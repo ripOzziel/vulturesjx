@@ -4,8 +4,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Plantilla Proyecto Antlr",
-  description: "Es una plantilla para l materia de compiladores",
+  title: "V",
+  description: "V is the languege.",
 };
 
 export default function RootLayout({ children }) {
