@@ -36,8 +36,38 @@ export default class TranslateVisitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 
+	// Visit a parse tree produced by TranslateParser#ifStatement.
+	visitIfStatement(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
 	// Visit a parse tree produced by TranslateParser#sentenciaIf.
 	visitSentenciaIf(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by TranslateParser#ifConElse.
+	visitIfConElse(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by TranslateParser#elseIfSintax.
+	visitElseIfSintax(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by TranslateParser#ifConElseIf.
+	visitIfConElseIf(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by TranslateParser#ifConElseIfConElse.
+	visitIfConElseIfConElse(ctx) {
 	  return this.visitChildren(ctx);
 	}
 

@@ -84,11 +84,44 @@ export default class CustomVisitorC extends TranslateVisitor {
 	}
 
 
-	// Visit a parse tree produced by TranslateParser#sentenciaIf.
-	visitSentenciaIf(ctx) {
-		console.log("Sentencia if");
-	  return
-	}
+	// Visit a parse tree produced by TranslateParser#ifStatement.
+	visitIfStatement(ctx) {
+		console.log("IF");
+		console.log(ctx.getText());
+		
+		return ctx.getText();
+	  }
+  
+  
+	  // Visit a parse tree produced by TranslateParser#sentenciaIf.
+	  visitSentenciaIf(ctx) {
+		return this.visitChildren(ctx);
+	  }
+  
+  
+	  // Visit a parse tree produced by TranslateParser#ifConElse.
+	  visitIfConElse(ctx) {
+		return this.visitChildren(ctx);
+	  }
+  
+  
+	  // Visit a parse tree produced by TranslateParser#elseIfSintax.
+	  visitElseIfSintax(ctx) {
+		return this.visitChildren(ctx);
+	  }
+  
+  
+	  // Visit a parse tree produced by TranslateParser#ifConElseIf.
+	  visitIfConElseIf(ctx) {
+		return this.visitChildren(ctx);
+	  }
+  
+  
+	  // Visit a parse tree produced by TranslateParser#ifConElseIfConElse.
+	  visitIfConElseIfConElse(ctx) {
+		return this.visitChildren(ctx);
+	  }
+  
 
 
 	// Visit a parse tree produced by TranslateParser#condicion.

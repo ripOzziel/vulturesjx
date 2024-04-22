@@ -6,6 +6,8 @@ IF: 'if';
 PRINT: 'printf';
 TRUE: 'true';
 FALSE: 'false';
+ELSE: 'else';
+ELSEIF: 'elseif';
 INT: 'int';
 FLOAT: 'float';
 STRING: 'string';

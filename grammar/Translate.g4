@@ -5,32 +5,42 @@ import CoomonC;
 
 prog: INT MAIN LPAREN RPAREN LBRACE content RBRACE ;
 
-//contenido
-content: ( declaration | declarationAndAssignament | assignment |ifSentence| printPlease | dataType )+;
+/**
+    Contenido es lo que el cascaron puede soportar dentro de el.
+    contenido puede tener declaracion de variables, declaracion con asignacion,
+    asignacion de una variable creada
+ */
+content: ( declaration | declarationAndAssignament | assignment | ifStatement | printPlease | dataType )+;
 
-//sintaxis de las declaraciones y asignaciones
-declaration: dataType (ID)  FIN   #declaracion;
-declarationAndAssignament: dataType ID EQUALS exp FIN #declAndAssig;
-assignment: ID EQUALS exp FIN #asignacion;
- 
+/**
+    Sinntaxis de las declaracion y asignaciones
+ */
+declaration: dataType (ID|NUMBER) simbolos? FIN?    #declaracion;
+declarationAndAssignament: dataType (ID|NUMBER) EQUALS exp? FIN? #declAndAssig;
+assignment: ID EQUALS exp FIN?  #asignacion;
+
 //sintaxis del if
-ifSentence: IF LPAREN condition RPAREN LBRACE content RBRACE FIN #sentenciaIf;
+ifStatement: ifWithElse | ifWithElseIf | ifWithElseIfElse | ifSentence;
+ifSentence: IF LPAREN condition RPAREN LBRACE content RBRACE #sentenciaIf;
+ifWithElse: ifSentence ELSE LBRACE content RBRACE #ifConElse;
+elseIfSintax: ELSEIF LPAREN condition RPAREN LBRACE content RBRACE;
+ifWithElseIf: ifSentence (elseIfSintax)+ #ifConElseIf;
+ifWithElseIfElse: ifWithElseIf (ELSE LBRACE content RBRACE)? #ifConElseIfConElse;
 condition: (logicalExpression | NOT condition | trueOrFalse) #condicion;
 trueOrFalse:(TRUE |FALSE) #verdaderoOFalso;
 logicalExpression: relationalExpression ( logic=(AND | OR) relationalExpression )* #expresionLogica;
 relationalExpression: 
-    (exp ( relation=(IGUAL | DISTINTO | MAYOR | MENOR | MAYORIGUAL | MENORIGUAL) exp)*) #expresionRelacional
-    ; 
+    (exp ( relation=(IGUAL | DISTINTO | MAYOR | MENOR | MAYORIGUAL | MENORIGUAL) exp)*) #expresionRelacional;
+
 //sintaxis de impresion
-printPlease: PRINT LPAREN (STRINGL|exp|concat) RPAREN FIN #impresion;        
+printPlease: PRINT LPAREN (STRINGL|exp|concat) RPAREN FIN?  #impresion;
 concat:  (atom) (PLUS atom)+ #concatenacion;
-atom:STRINGL #string
+atom:STRING #string
     |
     exp #expp;
 
-//expresion                                                                                                                                     
+//expresion
 exp: 
-    
     '(' exp ')' exp?           #parentesis
     |
     '(' exp ')''(' exp ')'       #parentesisMultiply
@@ -45,7 +55,7 @@ exp:
     |
     ID      #identificador
     ;   
-                                        //Traduccion de los tipos de datos de Vulture
+                                       //Traduccion de los tipos de datos de Vulture
 dataType: INT | STRING | CHAR; // (int, int), (flot, float), (vul, String), (v, char)
 simbolos: PLUS | MINUS | TIMES | DIV;
 

@@ -15,6 +15,10 @@ export const analizarC = () => {
   const input = `int main() {
     int a ;
     a = 0 ;
+    if(a)
+    {
+      int b;
+    }
     printf("Try programiz.pro");
     printf("Try sadasd.pro");
 }`
