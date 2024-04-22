@@ -2,6 +2,7 @@
 import React, {useState, useRef} from 'react'
 import Link from 'next/link';
 import { analizar } from './module/generador.js'
+import { analizarC } from './module/generadorC.js';
 import { errores } from './helper/Errores.js';
 import { impresiones } from './helper/Impresiones.js';
 
@@ -14,6 +15,7 @@ const HomePage = () => {
   //funcion para llamar a la funcion analizar del generador
   const iniciar=()=>
   {
+    analizarC()
     const regexHiram = /hiram\{\s*\S[\s\S]*?\}/;
     if(regexHiram.test(textarea))
     {
