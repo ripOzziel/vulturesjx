@@ -22,7 +22,17 @@ export default class CustomVisitor extends ArrayInitVisitor{
 	  }
   
   
-	  // Visit a parse tree produced by ArrayInitParser#declaracion.
+	  /**
+	   * La funcion declaracion recibirá un texto a analizar cuya sintaxis es:
+	   * declaration: dataType (ID|NUMBER) simbolos? FIN?
+	   * La función se encargará de guardar en un objeto de objetos (MEMORIA) la variable declarada,
+	   * las propiedades del objeto serán el identificador, tipo de dato y valor.
+	   * En declaracion se le asignara un valor por default al crear la variable.
+	   *
+	   * @param {Object} ctx 
+	   * @returns La funcion Declaracion retornará el identificador de la variable
+	   * 
+	   */
 	  visitDeclaracion(ctx) {
 		console.log("declaracion");
 		try{
@@ -79,8 +89,16 @@ export default class CustomVisitor extends ArrayInitVisitor{
 	  }
   
   
-	  // Visit a parse tree produced by ArrayInitParser#declAndAssig.
-	visitDeclAndAssig(ctx) {
+	  /**
+	   * La función DeclAndAssig permite declarar una variable y asignarle un valor
+	   * en la misma linea de codigo.
+	   * La sintaxis es : declarationAndAssignament: dataType (ID|NUMBER) EQUALS exp? FIN? #declAndAssig;
+	   * Si todo se hace de manera correcta se guardara la variable junto a su tipo 
+	   * de dato, valor e identificador.
+	   * @param {Object} ctx 
+	   * @returns Variable guardada en memoria
+	   */
+	  visitDeclAndAssig(ctx) {
 		console.log("Declaracion con asignacion");
 		try{
 			const regExpString = /^"([a-zA-Z0-9\s]+)"$/;
@@ -153,7 +171,6 @@ export default class CustomVisitor extends ArrayInitVisitor{
 					
 					else{
 						throw new Error("Ingresaste mal el tipo de dato")
-						return String("Algo esta mal");
 					}
 					console.log("Memoria");
 					console.log(memoria);
@@ -168,7 +185,14 @@ export default class CustomVisitor extends ArrayInitVisitor{
 
 	  }
 	  
-	  // Visit a parse tree produced by ArrayInitParser#asignacion.
+	  /**
+	   * La función visitAsignacion trabajara con un variables que ya estan en la memoria,
+	   * por lo tanto identificara si el nombre de la variable ya existe para poder reasignarle 
+	   * un valor nuevo, en caso de que no funcione por mal trato de sintaxis o nombre de varible
+	   * habra manejo de errores.
+	   * @param {Object} ctx 
+	   * @returns El valor de la variable
+	   */
 	  visitAsignacion(ctx) {
 		console.log("asignacion");
 		try{
@@ -216,44 +240,91 @@ export default class CustomVisitor extends ArrayInitVisitor{
 	  }
 
 
-	//!Aqui estamos trabajando
-	// Visit a parse tree produced by ArrayInitParser#sentenciaIf.
-	visitSentenciaIf(ctx) {
-		console.log("Sentencia if");
-		if(this.visit(ctx.condition()))
-		{
-			console.log("dio true");
-			this.visit(ctx.content())
+	  
+	  visitIfStatement(ctx) {
+		  return this.visitChildren(ctx);
 		}
-		else{
-			console.log("dio false");
-			return null
+
+
+		// Visit a parse tree produced by ArrayInitParser#sentenciaIf.
+		visitSentenciaIf(ctx) {
+			console.log("Sentencia if");
+			if(this.visit(ctx.condition()))
+			{
+				console.log("dio true");
+				this.visit(ctx.content())
+				return true
+			}
+			else{
+				console.log("dio false");
+				return false
+				
+			}
 			
 		}
 		
-	}
-	
-	// Visit a parse tree produced by ArrayInitParser#condicion.
-	visitCondicion(ctx) {
-		console.log("Condicion");
-		console.log(ctx.getText());
-		if(ctx.getText()=== 'true')
+		//!Aqui estamos trabajando
+		// Visit a parse tree produced by ArrayInitParser#ifConElse.
+	visitIfConElse(ctx) {
+		console.log("Visitando if con else");
+		if(this.visit(ctx.ifSentence())=== false){this.visit(ctx.content())}
+	  }
+  
+  
+	  // Visit a parse tree produced by ArrayInitParser#ifConElseIf.
+	  visitIfConElseIf(ctx) {
+		console.log("Visitando if con else if");
+		if(this.visit(ctx.ifSentence())=== false)
 		{
-			console.log("Hola");
-			return true
-		}
-		else if(ctx.getText()==='false')
-		{
+			const lenOfElseIfs =ctx.elseIfSintax().length
+			for (let i = 0; i < lenOfElseIfs; i++) {
+				console.log(ctx.elseIfSintax(i).condition());
+				if(this.visit(ctx.elseIfSintax(i).condition())=== true)
+				{
+					console.log("Else if num " + i+1);
+					this.visit(ctx.elseIfSintax(i).content())
+					return true
+				}
+				
+				
+			}
+			console.log("No fue ni una");
 			return false
 		}
-		else{
-
-			const resultLogical1 =this.visit(ctx.logicalExpression(0))	  
-			console.log(resultLogical1);
-			if(ctx.NOT() !== null){return !resultLogical1}
-			else{return resultLogical1}
-		}
 		
+	  }
+  
+  
+	  // Visit a parse tree produced by ArrayInitParser#ifConElseIfConElse.
+	  visitIfConElseIfConElse(ctx) {
+		console.log("Visitando if elseif con else");
+		if(this.visit(ctx.ifWithElseIf())===false){
+			this.visit(ctx.content())
+		}
+
+	  }
+
+		// Visit a parse tree produced by ArrayInitParser#condicion.
+		visitCondicion(ctx) {
+			console.log("Condicion");
+			console.log(ctx.getText());
+			if(ctx.getText()=== 'true')
+			{
+				console.log("Hola");
+				return true
+			}
+			else if(ctx.getText()==='false')
+			{
+				return false
+			}
+			else{
+
+				const resultLogical1 =this.visit(ctx.logicalExpression(0))	  
+				console.log(resultLogical1);
+				if(ctx.NOT() !== null){return !resultLogical1}
+				else{return resultLogical1}
+			}
+			
 	
 	}
   
@@ -267,12 +338,12 @@ export default class CustomVisitor extends ArrayInitVisitor{
 		{
 			const resultRelational2 =this.visit(ctx.relationalExpression(1))
 			console.log(resultRelational2);
-			if(ctx.logic.type === 34){
+			if(ctx.logic.type === 23){
 				console.log("and");
 				if(resultRelational1 && resultRelational2){return true}
 				else{return false}
 			}
-			if(ctx.logic.type === 35){
+			if(ctx.logic.type === 24){
 				if(resultRelational1 || resultRelational2){return true}
 				else{return false}
 			}
@@ -291,28 +362,28 @@ export default class CustomVisitor extends ArrayInitVisitor{
 		if(ctx.exp(1)!==null)
 		{
 			const exp2 = this.visit(ctx.exp(1))
-			if(ctx.relation.type===28){
+			if(ctx.relation.type===17){
 				if(exp1 == exp2){return true}
 				else{return false}
 			}
-			else if(ctx.relation.type ===29)
+			else if(ctx.relation.type ===18)
 			{
 				if(exp1 != exp2){return true}
 				else{return false}
 			}
-			else if(ctx.relation.type === 30){
+			else if(ctx.relation.type === 19){
 				if(exp1>exp2){return true}
 				else{return false}
 			}
-			else if(ctx.relation.type === 31){
+			else if(ctx.relation.type === 20){
 				if(exp1<exp2){return true}
 				else{return false}
 			}
-			else if(ctx.relation.type === 32){
+			else if(ctx.relation.type === 21){
 				if(exp1>=exp2){return true}
 				else{return false}
 			}
-			else if(ctx.relation.type === 33){
+			else if(ctx.relation.type === 22){
 				if(exp1<=exp2){return true}
 				else{return false}
 			}
