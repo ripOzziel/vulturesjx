@@ -13,9 +13,13 @@ const HomePage = () => {
 
   
   //funcion para llamar a la funcion analizar del generador
+  const traducir = () =>{
+    const texto = textarea.replace(/\/\/.*|\/\*[\s\S]*?\*\//g, "").trim();
+    setTextarea(analizarC(texto))
+  }
   const iniciar=()=>
   {
-    analizarC()
+    
     const regexHiram = /hiram\{\s*\S[\s\S]*?\}/;
     if(regexHiram.test(textarea))
     {
@@ -59,12 +63,13 @@ const HomePage = () => {
   };
   return (
     <main className='bg-black h-full'>
-      <section className='p-5 grid grid-cols-3'> 
+      <section className='p-5 grid grid-cols-4'> 
       <Link href="https://www.youtube.com/watch?v=cUcMegPmYIo&list=OLAK5uy_mTTV6CybTZyXnTJ4ZQXms1dhFXqjadRhA&index=2" target="_blank" rel="noopener noreferrer">
         
       <div target="_blank" rel="noopener noreferrer">Vulture ✞ </div>
       
       </Link>
+      <button onClick={() =>traducir()}>C Translator</button>
       <button onClick={() =>iniciar()}>Run ➸</button>
       <button onClick={() =>borrar()}>✧°</button>
       </section>

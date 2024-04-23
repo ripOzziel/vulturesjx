@@ -87,53 +87,83 @@ export default class CustomVisitorC extends TranslateVisitor {
 	// Visit a parse tree produced by TranslateParser#ifStatement.
 	visitIfStatement(ctx) {
 		console.log("IF");
-		console.log(ctx.getText());
-		
-		return ctx.getText();
+		console.log(this.visitChildren(ctx)[0]);
+		return this.visitChildren(ctx)[0]
 	  }
   
   
 	  // Visit a parse tree produced by TranslateParser#sentenciaIf.
 	  visitSentenciaIf(ctx) {
-		return this.visitChildren(ctx);
+		console.log("PURO IF");
+		let nuevaIf = ''
+		nuevaIf += 'if('
+		nuevaIf+= this.visit(ctx.condition())
+		nuevaIf += '){\n'
+		for (let i = 0; i < this.visit(ctx.content()).length; i++) {
+			nuevaIf += this.visit(ctx.content())[i]+'\n'
+		}
+		nuevaIf += '}\n'
+		console.log(nuevaIf);
+		return nuevaIf
 	  }
   
   
 	  // Visit a parse tree produced by TranslateParser#ifConElse.
 	  visitIfConElse(ctx) {
-		return this.visitChildren(ctx);
+		let nuevaIfConElse = ''
+		const iF = this.visit(ctx.ifSentence())
+		nuevaIfConElse += iF
+		nuevaIfConElse += 'else{\n'
+		for (let i = 0; i < this.visit(ctx.content()).length; i++) {
+			nuevaIfConElse += this.visit(ctx.content())[i]+'\n'
+		}
+		nuevaIfConElse += '}\n'
+		return nuevaIfConElse
 	  }
   
   
 	  // Visit a parse tree produced by TranslateParser#elseIfSintax.
 	  visitElseIfSintax(ctx) {
-		return this.visitChildren(ctx);
+		let nuevaElseIf =''
+		nuevaElseIf +='elseif ('+ this.visit(ctx.condition())+'){\n'
+		for (let i = 0; i < this.visit(ctx.content()).length; i++) {
+			nuevaElseIf += this.visit(ctx.content())[i]+'\n'
+		}
+		nuevaElseIf +='}\n'
+		return nuevaElseIf
 	  }
   
   
 	  // Visit a parse tree produced by TranslateParser#ifConElseIf.
 	  visitIfConElseIf(ctx) {
-		return this.visitChildren(ctx);
+		let nuevo = ''
+		nuevo += this.visit(ctx.ifSentence())
+		nuevo += this.visit(ctx.elseIfSintax())
+		return nuevo
 	  }
   
   
 	  // Visit a parse tree produced by TranslateParser#ifConElseIfConElse.
 	  visitIfConElseIfConElse(ctx) {
-		return this.visitChildren(ctx);
+		let nuevo = ''
+		nuevo += this.visit(ctx.ifWithElseIf())
+		nuevo += 'else{\n'
+		for (let i = 0; i < this.visit(ctx.content()).length; i++) {
+			nuevo += this.visit(ctx.content())[i]+'\n'
+		}
+		nuevo += '}\n'
+		return nuevo
 	  }
   
 
 
 	// Visit a parse tree produced by TranslateParser#condicion.
 	visitCondicion(ctx) {
-		return
+		console.log("Condicion");
+		console.log(ctx.getText());
+		return ctx.getText()
 	}
 
-
-	// Visit a parse tree produced by TranslateParser#verdaderoOFalso.
-	visitVerdaderoOFalso(ctx) {
-		return
-	}
 
 
 	// Visit a parse tree produced by TranslateParser#expresionLogica.
@@ -158,64 +188,6 @@ export default class CustomVisitorC extends TranslateVisitor {
 	}
 
 
-	// Visit a parse tree produced by TranslateParser#concatenacion.
-	visitConcatenacion(ctx) {
-	  return
-	}
-
-
-	// Visit a parse tree produced by TranslateParser#string.
-	visitString(ctx) {
-		return
-	}
-
-
-	// Visit a parse tree produced by TranslateParser#expp.
-	visitExpp(ctx) {
-		return
-	}
-
-
-	// Visit a parse tree produced by TranslateParser#parentesis.
-	visitParentesis(ctx) {
-		return
-	}
-
-
-	// Visit a parse tree produced by TranslateParser#timesDiv.
-	visitTimesDiv(ctx) {
-		return
-	}
-
-
-	// Visit a parse tree produced by TranslateParser#parentesisMultiply.
-	visitParentesisMultiply(ctx) {
-		return
-	}
-
-
-	// Visit a parse tree produced by TranslateParser#numero.
-	visitNumero(ctx) {
-	  return 
-	}
-
-
-	// Visit a parse tree produced by TranslateParser#char.
-	visitChar(ctx) {
-	  return 
-	}
-
-
-	// Visit a parse tree produced by TranslateParser#plusSubtraction.
-	visitPlusSubtraction(ctx) {
-	  return 
-	}
-
-
-	// Visit a parse tree produced by TranslateParser#identificador.
-	visitIdentificador(ctx) {
-	  return 
-	}
 
 
 	// Visit a parse tree produced by TranslateParser#dataType.
@@ -232,10 +204,6 @@ export default class CustomVisitorC extends TranslateVisitor {
 	}
 
 
-	// Visit a parse tree produced by TranslateParser#simbolos.
-	visitSimbolos(ctx) {
-	  return 
-	}
 
 
 

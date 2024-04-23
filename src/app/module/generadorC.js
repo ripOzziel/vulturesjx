@@ -11,17 +11,24 @@ import { errores } from "../helper/Errores.js";
 import { ErrorSintaxis, ErrorLexico } from "../helper/List.js";
 
 
-export const analizarC = () => {
+export const analizarC = (input) => {
+  /*
   const input = `int main() {
     int a ;
     a = 0 ;
     if(a)
     {
       int b;
+      b = 9
+    }
+    elseif(a)
+    {
+      int c;
     }
     printf("Try programiz.pro");
     printf("Try sadasd.pro");
 }`
+*/
   //borrando los helpers
   errores.splice(0, errores.length)
 
