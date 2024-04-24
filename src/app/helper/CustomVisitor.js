@@ -568,12 +568,32 @@ export default class CustomVisitor extends ArrayInitVisitor{
 			}
 		}
 		catch(error){
-
+			// Manejar el error y detener la compilación
+			errores.push(error.message);
+			throw new Error("Detenido debido a errores de compilación");
 		}
 		
 	  }
 	visitDecremento(ctx) {
-		return this.visitChildren(ctx);
+		try{
+			const variable = ctx.ID().getText()
+			if(!isNaN(variable)){
+				throw new Error(`Error en la linea ${ctx.start.line}, no se puede incrementar`)
+			}
+			if(memoria[variable] !== undefined){
+				memoria[variable].valor -= 1
+				console.log(memoria[variable]);
+				return
+			}
+			else{
+				throw new Error(`Error en la linea ${ctx.start.line}, la variable ${variable}, no ha sido declarada`)
+			}
+		}
+		catch(error){
+			// Manejar el error y detener la compilación
+			errores.push(error.message);
+			throw new Error("Detenido debido a errores de compilación");
+		}
 	}
 	visitSimb(ctx) {return this.visitChildren(ctx);}
 	visitNumero(ctx) {return Number(ctx.getText());}
