@@ -49,3 +49,6 @@ SALTO: '\n';
 //verdadero o falso
 TRUE: 'true';
 FALSE: 'false';
+
+//WHILE
+WHILE: 'mien';

@@ -32,6 +32,9 @@ logicalExpression: relationalExpression ( logic=(AND | OR) relationalExpression 
 relationalExpression: 
     (exp ( relation=(IGUAL | DISTINTO | MAYOR | MENOR | MAYORIGUAL | MENORIGUAL) exp)*) #expresionRelacional;
 
+//sintaxis de while
+whileStatement: WHILE LPAREN condition RPAREN LBRACE content RBRACE #whileSentencia;
+
 //sintaxis de impresion
 printPlease: PRINT LPAREN (STRING|exp|concat) RPAREN FIN?  #impresion;
 concat:  (atom) (PLUS atom)+ #concatenacion;

@@ -239,7 +239,11 @@ export default class CustomVisitor extends ArrayInitVisitor{
 		
 	  }
 
-
+	  // Visit a parse tree produced by ArrayInitParser#whileSentencia.
+	visitWhileSentencia(ctx) {
+		console.log("CIclo While");
+		return ;
+	  }
 	  
 	  visitIfStatement(ctx) {
 		  return this.visitChildren(ctx);
@@ -263,7 +267,6 @@ export default class CustomVisitor extends ArrayInitVisitor{
 			
 		}
 		
-		//!Aqui estamos trabajando
 		// Visit a parse tree produced by ArrayInitParser#ifConElse.
 	visitIfConElse(ctx) {
 		console.log("Visitando if con else");
@@ -406,7 +409,7 @@ export default class CustomVisitor extends ArrayInitVisitor{
 		}
 	  }
   
-//! aqui termina el bloque donde estamos trabajando  
+
   // Visit a parse tree produced by ArrayInitParser#concatenacion.
 	visitConcatenacion(ctx) {
 		console.log("visitConca");
