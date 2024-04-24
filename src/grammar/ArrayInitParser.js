@@ -3,71 +3,77 @@
 import antlr4 from 'antlr4';
 import ArrayInitVisitor from './ArrayInitVisitor.js';
 
-const serializedATN = [4,1,41,205,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,
+const serializedATN = [4,1,43,223,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,
 4,2,5,7,5,2,6,7,6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,
-2,13,7,13,2,14,7,14,2,15,7,15,2,16,7,16,1,0,1,0,1,0,5,0,38,8,0,10,0,12,0,
-41,9,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,3,1,51,8,1,1,2,1,2,1,2,3,2,56,8,2,
-1,2,3,2,59,8,2,1,3,1,3,1,3,1,3,3,3,65,8,3,1,3,3,3,68,8,3,1,4,1,4,1,4,1,4,
-3,4,74,8,4,1,5,1,5,1,5,1,5,1,5,1,5,5,5,82,8,5,10,5,12,5,85,9,5,1,5,1,5,1,
-5,1,5,1,5,1,5,1,5,5,5,94,8,5,10,5,12,5,97,9,5,1,5,1,5,5,5,101,8,5,10,5,12,
-5,104,9,5,1,5,1,5,1,5,5,5,109,8,5,10,5,12,5,112,9,5,1,5,3,5,115,8,5,1,6,
-1,6,1,6,1,6,3,6,121,8,6,1,7,1,7,1,8,1,8,1,8,5,8,128,8,8,10,8,12,8,131,9,
-8,1,9,1,9,1,9,5,9,136,8,9,10,9,12,9,139,9,9,1,10,1,10,1,10,1,10,1,10,1,10,
-1,10,1,10,1,11,1,11,1,11,1,11,1,11,3,11,154,8,11,1,11,1,11,3,11,158,8,11,
-1,12,1,12,1,12,4,12,163,8,12,11,12,12,12,164,1,13,1,13,3,13,169,8,13,1,14,
-1,14,1,14,1,14,1,14,3,14,176,8,14,1,14,1,14,1,14,1,14,1,14,1,14,1,14,1,14,
-1,14,1,14,3,14,188,8,14,1,14,1,14,1,14,1,14,1,14,1,14,5,14,196,8,14,10,14,
-12,14,199,9,14,1,15,1,15,1,16,1,16,1,16,0,1,28,17,0,2,4,6,8,10,12,14,16,
-18,20,22,24,26,28,30,32,0,8,1,0,33,34,1,0,39,40,1,0,23,24,1,0,17,22,1,0,
-5,6,1,0,3,4,1,0,30,32,1,0,3,6,219,0,34,1,0,0,0,2,50,1,0,0,0,4,52,1,0,0,0,
-6,60,1,0,0,0,8,69,1,0,0,0,10,75,1,0,0,0,12,120,1,0,0,0,14,122,1,0,0,0,16,
-124,1,0,0,0,18,132,1,0,0,0,20,140,1,0,0,0,22,148,1,0,0,0,24,159,1,0,0,0,
-26,168,1,0,0,0,28,187,1,0,0,0,30,200,1,0,0,0,32,202,1,0,0,0,34,35,5,1,0,
-0,35,39,5,15,0,0,36,38,3,2,1,0,37,36,1,0,0,0,38,41,1,0,0,0,39,37,1,0,0,0,
-39,40,1,0,0,0,40,42,1,0,0,0,41,39,1,0,0,0,42,43,5,16,0,0,43,1,1,0,0,0,44,
-51,3,4,2,0,45,51,3,6,3,0,46,51,3,8,4,0,47,51,3,10,5,0,48,51,3,22,11,0,49,
-51,3,30,15,0,50,44,1,0,0,0,50,45,1,0,0,0,50,46,1,0,0,0,50,47,1,0,0,0,50,
-48,1,0,0,0,50,49,1,0,0,0,51,3,1,0,0,0,52,53,3,30,15,0,53,55,7,0,0,0,54,56,
-3,32,16,0,55,54,1,0,0,0,55,56,1,0,0,0,56,58,1,0,0,0,57,59,5,2,0,0,58,57,
-1,0,0,0,58,59,1,0,0,0,59,5,1,0,0,0,60,61,3,30,15,0,61,62,7,0,0,0,62,64,5,
-7,0,0,63,65,3,28,14,0,64,63,1,0,0,0,64,65,1,0,0,0,65,67,1,0,0,0,66,68,5,
-2,0,0,67,66,1,0,0,0,67,68,1,0,0,0,68,7,1,0,0,0,69,70,5,33,0,0,70,71,5,7,
-0,0,71,73,3,28,14,0,72,74,5,2,0,0,73,72,1,0,0,0,73,74,1,0,0,0,74,9,1,0,0,
-0,75,76,5,27,0,0,76,77,5,13,0,0,77,78,3,12,6,0,78,79,5,14,0,0,79,83,5,15,
-0,0,80,82,3,2,1,0,81,80,1,0,0,0,82,85,1,0,0,0,83,81,1,0,0,0,83,84,1,0,0,
-0,84,86,1,0,0,0,85,83,1,0,0,0,86,102,5,16,0,0,87,88,5,29,0,0,88,89,5,13,
-0,0,89,90,3,12,6,0,90,91,5,14,0,0,91,95,5,15,0,0,92,94,3,2,1,0,93,92,1,0,
-0,0,94,97,1,0,0,0,95,93,1,0,0,0,95,96,1,0,0,0,96,98,1,0,0,0,97,95,1,0,0,
-0,98,99,5,16,0,0,99,101,1,0,0,0,100,87,1,0,0,0,101,104,1,0,0,0,102,100,1,
-0,0,0,102,103,1,0,0,0,103,114,1,0,0,0,104,102,1,0,0,0,105,106,5,28,0,0,106,
-110,5,15,0,0,107,109,3,2,1,0,108,107,1,0,0,0,109,112,1,0,0,0,110,108,1,0,
-0,0,110,111,1,0,0,0,111,113,1,0,0,0,112,110,1,0,0,0,113,115,5,16,0,0,114,
-105,1,0,0,0,114,115,1,0,0,0,115,11,1,0,0,0,116,121,3,16,8,0,117,118,5,25,
-0,0,118,121,3,12,6,0,119,121,3,14,7,0,120,116,1,0,0,0,120,117,1,0,0,0,120,
-119,1,0,0,0,121,13,1,0,0,0,122,123,7,1,0,0,123,15,1,0,0,0,124,129,3,18,9,
-0,125,126,7,2,0,0,126,128,3,18,9,0,127,125,1,0,0,0,128,131,1,0,0,0,129,127,
-1,0,0,0,129,130,1,0,0,0,130,17,1,0,0,0,131,129,1,0,0,0,132,137,3,28,14,0,
-133,134,7,3,0,0,134,136,3,28,14,0,135,133,1,0,0,0,136,139,1,0,0,0,137,135,
-1,0,0,0,137,138,1,0,0,0,138,19,1,0,0,0,139,137,1,0,0,0,140,141,5,41,0,0,
-141,142,5,13,0,0,142,143,3,12,6,0,143,144,5,14,0,0,144,145,5,15,0,0,145,
-146,3,2,1,0,146,147,5,16,0,0,147,21,1,0,0,0,148,149,5,26,0,0,149,153,5,13,
-0,0,150,154,5,35,0,0,151,154,3,28,14,0,152,154,3,24,12,0,153,150,1,0,0,0,
-153,151,1,0,0,0,153,152,1,0,0,0,154,155,1,0,0,0,155,157,5,14,0,0,156,158,
-5,2,0,0,157,156,1,0,0,0,157,158,1,0,0,0,158,23,1,0,0,0,159,162,3,26,13,0,
-160,161,5,3,0,0,161,163,3,26,13,0,162,160,1,0,0,0,163,164,1,0,0,0,164,162,
-1,0,0,0,164,165,1,0,0,0,165,25,1,0,0,0,166,169,5,35,0,0,167,169,3,28,14,
-0,168,166,1,0,0,0,168,167,1,0,0,0,169,27,1,0,0,0,170,171,6,14,-1,0,171,172,
-5,13,0,0,172,173,3,28,14,0,173,175,5,14,0,0,174,176,3,28,14,0,175,174,1,
-0,0,0,175,176,1,0,0,0,176,188,1,0,0,0,177,178,5,13,0,0,178,179,3,28,14,0,
-179,180,5,14,0,0,180,181,5,13,0,0,181,182,3,28,14,0,182,183,5,14,0,0,183,
-188,1,0,0,0,184,188,5,34,0,0,185,188,5,36,0,0,186,188,5,33,0,0,187,170,1,
-0,0,0,187,177,1,0,0,0,187,184,1,0,0,0,187,185,1,0,0,0,187,186,1,0,0,0,188,
-197,1,0,0,0,189,190,10,5,0,0,190,191,7,4,0,0,191,196,3,28,14,6,192,193,10,
-4,0,0,193,194,7,5,0,0,194,196,3,28,14,5,195,189,1,0,0,0,195,192,1,0,0,0,
-196,199,1,0,0,0,197,195,1,0,0,0,197,198,1,0,0,0,198,29,1,0,0,0,199,197,1,
-0,0,0,200,201,7,6,0,0,201,31,1,0,0,0,202,203,7,7,0,0,203,33,1,0,0,0,23,39,
-50,55,58,64,67,73,83,95,102,110,114,120,129,137,153,157,164,168,175,187,
-195,197];
+2,13,7,13,2,14,7,14,2,15,7,15,2,16,7,16,2,17,7,17,2,18,7,18,1,0,1,0,1,0,
+5,0,42,8,0,10,0,12,0,45,9,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+3,1,58,8,1,1,2,1,2,1,2,3,2,63,8,2,1,2,3,2,66,8,2,1,3,1,3,1,3,1,3,3,3,72,
+8,3,1,3,3,3,75,8,3,1,4,1,4,1,4,1,4,3,4,81,8,4,1,5,1,5,1,5,1,5,1,5,1,5,5,
+5,89,8,5,10,5,12,5,92,9,5,1,5,1,5,1,6,1,6,1,6,1,6,1,6,1,6,5,6,102,8,6,10,
+6,12,6,105,9,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,5,6,114,8,6,10,6,12,6,117,9,6,
+1,6,1,6,5,6,121,8,6,10,6,12,6,124,9,6,1,6,1,6,1,6,5,6,129,8,6,10,6,12,6,
+132,9,6,1,6,3,6,135,8,6,1,7,1,7,1,7,1,7,3,7,141,8,7,1,8,1,8,1,9,1,9,1,9,
+5,9,148,8,9,10,9,12,9,151,9,9,1,10,1,10,1,10,5,10,156,8,10,10,10,12,10,159,
+9,10,1,11,1,11,1,11,1,11,1,11,3,11,166,8,11,1,11,1,11,3,11,170,8,11,1,12,
+1,12,1,12,4,12,175,8,12,11,12,12,12,176,1,13,1,13,3,13,181,8,13,1,14,1,14,
+1,14,1,15,1,15,1,15,1,16,1,16,1,16,1,16,1,16,3,16,194,8,16,1,16,1,16,1,16,
+1,16,1,16,1,16,1,16,1,16,1,16,1,16,3,16,206,8,16,1,16,1,16,1,16,1,16,1,16,
+1,16,5,16,214,8,16,10,16,12,16,217,9,16,1,17,1,17,1,18,1,18,1,18,0,1,32,
+19,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,0,8,1,0,36,37,1,0,
+42,43,1,0,25,26,1,0,19,24,1,0,7,8,1,0,5,6,1,0,33,35,1,0,5,8,239,0,38,1,0,
+0,0,2,57,1,0,0,0,4,59,1,0,0,0,6,67,1,0,0,0,8,76,1,0,0,0,10,82,1,0,0,0,12,
+95,1,0,0,0,14,140,1,0,0,0,16,142,1,0,0,0,18,144,1,0,0,0,20,152,1,0,0,0,22,
+160,1,0,0,0,24,171,1,0,0,0,26,180,1,0,0,0,28,182,1,0,0,0,30,185,1,0,0,0,
+32,205,1,0,0,0,34,218,1,0,0,0,36,220,1,0,0,0,38,39,5,1,0,0,39,43,5,17,0,
+0,40,42,3,2,1,0,41,40,1,0,0,0,42,45,1,0,0,0,43,41,1,0,0,0,43,44,1,0,0,0,
+44,46,1,0,0,0,45,43,1,0,0,0,46,47,5,18,0,0,47,1,1,0,0,0,48,58,3,4,2,0,49,
+58,3,6,3,0,50,58,3,8,4,0,51,58,3,12,6,0,52,58,3,10,5,0,53,58,3,22,11,0,54,
+58,3,34,17,0,55,58,3,28,14,0,56,58,3,30,15,0,57,48,1,0,0,0,57,49,1,0,0,0,
+57,50,1,0,0,0,57,51,1,0,0,0,57,52,1,0,0,0,57,53,1,0,0,0,57,54,1,0,0,0,57,
+55,1,0,0,0,57,56,1,0,0,0,58,3,1,0,0,0,59,60,3,34,17,0,60,62,7,0,0,0,61,63,
+3,36,18,0,62,61,1,0,0,0,62,63,1,0,0,0,63,65,1,0,0,0,64,66,5,4,0,0,65,64,
+1,0,0,0,65,66,1,0,0,0,66,5,1,0,0,0,67,68,3,34,17,0,68,69,7,0,0,0,69,71,5,
+9,0,0,70,72,3,32,16,0,71,70,1,0,0,0,71,72,1,0,0,0,72,74,1,0,0,0,73,75,5,
+4,0,0,74,73,1,0,0,0,74,75,1,0,0,0,75,7,1,0,0,0,76,77,5,36,0,0,77,78,5,9,
+0,0,78,80,3,32,16,0,79,81,5,4,0,0,80,79,1,0,0,0,80,81,1,0,0,0,81,9,1,0,0,
+0,82,83,5,32,0,0,83,84,5,15,0,0,84,85,3,14,7,0,85,86,5,16,0,0,86,90,5,17,
+0,0,87,89,3,2,1,0,88,87,1,0,0,0,89,92,1,0,0,0,90,88,1,0,0,0,90,91,1,0,0,
+0,91,93,1,0,0,0,92,90,1,0,0,0,93,94,5,18,0,0,94,11,1,0,0,0,95,96,5,29,0,
+0,96,97,5,15,0,0,97,98,3,14,7,0,98,99,5,16,0,0,99,103,5,17,0,0,100,102,3,
+2,1,0,101,100,1,0,0,0,102,105,1,0,0,0,103,101,1,0,0,0,103,104,1,0,0,0,104,
+106,1,0,0,0,105,103,1,0,0,0,106,122,5,18,0,0,107,108,5,31,0,0,108,109,5,
+15,0,0,109,110,3,14,7,0,110,111,5,16,0,0,111,115,5,17,0,0,112,114,3,2,1,
+0,113,112,1,0,0,0,114,117,1,0,0,0,115,113,1,0,0,0,115,116,1,0,0,0,116,118,
+1,0,0,0,117,115,1,0,0,0,118,119,5,18,0,0,119,121,1,0,0,0,120,107,1,0,0,0,
+121,124,1,0,0,0,122,120,1,0,0,0,122,123,1,0,0,0,123,134,1,0,0,0,124,122,
+1,0,0,0,125,126,5,30,0,0,126,130,5,17,0,0,127,129,3,2,1,0,128,127,1,0,0,
+0,129,132,1,0,0,0,130,128,1,0,0,0,130,131,1,0,0,0,131,133,1,0,0,0,132,130,
+1,0,0,0,133,135,5,18,0,0,134,125,1,0,0,0,134,135,1,0,0,0,135,13,1,0,0,0,
+136,141,3,18,9,0,137,138,5,27,0,0,138,141,3,14,7,0,139,141,3,16,8,0,140,
+136,1,0,0,0,140,137,1,0,0,0,140,139,1,0,0,0,141,15,1,0,0,0,142,143,7,1,0,
+0,143,17,1,0,0,0,144,149,3,20,10,0,145,146,7,2,0,0,146,148,3,20,10,0,147,
+145,1,0,0,0,148,151,1,0,0,0,149,147,1,0,0,0,149,150,1,0,0,0,150,19,1,0,0,
+0,151,149,1,0,0,0,152,157,3,32,16,0,153,154,7,3,0,0,154,156,3,32,16,0,155,
+153,1,0,0,0,156,159,1,0,0,0,157,155,1,0,0,0,157,158,1,0,0,0,158,21,1,0,0,
+0,159,157,1,0,0,0,160,161,5,28,0,0,161,165,5,15,0,0,162,166,5,38,0,0,163,
+166,3,32,16,0,164,166,3,24,12,0,165,162,1,0,0,0,165,163,1,0,0,0,165,164,
+1,0,0,0,166,167,1,0,0,0,167,169,5,16,0,0,168,170,5,4,0,0,169,168,1,0,0,0,
+169,170,1,0,0,0,170,23,1,0,0,0,171,174,3,26,13,0,172,173,5,5,0,0,173,175,
+3,26,13,0,174,172,1,0,0,0,175,176,1,0,0,0,176,174,1,0,0,0,176,177,1,0,0,
+0,177,25,1,0,0,0,178,181,5,38,0,0,179,181,3,32,16,0,180,178,1,0,0,0,180,
+179,1,0,0,0,181,27,1,0,0,0,182,183,5,36,0,0,183,184,5,2,0,0,184,29,1,0,0,
+0,185,186,5,36,0,0,186,187,5,3,0,0,187,31,1,0,0,0,188,189,6,16,-1,0,189,
+190,5,15,0,0,190,191,3,32,16,0,191,193,5,16,0,0,192,194,3,32,16,0,193,192,
+1,0,0,0,193,194,1,0,0,0,194,206,1,0,0,0,195,196,5,15,0,0,196,197,3,32,16,
+0,197,198,5,16,0,0,198,199,5,15,0,0,199,200,3,32,16,0,200,201,5,16,0,0,201,
+206,1,0,0,0,202,206,5,37,0,0,203,206,5,39,0,0,204,206,5,36,0,0,205,188,1,
+0,0,0,205,195,1,0,0,0,205,202,1,0,0,0,205,203,1,0,0,0,205,204,1,0,0,0,206,
+215,1,0,0,0,207,208,10,5,0,0,208,209,7,4,0,0,209,214,3,32,16,6,210,211,10,
+4,0,0,211,212,7,5,0,0,212,214,3,32,16,5,213,207,1,0,0,0,213,210,1,0,0,0,
+214,217,1,0,0,0,215,213,1,0,0,0,215,216,1,0,0,0,216,33,1,0,0,0,217,215,1,
+0,0,0,218,219,7,6,0,0,219,35,1,0,0,0,220,221,7,7,0,0,221,37,1,0,0,0,24,43,
+57,62,65,71,74,80,90,103,115,122,130,134,140,149,157,165,169,176,180,193,
+205,213,215];
 
 
 const atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
@@ -79,26 +85,28 @@ const sharedContextCache = new antlr4.atn.PredictionContextCache();
 export default class ArrayInitParser extends antlr4.Parser {
 
     static grammarFileName = "ArrayInit.g4";
-    static literalNames = [ null, "'hiram'", "';'", "'+'", "'-'", "'*'", 
-                            "'/'", "'='", "'#'", "'$'", "':'", "'&'", "','", 
-                            "'('", "')'", "'{'", "'}'", "'=='", "'!='", 
-                            "'>'", "'<'", "'>='", "'<='", "'&&'", "'||'", 
-                            "'!'", "'printPlease'", "'if'", "'else'", "'elseif'", 
-                            "'num'", "'vul'", "'v'", null, null, null, null, 
-                            null, "'\\n'", "'true'", "'false'", "'mien'" ];
-    static symbolicNames = [ null, null, "FIN", "PLUS", "MINUS", "TIMES", 
-                             "DIV", "EQUALS", "GATO", "DOLLAR", "DOBLEPUNTO", 
-                             "ANDPERSON", "COMMA", "LPAREN", "RPAREN", "LBRACE", 
-                             "RBRACE", "IGUAL", "DISTINTO", "MAYOR", "MENOR", 
-                             "MAYORIGUAL", "MENORIGUAL", "AND", "OR", "NOT", 
-                             "PRINT", "IF", "ELSE", "ELSEIF", "NUM", "VUL", 
-                             "V", "ID", "NUMBER", "STRING", "CHAR", "WS", 
-                             "SALTO", "TRUE", "FALSE", "WHILE" ];
+    static literalNames = [ null, "'hiram'", "'++'", "'--'", "';'", "'+'", 
+                            "'-'", "'*'", "'/'", "'='", "'#'", "'$'", "':'", 
+                            "'&'", "','", "'('", "')'", "'{'", "'}'", "'=='", 
+                            "'!='", "'>'", "'<'", "'>='", "'<='", "'&&'", 
+                            "'||'", "'!'", "'printPlease'", "'if'", "'else'", 
+                            "'elseif'", "'mien'", "'num'", "'vul'", "'v'", 
+                            null, null, null, null, null, "'\\n'", "'true'", 
+                            "'false'" ];
+    static symbolicNames = [ null, null, null, null, "FIN", "PLUS", "MINUS", 
+                             "TIMES", "DIV", "EQUALS", "GATO", "DOLLAR", 
+                             "DOBLEPUNTO", "ANDPERSON", "COMMA", "LPAREN", 
+                             "RPAREN", "LBRACE", "RBRACE", "IGUAL", "DISTINTO", 
+                             "MAYOR", "MENOR", "MAYORIGUAL", "MENORIGUAL", 
+                             "AND", "OR", "NOT", "PRINT", "IF", "ELSE", 
+                             "ELSEIF", "WHILE", "NUM", "VUL", "V", "ID", 
+                             "NUMBER", "STRING", "CHAR", "WS", "SALTO", 
+                             "TRUE", "FALSE" ];
     static ruleNames = [ "prog", "content", "declaration", "declarationAndAssignament", 
-                         "assignment", "ifStatement", "condition", "trueOrFalse", 
-                         "logicalExpression", "relationalExpression", "whileStatement", 
-                         "printPlease", "concat", "atom", "exp", "dataType", 
-                         "simbolos" ];
+                         "assignment", "whileStatement", "ifStatement", 
+                         "condition", "trueOrFalse", "logicalExpression", 
+                         "relationalExpression", "printPlease", "concat", 
+                         "atom", "incre", "decre", "exp", "dataType", "simbolos" ];
 
     constructor(input) {
         super(input);
@@ -110,7 +118,7 @@ export default class ArrayInitParser extends antlr4.Parser {
 
     sempred(localctx, ruleIndex, predIndex) {
     	switch(ruleIndex) {
-    	case 14:
+    	case 16:
     	    		return this.exp_sempred(localctx, predIndex);
         default:
             throw "No predicate with index:" + ruleIndex;
@@ -137,21 +145,21 @@ export default class ArrayInitParser extends antlr4.Parser {
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 34;
+	        this.state = 38;
 	        this.match(ArrayInitParser.T__0);
-	        this.state = 35;
-	        this.match(ArrayInitParser.LBRACE);
 	        this.state = 39;
+	        this.match(ArrayInitParser.LBRACE);
+	        this.state = 43;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        while(((((_la - 26)) & ~0x1f) === 0 && ((1 << (_la - 26)) & 243) !== 0)) {
-	            this.state = 36;
+	        while(((((_la - 28)) & ~0x1f) === 0 && ((1 << (_la - 28)) & 499) !== 0)) {
+	            this.state = 40;
 	            this.content();
-	            this.state = 41;
+	            this.state = 45;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
 	        }
-	        this.state = 42;
+	        this.state = 46;
 	        this.match(ArrayInitParser.RBRACE);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -173,44 +181,62 @@ export default class ArrayInitParser extends antlr4.Parser {
 	    let localctx = new ContentContext(this, this._ctx, this.state);
 	    this.enterRule(localctx, 2, ArrayInitParser.RULE_content);
 	    try {
-	        this.state = 50;
+	        this.state = 57;
 	        this._errHandler.sync(this);
 	        var la_ = this._interp.adaptivePredict(this._input,1,this._ctx);
 	        switch(la_) {
 	        case 1:
 	            this.enterOuterAlt(localctx, 1);
-	            this.state = 44;
+	            this.state = 48;
 	            this.declaration();
 	            break;
 
 	        case 2:
 	            this.enterOuterAlt(localctx, 2);
-	            this.state = 45;
+	            this.state = 49;
 	            this.declarationAndAssignament();
 	            break;
 
 	        case 3:
 	            this.enterOuterAlt(localctx, 3);
-	            this.state = 46;
+	            this.state = 50;
 	            this.assignment();
 	            break;
 
 	        case 4:
 	            this.enterOuterAlt(localctx, 4);
-	            this.state = 47;
+	            this.state = 51;
 	            this.ifStatement();
 	            break;
 
 	        case 5:
 	            this.enterOuterAlt(localctx, 5);
-	            this.state = 48;
-	            this.printPlease();
+	            this.state = 52;
+	            this.whileStatement();
 	            break;
 
 	        case 6:
 	            this.enterOuterAlt(localctx, 6);
-	            this.state = 49;
+	            this.state = 53;
+	            this.printPlease();
+	            break;
+
+	        case 7:
+	            this.enterOuterAlt(localctx, 7);
+	            this.state = 54;
 	            this.dataType();
+	            break;
+
+	        case 8:
+	            this.enterOuterAlt(localctx, 8);
+	            this.state = 55;
+	            this.incre();
+	            break;
+
+	        case 9:
+	            this.enterOuterAlt(localctx, 9);
+	            this.state = 56;
+	            this.decre();
 	            break;
 
 	        }
@@ -237,30 +263,30 @@ export default class ArrayInitParser extends antlr4.Parser {
 	    try {
 	        localctx = new DeclaracionContext(this, localctx);
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 52;
+	        this.state = 59;
 	        this.dataType();
-	        this.state = 53;
+	        this.state = 60;
 	        _la = this._input.LA(1);
-	        if(!(_la===33 || _la===34)) {
+	        if(!(_la===36 || _la===37)) {
 	        this._errHandler.recoverInline(this);
 	        }
 	        else {
 	        	this._errHandler.reportMatch(this);
 	            this.consume();
 	        }
-	        this.state = 55;
+	        this.state = 62;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        if((((_la) & ~0x1f) === 0 && ((1 << _la) & 120) !== 0)) {
-	            this.state = 54;
+	        if((((_la) & ~0x1f) === 0 && ((1 << _la) & 480) !== 0)) {
+	            this.state = 61;
 	            this.simbolos();
 	        }
 
-	        this.state = 58;
+	        this.state = 65;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        if(_la===2) {
-	            this.state = 57;
+	        if(_la===4) {
+	            this.state = 64;
 	            this.match(ArrayInitParser.FIN);
 	        }
 
@@ -287,32 +313,32 @@ export default class ArrayInitParser extends antlr4.Parser {
 	    try {
 	        localctx = new DeclAndAssigContext(this, localctx);
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 60;
+	        this.state = 67;
 	        this.dataType();
-	        this.state = 61;
+	        this.state = 68;
 	        _la = this._input.LA(1);
-	        if(!(_la===33 || _la===34)) {
+	        if(!(_la===36 || _la===37)) {
 	        this._errHandler.recoverInline(this);
 	        }
 	        else {
 	        	this._errHandler.reportMatch(this);
 	            this.consume();
 	        }
-	        this.state = 62;
+	        this.state = 69;
 	        this.match(ArrayInitParser.EQUALS);
-	        this.state = 64;
+	        this.state = 71;
 	        this._errHandler.sync(this);
 	        var la_ = this._interp.adaptivePredict(this._input,4,this._ctx);
 	        if(la_===1) {
-	            this.state = 63;
+	            this.state = 70;
 	            this.exp(0);
 
 	        }
-	        this.state = 67;
+	        this.state = 74;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        if(_la===2) {
-	            this.state = 66;
+	        if(_la===4) {
+	            this.state = 73;
 	            this.match(ArrayInitParser.FIN);
 	        }
 
@@ -339,17 +365,17 @@ export default class ArrayInitParser extends antlr4.Parser {
 	    try {
 	        localctx = new AsignacionContext(this, localctx);
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 69;
+	        this.state = 76;
 	        this.match(ArrayInitParser.ID);
-	        this.state = 70;
+	        this.state = 77;
 	        this.match(ArrayInitParser.EQUALS);
-	        this.state = 71;
+	        this.state = 78;
 	        this.exp(0);
-	        this.state = 73;
+	        this.state = 80;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        if(_la===2) {
-	            this.state = 72;
+	        if(_la===4) {
+	            this.state = 79;
 	            this.match(ArrayInitParser.FIN);
 	        }
 
@@ -369,84 +395,129 @@ export default class ArrayInitParser extends antlr4.Parser {
 
 
 
+	whileStatement() {
+	    let localctx = new WhileStatementContext(this, this._ctx, this.state);
+	    this.enterRule(localctx, 10, ArrayInitParser.RULE_whileStatement);
+	    var _la = 0;
+	    try {
+	        localctx = new WhileSentenciaContext(this, localctx);
+	        this.enterOuterAlt(localctx, 1);
+	        this.state = 82;
+	        this.match(ArrayInitParser.WHILE);
+	        this.state = 83;
+	        this.match(ArrayInitParser.LPAREN);
+	        this.state = 84;
+	        this.condition();
+	        this.state = 85;
+	        this.match(ArrayInitParser.RPAREN);
+	        this.state = 86;
+	        this.match(ArrayInitParser.LBRACE);
+	        this.state = 90;
+	        this._errHandler.sync(this);
+	        _la = this._input.LA(1);
+	        while(((((_la - 28)) & ~0x1f) === 0 && ((1 << (_la - 28)) & 499) !== 0)) {
+	            this.state = 87;
+	            this.content();
+	            this.state = 92;
+	            this._errHandler.sync(this);
+	            _la = this._input.LA(1);
+	        }
+	        this.state = 93;
+	        this.match(ArrayInitParser.RBRACE);
+	    } catch (re) {
+	    	if(re instanceof antlr4.error.RecognitionException) {
+		        localctx.exception = re;
+		        this._errHandler.reportError(this, re);
+		        this._errHandler.recover(this, re);
+		    } else {
+		    	throw re;
+		    }
+	    } finally {
+	        this.exitRule();
+	    }
+	    return localctx;
+	}
+
+
+
 	ifStatement() {
 	    let localctx = new IfStatementContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 10, ArrayInitParser.RULE_ifStatement);
+	    this.enterRule(localctx, 12, ArrayInitParser.RULE_ifStatement);
 	    var _la = 0;
 	    try {
 	        localctx = new SentenciaIfContext(this, localctx);
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 75;
+	        this.state = 95;
 	        this.match(ArrayInitParser.IF);
-	        this.state = 76;
+	        this.state = 96;
 	        this.match(ArrayInitParser.LPAREN);
-	        this.state = 77;
+	        this.state = 97;
 	        this.condition();
-	        this.state = 78;
+	        this.state = 98;
 	        this.match(ArrayInitParser.RPAREN);
-	        this.state = 79;
+	        this.state = 99;
 	        this.match(ArrayInitParser.LBRACE);
-	        this.state = 83;
+	        this.state = 103;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        while(((((_la - 26)) & ~0x1f) === 0 && ((1 << (_la - 26)) & 243) !== 0)) {
-	            this.state = 80;
+	        while(((((_la - 28)) & ~0x1f) === 0 && ((1 << (_la - 28)) & 499) !== 0)) {
+	            this.state = 100;
 	            this.content();
-	            this.state = 85;
-	            this._errHandler.sync(this);
-	            _la = this._input.LA(1);
-	        }
-	        this.state = 86;
-	        this.match(ArrayInitParser.RBRACE);
-	        this.state = 102;
-	        this._errHandler.sync(this);
-	        _la = this._input.LA(1);
-	        while(_la===29) {
-	            this.state = 87;
-	            this.match(ArrayInitParser.ELSEIF);
-	            this.state = 88;
-	            this.match(ArrayInitParser.LPAREN);
-	            this.state = 89;
-	            this.condition();
-	            this.state = 90;
-	            this.match(ArrayInitParser.RPAREN);
-	            this.state = 91;
-	            this.match(ArrayInitParser.LBRACE);
-	            this.state = 95;
-	            this._errHandler.sync(this);
-	            _la = this._input.LA(1);
-	            while(((((_la - 26)) & ~0x1f) === 0 && ((1 << (_la - 26)) & 243) !== 0)) {
-	                this.state = 92;
-	                this.content();
-	                this.state = 97;
-	                this._errHandler.sync(this);
-	                _la = this._input.LA(1);
-	            }
-	            this.state = 98;
-	            this.match(ArrayInitParser.RBRACE);
-	            this.state = 104;
-	            this._errHandler.sync(this);
-	            _la = this._input.LA(1);
-	        }
-	        this.state = 114;
-	        this._errHandler.sync(this);
-	        _la = this._input.LA(1);
-	        if(_la===28) {
 	            this.state = 105;
-	            this.match(ArrayInitParser.ELSE);
-	            this.state = 106;
-	            this.match(ArrayInitParser.LBRACE);
-	            this.state = 110;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
-	            while(((((_la - 26)) & ~0x1f) === 0 && ((1 << (_la - 26)) & 243) !== 0)) {
-	                this.state = 107;
-	                this.content();
+	        }
+	        this.state = 106;
+	        this.match(ArrayInitParser.RBRACE);
+	        this.state = 122;
+	        this._errHandler.sync(this);
+	        _la = this._input.LA(1);
+	        while(_la===31) {
+	            this.state = 107;
+	            this.match(ArrayInitParser.ELSEIF);
+	            this.state = 108;
+	            this.match(ArrayInitParser.LPAREN);
+	            this.state = 109;
+	            this.condition();
+	            this.state = 110;
+	            this.match(ArrayInitParser.RPAREN);
+	            this.state = 111;
+	            this.match(ArrayInitParser.LBRACE);
+	            this.state = 115;
+	            this._errHandler.sync(this);
+	            _la = this._input.LA(1);
+	            while(((((_la - 28)) & ~0x1f) === 0 && ((1 << (_la - 28)) & 499) !== 0)) {
 	                this.state = 112;
+	                this.content();
+	                this.state = 117;
 	                this._errHandler.sync(this);
 	                _la = this._input.LA(1);
 	            }
-	            this.state = 113;
+	            this.state = 118;
+	            this.match(ArrayInitParser.RBRACE);
+	            this.state = 124;
+	            this._errHandler.sync(this);
+	            _la = this._input.LA(1);
+	        }
+	        this.state = 134;
+	        this._errHandler.sync(this);
+	        _la = this._input.LA(1);
+	        if(_la===30) {
+	            this.state = 125;
+	            this.match(ArrayInitParser.ELSE);
+	            this.state = 126;
+	            this.match(ArrayInitParser.LBRACE);
+	            this.state = 130;
+	            this._errHandler.sync(this);
+	            _la = this._input.LA(1);
+	            while(((((_la - 28)) & ~0x1f) === 0 && ((1 << (_la - 28)) & 499) !== 0)) {
+	                this.state = 127;
+	                this.content();
+	                this.state = 132;
+	                this._errHandler.sync(this);
+	                _la = this._input.LA(1);
+	            }
+	            this.state = 133;
 	            this.match(ArrayInitParser.RBRACE);
 	        }
 
@@ -468,29 +539,29 @@ export default class ArrayInitParser extends antlr4.Parser {
 
 	condition() {
 	    let localctx = new ConditionContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 12, ArrayInitParser.RULE_condition);
+	    this.enterRule(localctx, 14, ArrayInitParser.RULE_condition);
 	    try {
 	        localctx = new CondicionContext(this, localctx);
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 120;
+	        this.state = 140;
 	        this._errHandler.sync(this);
 	        switch(this._input.LA(1)) {
-	        case 13:
-	        case 33:
-	        case 34:
+	        case 15:
 	        case 36:
-	            this.state = 116;
+	        case 37:
+	        case 39:
+	            this.state = 136;
 	            this.logicalExpression();
 	            break;
-	        case 25:
-	            this.state = 117;
+	        case 27:
+	            this.state = 137;
 	            this.match(ArrayInitParser.NOT);
-	            this.state = 118;
+	            this.state = 138;
 	            this.condition();
 	            break;
-	        case 39:
-	        case 40:
-	            this.state = 119;
+	        case 42:
+	        case 43:
+	            this.state = 139;
 	            this.trueOrFalse();
 	            break;
 	        default:
@@ -514,14 +585,14 @@ export default class ArrayInitParser extends antlr4.Parser {
 
 	trueOrFalse() {
 	    let localctx = new TrueOrFalseContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 14, ArrayInitParser.RULE_trueOrFalse);
+	    this.enterRule(localctx, 16, ArrayInitParser.RULE_trueOrFalse);
 	    var _la = 0;
 	    try {
 	        localctx = new VerdaderoOFalsoContext(this, localctx);
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 122;
+	        this.state = 142;
 	        _la = this._input.LA(1);
-	        if(!(_la===39 || _la===40)) {
+	        if(!(_la===42 || _la===43)) {
 	        this._errHandler.recoverInline(this);
 	        }
 	        else {
@@ -546,30 +617,30 @@ export default class ArrayInitParser extends antlr4.Parser {
 
 	logicalExpression() {
 	    let localctx = new LogicalExpressionContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 16, ArrayInitParser.RULE_logicalExpression);
+	    this.enterRule(localctx, 18, ArrayInitParser.RULE_logicalExpression);
 	    var _la = 0;
 	    try {
 	        localctx = new ExpresionLogicaContext(this, localctx);
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 124;
+	        this.state = 144;
 	        this.relationalExpression();
-	        this.state = 129;
+	        this.state = 149;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        while(_la===23 || _la===24) {
-	            this.state = 125;
+	        while(_la===25 || _la===26) {
+	            this.state = 145;
 	            localctx.logic = this._input.LT(1);
 	            _la = this._input.LA(1);
-	            if(!(_la===23 || _la===24)) {
+	            if(!(_la===25 || _la===26)) {
 	                localctx.logic = this._errHandler.recoverInline(this);
 	            }
 	            else {
 	            	this._errHandler.reportMatch(this);
 	                this.consume();
 	            }
-	            this.state = 126;
+	            this.state = 146;
 	            this.relationalExpression();
-	            this.state = 131;
+	            this.state = 151;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
 	        }
@@ -591,69 +662,33 @@ export default class ArrayInitParser extends antlr4.Parser {
 
 	relationalExpression() {
 	    let localctx = new RelationalExpressionContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 18, ArrayInitParser.RULE_relationalExpression);
+	    this.enterRule(localctx, 20, ArrayInitParser.RULE_relationalExpression);
 	    var _la = 0;
 	    try {
 	        localctx = new ExpresionRelacionalContext(this, localctx);
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 132;
+	        this.state = 152;
 	        this.exp(0);
-	        this.state = 137;
+	        this.state = 157;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        while((((_la) & ~0x1f) === 0 && ((1 << _la) & 8257536) !== 0)) {
-	            this.state = 133;
+	        while((((_la) & ~0x1f) === 0 && ((1 << _la) & 33030144) !== 0)) {
+	            this.state = 153;
 	            localctx.relation = this._input.LT(1);
 	            _la = this._input.LA(1);
-	            if(!((((_la) & ~0x1f) === 0 && ((1 << _la) & 8257536) !== 0))) {
+	            if(!((((_la) & ~0x1f) === 0 && ((1 << _la) & 33030144) !== 0))) {
 	                localctx.relation = this._errHandler.recoverInline(this);
 	            }
 	            else {
 	            	this._errHandler.reportMatch(this);
 	                this.consume();
 	            }
-	            this.state = 134;
+	            this.state = 154;
 	            this.exp(0);
-	            this.state = 139;
+	            this.state = 159;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
 	        }
-	    } catch (re) {
-	    	if(re instanceof antlr4.error.RecognitionException) {
-		        localctx.exception = re;
-		        this._errHandler.reportError(this, re);
-		        this._errHandler.recover(this, re);
-		    } else {
-		    	throw re;
-		    }
-	    } finally {
-	        this.exitRule();
-	    }
-	    return localctx;
-	}
-
-
-
-	whileStatement() {
-	    let localctx = new WhileStatementContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 20, ArrayInitParser.RULE_whileStatement);
-	    try {
-	        localctx = new WhileSentenciaContext(this, localctx);
-	        this.enterOuterAlt(localctx, 1);
-	        this.state = 140;
-	        this.match(ArrayInitParser.WHILE);
-	        this.state = 141;
-	        this.match(ArrayInitParser.LPAREN);
-	        this.state = 142;
-	        this.condition();
-	        this.state = 143;
-	        this.match(ArrayInitParser.RPAREN);
-	        this.state = 144;
-	        this.match(ArrayInitParser.LBRACE);
-	        this.state = 145;
-	        this.content();
-	        this.state = 146;
-	        this.match(ArrayInitParser.RBRACE);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
 		        localctx.exception = re;
@@ -677,37 +712,37 @@ export default class ArrayInitParser extends antlr4.Parser {
 	    try {
 	        localctx = new ImpresionContext(this, localctx);
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 148;
+	        this.state = 160;
 	        this.match(ArrayInitParser.PRINT);
-	        this.state = 149;
+	        this.state = 161;
 	        this.match(ArrayInitParser.LPAREN);
-	        this.state = 153;
+	        this.state = 165;
 	        this._errHandler.sync(this);
-	        var la_ = this._interp.adaptivePredict(this._input,15,this._ctx);
+	        var la_ = this._interp.adaptivePredict(this._input,16,this._ctx);
 	        switch(la_) {
 	        case 1:
-	            this.state = 150;
+	            this.state = 162;
 	            this.match(ArrayInitParser.STRING);
 	            break;
 
 	        case 2:
-	            this.state = 151;
+	            this.state = 163;
 	            this.exp(0);
 	            break;
 
 	        case 3:
-	            this.state = 152;
+	            this.state = 164;
 	            this.concat();
 	            break;
 
 	        }
-	        this.state = 155;
+	        this.state = 167;
 	        this.match(ArrayInitParser.RPAREN);
-	        this.state = 157;
+	        this.state = 169;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        if(_la===2) {
-	            this.state = 156;
+	        if(_la===4) {
+	            this.state = 168;
 	            this.match(ArrayInitParser.FIN);
 	        }
 
@@ -734,20 +769,20 @@ export default class ArrayInitParser extends antlr4.Parser {
 	    try {
 	        localctx = new ConcatenacionContext(this, localctx);
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 159;
+	        this.state = 171;
 	        this.atom();
-	        this.state = 162; 
+	        this.state = 174; 
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
 	        do {
-	            this.state = 160;
+	            this.state = 172;
 	            this.match(ArrayInitParser.PLUS);
-	            this.state = 161;
+	            this.state = 173;
 	            this.atom();
-	            this.state = 164; 
+	            this.state = 176; 
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
-	        } while(_la===3);
+	        } while(_la===5);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
 		        localctx.exception = re;
@@ -768,27 +803,79 @@ export default class ArrayInitParser extends antlr4.Parser {
 	    let localctx = new AtomContext(this, this._ctx, this.state);
 	    this.enterRule(localctx, 26, ArrayInitParser.RULE_atom);
 	    try {
-	        this.state = 168;
+	        this.state = 180;
 	        this._errHandler.sync(this);
 	        switch(this._input.LA(1)) {
-	        case 35:
+	        case 38:
 	            localctx = new StringContext(this, localctx);
 	            this.enterOuterAlt(localctx, 1);
-	            this.state = 166;
+	            this.state = 178;
 	            this.match(ArrayInitParser.STRING);
 	            break;
-	        case 13:
-	        case 33:
-	        case 34:
+	        case 15:
 	        case 36:
+	        case 37:
+	        case 39:
 	            localctx = new ExppContext(this, localctx);
 	            this.enterOuterAlt(localctx, 2);
-	            this.state = 167;
+	            this.state = 179;
 	            this.exp(0);
 	            break;
 	        default:
 	            throw new antlr4.error.NoViableAltException(this);
 	        }
+	    } catch (re) {
+	    	if(re instanceof antlr4.error.RecognitionException) {
+		        localctx.exception = re;
+		        this._errHandler.reportError(this, re);
+		        this._errHandler.recover(this, re);
+		    } else {
+		    	throw re;
+		    }
+	    } finally {
+	        this.exitRule();
+	    }
+	    return localctx;
+	}
+
+
+
+	incre() {
+	    let localctx = new IncreContext(this, this._ctx, this.state);
+	    this.enterRule(localctx, 28, ArrayInitParser.RULE_incre);
+	    try {
+	        localctx = new IncrementoContext(this, localctx);
+	        this.enterOuterAlt(localctx, 1);
+	        this.state = 182;
+	        this.match(ArrayInitParser.ID);
+	        this.state = 183;
+	        this.match(ArrayInitParser.T__1);
+	    } catch (re) {
+	    	if(re instanceof antlr4.error.RecognitionException) {
+		        localctx.exception = re;
+		        this._errHandler.reportError(this, re);
+		        this._errHandler.recover(this, re);
+		    } else {
+		    	throw re;
+		    }
+	    } finally {
+	        this.exitRule();
+	    }
+	    return localctx;
+	}
+
+
+
+	decre() {
+	    let localctx = new DecreContext(this, this._ctx, this.state);
+	    this.enterRule(localctx, 30, ArrayInitParser.RULE_decre);
+	    try {
+	        localctx = new DecrementoContext(this, localctx);
+	        this.enterOuterAlt(localctx, 1);
+	        this.state = 185;
+	        this.match(ArrayInitParser.ID);
+	        this.state = 186;
+	        this.match(ArrayInitParser.T__2);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
 		        localctx.exception = re;
@@ -812,31 +899,31 @@ export default class ArrayInitParser extends antlr4.Parser {
 	    const _parentState = this.state;
 	    let localctx = new ExpContext(this, this._ctx, _parentState);
 	    let _prevctx = localctx;
-	    const _startState = 28;
-	    this.enterRecursionRule(localctx, 28, ArrayInitParser.RULE_exp, _p);
+	    const _startState = 32;
+	    this.enterRecursionRule(localctx, 32, ArrayInitParser.RULE_exp, _p);
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 187;
+	        this.state = 205;
 	        this._errHandler.sync(this);
-	        var la_ = this._interp.adaptivePredict(this._input,20,this._ctx);
+	        var la_ = this._interp.adaptivePredict(this._input,21,this._ctx);
 	        switch(la_) {
 	        case 1:
 	            localctx = new ParentesisContext(this, localctx);
 	            this._ctx = localctx;
 	            _prevctx = localctx;
 
-	            this.state = 171;
+	            this.state = 189;
 	            this.match(ArrayInitParser.LPAREN);
-	            this.state = 172;
+	            this.state = 190;
 	            this.exp(0);
-	            this.state = 173;
+	            this.state = 191;
 	            this.match(ArrayInitParser.RPAREN);
-	            this.state = 175;
+	            this.state = 193;
 	            this._errHandler.sync(this);
-	            var la_ = this._interp.adaptivePredict(this._input,19,this._ctx);
+	            var la_ = this._interp.adaptivePredict(this._input,20,this._ctx);
 	            if(la_===1) {
-	                this.state = 174;
+	                this.state = 192;
 	                this.exp(0);
 
 	            }
@@ -846,17 +933,17 @@ export default class ArrayInitParser extends antlr4.Parser {
 	            localctx = new ParentesisMultiplyContext(this, localctx);
 	            this._ctx = localctx;
 	            _prevctx = localctx;
-	            this.state = 177;
+	            this.state = 195;
 	            this.match(ArrayInitParser.LPAREN);
-	            this.state = 178;
+	            this.state = 196;
 	            this.exp(0);
-	            this.state = 179;
+	            this.state = 197;
 	            this.match(ArrayInitParser.RPAREN);
-	            this.state = 180;
+	            this.state = 198;
 	            this.match(ArrayInitParser.LPAREN);
-	            this.state = 181;
+	            this.state = 199;
 	            this.exp(0);
-	            this.state = 182;
+	            this.state = 200;
 	            this.match(ArrayInitParser.RPAREN);
 	            break;
 
@@ -864,7 +951,7 @@ export default class ArrayInitParser extends antlr4.Parser {
 	            localctx = new NumeroContext(this, localctx);
 	            this._ctx = localctx;
 	            _prevctx = localctx;
-	            this.state = 184;
+	            this.state = 202;
 	            this.match(ArrayInitParser.NUMBER);
 	            break;
 
@@ -872,7 +959,7 @@ export default class ArrayInitParser extends antlr4.Parser {
 	            localctx = new CharContext(this, localctx);
 	            this._ctx = localctx;
 	            _prevctx = localctx;
-	            this.state = 185;
+	            this.state = 203;
 	            this.match(ArrayInitParser.CHAR);
 	            break;
 
@@ -880,33 +967,54 @@ export default class ArrayInitParser extends antlr4.Parser {
 	            localctx = new IdentificadorContext(this, localctx);
 	            this._ctx = localctx;
 	            _prevctx = localctx;
-	            this.state = 186;
+	            this.state = 204;
 	            this.match(ArrayInitParser.ID);
 	            break;
 
 	        }
 	        this._ctx.stop = this._input.LT(-1);
-	        this.state = 197;
+	        this.state = 215;
 	        this._errHandler.sync(this);
-	        var _alt = this._interp.adaptivePredict(this._input,22,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,23,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                if(this._parseListeners!==null) {
 	                    this.triggerExitRuleEvent();
 	                }
 	                _prevctx = localctx;
-	                this.state = 195;
+	                this.state = 213;
 	                this._errHandler.sync(this);
-	                var la_ = this._interp.adaptivePredict(this._input,21,this._ctx);
+	                var la_ = this._interp.adaptivePredict(this._input,22,this._ctx);
 	                switch(la_) {
 	                case 1:
 	                    localctx = new TimesDivContext(this, new ExpContext(this, _parentctx, _parentState));
 	                    this.pushNewRecursionContext(localctx, _startState, ArrayInitParser.RULE_exp);
-	                    this.state = 189;
+	                    this.state = 207;
 	                    if (!( this.precpred(this._ctx, 5))) {
 	                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 5)");
 	                    }
-	                    this.state = 190;
+	                    this.state = 208;
+	                    localctx.operation = this._input.LT(1);
+	                    _la = this._input.LA(1);
+	                    if(!(_la===7 || _la===8)) {
+	                        localctx.operation = this._errHandler.recoverInline(this);
+	                    }
+	                    else {
+	                    	this._errHandler.reportMatch(this);
+	                        this.consume();
+	                    }
+	                    this.state = 209;
+	                    this.exp(6);
+	                    break;
+
+	                case 2:
+	                    localctx = new PlusSubtractionContext(this, new ExpContext(this, _parentctx, _parentState));
+	                    this.pushNewRecursionContext(localctx, _startState, ArrayInitParser.RULE_exp);
+	                    this.state = 210;
+	                    if (!( this.precpred(this._ctx, 4))) {
+	                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 4)");
+	                    }
+	                    this.state = 211;
 	                    localctx.operation = this._input.LT(1);
 	                    _la = this._input.LA(1);
 	                    if(!(_la===5 || _la===6)) {
@@ -916,36 +1024,15 @@ export default class ArrayInitParser extends antlr4.Parser {
 	                    	this._errHandler.reportMatch(this);
 	                        this.consume();
 	                    }
-	                    this.state = 191;
-	                    this.exp(6);
-	                    break;
-
-	                case 2:
-	                    localctx = new PlusSubtractionContext(this, new ExpContext(this, _parentctx, _parentState));
-	                    this.pushNewRecursionContext(localctx, _startState, ArrayInitParser.RULE_exp);
-	                    this.state = 192;
-	                    if (!( this.precpred(this._ctx, 4))) {
-	                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 4)");
-	                    }
-	                    this.state = 193;
-	                    localctx.operation = this._input.LT(1);
-	                    _la = this._input.LA(1);
-	                    if(!(_la===3 || _la===4)) {
-	                        localctx.operation = this._errHandler.recoverInline(this);
-	                    }
-	                    else {
-	                    	this._errHandler.reportMatch(this);
-	                        this.consume();
-	                    }
-	                    this.state = 194;
+	                    this.state = 212;
 	                    this.exp(5);
 	                    break;
 
 	                } 
 	            }
-	            this.state = 199;
+	            this.state = 217;
 	            this._errHandler.sync(this);
-	            _alt = this._interp.adaptivePredict(this._input,22,this._ctx);
+	            _alt = this._interp.adaptivePredict(this._input,23,this._ctx);
 	        }
 
 	    } catch( error) {
@@ -966,13 +1053,13 @@ export default class ArrayInitParser extends antlr4.Parser {
 
 	dataType() {
 	    let localctx = new DataTypeContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 30, ArrayInitParser.RULE_dataType);
+	    this.enterRule(localctx, 34, ArrayInitParser.RULE_dataType);
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 200;
+	        this.state = 218;
 	        _la = this._input.LA(1);
-	        if(!(((((_la - 30)) & ~0x1f) === 0 && ((1 << (_la - 30)) & 7) !== 0))) {
+	        if(!(((((_la - 33)) & ~0x1f) === 0 && ((1 << (_la - 33)) & 7) !== 0))) {
 	        this._errHandler.recoverInline(this);
 	        }
 	        else {
@@ -997,13 +1084,13 @@ export default class ArrayInitParser extends antlr4.Parser {
 
 	simbolos() {
 	    let localctx = new SimbolosContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 32, ArrayInitParser.RULE_simbolos);
+	    this.enterRule(localctx, 36, ArrayInitParser.RULE_simbolos);
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 202;
+	        this.state = 220;
 	        _la = this._input.LA(1);
-	        if(!((((_la) & ~0x1f) === 0 && ((1 << _la) & 120) !== 0))) {
+	        if(!((((_la) & ~0x1f) === 0 && ((1 << _la) & 480) !== 0))) {
 	        this._errHandler.recoverInline(this);
 	        }
 	        else {
@@ -1029,64 +1116,68 @@ export default class ArrayInitParser extends antlr4.Parser {
 
 ArrayInitParser.EOF = antlr4.Token.EOF;
 ArrayInitParser.T__0 = 1;
-ArrayInitParser.FIN = 2;
-ArrayInitParser.PLUS = 3;
-ArrayInitParser.MINUS = 4;
-ArrayInitParser.TIMES = 5;
-ArrayInitParser.DIV = 6;
-ArrayInitParser.EQUALS = 7;
-ArrayInitParser.GATO = 8;
-ArrayInitParser.DOLLAR = 9;
-ArrayInitParser.DOBLEPUNTO = 10;
-ArrayInitParser.ANDPERSON = 11;
-ArrayInitParser.COMMA = 12;
-ArrayInitParser.LPAREN = 13;
-ArrayInitParser.RPAREN = 14;
-ArrayInitParser.LBRACE = 15;
-ArrayInitParser.RBRACE = 16;
-ArrayInitParser.IGUAL = 17;
-ArrayInitParser.DISTINTO = 18;
-ArrayInitParser.MAYOR = 19;
-ArrayInitParser.MENOR = 20;
-ArrayInitParser.MAYORIGUAL = 21;
-ArrayInitParser.MENORIGUAL = 22;
-ArrayInitParser.AND = 23;
-ArrayInitParser.OR = 24;
-ArrayInitParser.NOT = 25;
-ArrayInitParser.PRINT = 26;
-ArrayInitParser.IF = 27;
-ArrayInitParser.ELSE = 28;
-ArrayInitParser.ELSEIF = 29;
-ArrayInitParser.NUM = 30;
-ArrayInitParser.VUL = 31;
-ArrayInitParser.V = 32;
-ArrayInitParser.ID = 33;
-ArrayInitParser.NUMBER = 34;
-ArrayInitParser.STRING = 35;
-ArrayInitParser.CHAR = 36;
-ArrayInitParser.WS = 37;
-ArrayInitParser.SALTO = 38;
-ArrayInitParser.TRUE = 39;
-ArrayInitParser.FALSE = 40;
-ArrayInitParser.WHILE = 41;
+ArrayInitParser.T__1 = 2;
+ArrayInitParser.T__2 = 3;
+ArrayInitParser.FIN = 4;
+ArrayInitParser.PLUS = 5;
+ArrayInitParser.MINUS = 6;
+ArrayInitParser.TIMES = 7;
+ArrayInitParser.DIV = 8;
+ArrayInitParser.EQUALS = 9;
+ArrayInitParser.GATO = 10;
+ArrayInitParser.DOLLAR = 11;
+ArrayInitParser.DOBLEPUNTO = 12;
+ArrayInitParser.ANDPERSON = 13;
+ArrayInitParser.COMMA = 14;
+ArrayInitParser.LPAREN = 15;
+ArrayInitParser.RPAREN = 16;
+ArrayInitParser.LBRACE = 17;
+ArrayInitParser.RBRACE = 18;
+ArrayInitParser.IGUAL = 19;
+ArrayInitParser.DISTINTO = 20;
+ArrayInitParser.MAYOR = 21;
+ArrayInitParser.MENOR = 22;
+ArrayInitParser.MAYORIGUAL = 23;
+ArrayInitParser.MENORIGUAL = 24;
+ArrayInitParser.AND = 25;
+ArrayInitParser.OR = 26;
+ArrayInitParser.NOT = 27;
+ArrayInitParser.PRINT = 28;
+ArrayInitParser.IF = 29;
+ArrayInitParser.ELSE = 30;
+ArrayInitParser.ELSEIF = 31;
+ArrayInitParser.WHILE = 32;
+ArrayInitParser.NUM = 33;
+ArrayInitParser.VUL = 34;
+ArrayInitParser.V = 35;
+ArrayInitParser.ID = 36;
+ArrayInitParser.NUMBER = 37;
+ArrayInitParser.STRING = 38;
+ArrayInitParser.CHAR = 39;
+ArrayInitParser.WS = 40;
+ArrayInitParser.SALTO = 41;
+ArrayInitParser.TRUE = 42;
+ArrayInitParser.FALSE = 43;
 
 ArrayInitParser.RULE_prog = 0;
 ArrayInitParser.RULE_content = 1;
 ArrayInitParser.RULE_declaration = 2;
 ArrayInitParser.RULE_declarationAndAssignament = 3;
 ArrayInitParser.RULE_assignment = 4;
-ArrayInitParser.RULE_ifStatement = 5;
-ArrayInitParser.RULE_condition = 6;
-ArrayInitParser.RULE_trueOrFalse = 7;
-ArrayInitParser.RULE_logicalExpression = 8;
-ArrayInitParser.RULE_relationalExpression = 9;
-ArrayInitParser.RULE_whileStatement = 10;
+ArrayInitParser.RULE_whileStatement = 5;
+ArrayInitParser.RULE_ifStatement = 6;
+ArrayInitParser.RULE_condition = 7;
+ArrayInitParser.RULE_trueOrFalse = 8;
+ArrayInitParser.RULE_logicalExpression = 9;
+ArrayInitParser.RULE_relationalExpression = 10;
 ArrayInitParser.RULE_printPlease = 11;
 ArrayInitParser.RULE_concat = 12;
 ArrayInitParser.RULE_atom = 13;
-ArrayInitParser.RULE_exp = 14;
-ArrayInitParser.RULE_dataType = 15;
-ArrayInitParser.RULE_simbolos = 16;
+ArrayInitParser.RULE_incre = 14;
+ArrayInitParser.RULE_decre = 15;
+ArrayInitParser.RULE_exp = 16;
+ArrayInitParser.RULE_dataType = 17;
+ArrayInitParser.RULE_simbolos = 18;
 
 class ProgContext extends antlr4.ParserRuleContext {
 
@@ -1164,12 +1255,24 @@ class ContentContext extends antlr4.ParserRuleContext {
 	    return this.getTypedRuleContext(IfStatementContext,0);
 	};
 
+	whileStatement() {
+	    return this.getTypedRuleContext(WhileStatementContext,0);
+	};
+
 	printPlease() {
 	    return this.getTypedRuleContext(PrintPleaseContext,0);
 	};
 
 	dataType() {
 	    return this.getTypedRuleContext(DataTypeContext,0);
+	};
+
+	incre() {
+	    return this.getTypedRuleContext(IncreContext,0);
+	};
+
+	decre() {
+	    return this.getTypedRuleContext(DecreContext,0);
 	};
 
 	accept(visitor) {
@@ -1373,6 +1476,84 @@ class AsignacionContext extends AssignmentContext {
 }
 
 ArrayInitParser.AsignacionContext = AsignacionContext;
+
+class WhileStatementContext extends antlr4.ParserRuleContext {
+
+    constructor(parser, parent, invokingState) {
+        if(parent===undefined) {
+            parent = null;
+        }
+        if(invokingState===undefined || invokingState===null) {
+            invokingState = -1;
+        }
+        super(parent, invokingState);
+        this.parser = parser;
+        this.ruleIndex = ArrayInitParser.RULE_whileStatement;
+    }
+
+
+	 
+		copyFrom(ctx) {
+			super.copyFrom(ctx);
+		}
+
+}
+
+
+class WhileSentenciaContext extends WhileStatementContext {
+
+    constructor(parser, ctx) {
+        super(parser);
+        super.copyFrom(ctx);
+    }
+
+	WHILE() {
+	    return this.getToken(ArrayInitParser.WHILE, 0);
+	};
+
+	LPAREN() {
+	    return this.getToken(ArrayInitParser.LPAREN, 0);
+	};
+
+	condition() {
+	    return this.getTypedRuleContext(ConditionContext,0);
+	};
+
+	RPAREN() {
+	    return this.getToken(ArrayInitParser.RPAREN, 0);
+	};
+
+	LBRACE() {
+	    return this.getToken(ArrayInitParser.LBRACE, 0);
+	};
+
+	RBRACE() {
+	    return this.getToken(ArrayInitParser.RBRACE, 0);
+	};
+
+	content = function(i) {
+	    if(i===undefined) {
+	        i = null;
+	    }
+	    if(i===null) {
+	        return this.getTypedRuleContexts(ContentContext);
+	    } else {
+	        return this.getTypedRuleContext(ContentContext,i);
+	    }
+	};
+
+	accept(visitor) {
+	    if ( visitor instanceof ArrayInitVisitor ) {
+	        return visitor.visitWhileSentencia(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
+
+}
+
+ArrayInitParser.WhileSentenciaContext = WhileSentenciaContext;
 
 class IfStatementContext extends antlr4.ParserRuleContext {
 
@@ -1823,77 +2004,6 @@ class ExpresionRelacionalContext extends RelationalExpressionContext {
 
 ArrayInitParser.ExpresionRelacionalContext = ExpresionRelacionalContext;
 
-class WhileStatementContext extends antlr4.ParserRuleContext {
-
-    constructor(parser, parent, invokingState) {
-        if(parent===undefined) {
-            parent = null;
-        }
-        if(invokingState===undefined || invokingState===null) {
-            invokingState = -1;
-        }
-        super(parent, invokingState);
-        this.parser = parser;
-        this.ruleIndex = ArrayInitParser.RULE_whileStatement;
-    }
-
-
-	 
-		copyFrom(ctx) {
-			super.copyFrom(ctx);
-		}
-
-}
-
-
-class WhileSentenciaContext extends WhileStatementContext {
-
-    constructor(parser, ctx) {
-        super(parser);
-        super.copyFrom(ctx);
-    }
-
-	WHILE() {
-	    return this.getToken(ArrayInitParser.WHILE, 0);
-	};
-
-	LPAREN() {
-	    return this.getToken(ArrayInitParser.LPAREN, 0);
-	};
-
-	condition() {
-	    return this.getTypedRuleContext(ConditionContext,0);
-	};
-
-	RPAREN() {
-	    return this.getToken(ArrayInitParser.RPAREN, 0);
-	};
-
-	LBRACE() {
-	    return this.getToken(ArrayInitParser.LBRACE, 0);
-	};
-
-	content() {
-	    return this.getTypedRuleContext(ContentContext,0);
-	};
-
-	RBRACE() {
-	    return this.getToken(ArrayInitParser.RBRACE, 0);
-	};
-
-	accept(visitor) {
-	    if ( visitor instanceof ArrayInitVisitor ) {
-	        return visitor.visitWhileSentencia(this);
-	    } else {
-	        return visitor.visitChildren(this);
-	    }
-	}
-
-
-}
-
-ArrayInitParser.WhileSentenciaContext = WhileSentenciaContext;
-
 class PrintPleaseContext extends antlr4.ParserRuleContext {
 
     constructor(parser, parent, invokingState) {
@@ -2101,6 +2211,100 @@ class ExppContext extends AtomContext {
 }
 
 ArrayInitParser.ExppContext = ExppContext;
+
+class IncreContext extends antlr4.ParserRuleContext {
+
+    constructor(parser, parent, invokingState) {
+        if(parent===undefined) {
+            parent = null;
+        }
+        if(invokingState===undefined || invokingState===null) {
+            invokingState = -1;
+        }
+        super(parent, invokingState);
+        this.parser = parser;
+        this.ruleIndex = ArrayInitParser.RULE_incre;
+    }
+
+
+	 
+		copyFrom(ctx) {
+			super.copyFrom(ctx);
+		}
+
+}
+
+
+class IncrementoContext extends IncreContext {
+
+    constructor(parser, ctx) {
+        super(parser);
+        super.copyFrom(ctx);
+    }
+
+	ID() {
+	    return this.getToken(ArrayInitParser.ID, 0);
+	};
+
+	accept(visitor) {
+	    if ( visitor instanceof ArrayInitVisitor ) {
+	        return visitor.visitIncremento(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
+
+}
+
+ArrayInitParser.IncrementoContext = IncrementoContext;
+
+class DecreContext extends antlr4.ParserRuleContext {
+
+    constructor(parser, parent, invokingState) {
+        if(parent===undefined) {
+            parent = null;
+        }
+        if(invokingState===undefined || invokingState===null) {
+            invokingState = -1;
+        }
+        super(parent, invokingState);
+        this.parser = parser;
+        this.ruleIndex = ArrayInitParser.RULE_decre;
+    }
+
+
+	 
+		copyFrom(ctx) {
+			super.copyFrom(ctx);
+		}
+
+}
+
+
+class DecrementoContext extends DecreContext {
+
+    constructor(parser, ctx) {
+        super(parser);
+        super.copyFrom(ctx);
+    }
+
+	ID() {
+	    return this.getToken(ArrayInitParser.ID, 0);
+	};
+
+	accept(visitor) {
+	    if ( visitor instanceof ArrayInitVisitor ) {
+	        return visitor.visitDecremento(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
+
+}
+
+ArrayInitParser.DecrementoContext = DecrementoContext;
 
 class ExpContext extends antlr4.ParserRuleContext {
 
@@ -2459,15 +2663,17 @@ ArrayInitParser.ContentContext = ContentContext;
 ArrayInitParser.DeclarationContext = DeclarationContext; 
 ArrayInitParser.DeclarationAndAssignamentContext = DeclarationAndAssignamentContext; 
 ArrayInitParser.AssignmentContext = AssignmentContext; 
+ArrayInitParser.WhileStatementContext = WhileStatementContext; 
 ArrayInitParser.IfStatementContext = IfStatementContext; 
 ArrayInitParser.ConditionContext = ConditionContext; 
 ArrayInitParser.TrueOrFalseContext = TrueOrFalseContext; 
 ArrayInitParser.LogicalExpressionContext = LogicalExpressionContext; 
 ArrayInitParser.RelationalExpressionContext = RelationalExpressionContext; 
-ArrayInitParser.WhileStatementContext = WhileStatementContext; 
 ArrayInitParser.PrintPleaseContext = PrintPleaseContext; 
 ArrayInitParser.ConcatContext = ConcatContext; 
 ArrayInitParser.AtomContext = AtomContext; 
+ArrayInitParser.IncreContext = IncreContext; 
+ArrayInitParser.DecreContext = DecreContext; 
 ArrayInitParser.ExpContext = ExpContext; 
 ArrayInitParser.DataTypeContext = DataTypeContext; 
 ArrayInitParser.SimbolosContext = SimbolosContext; 

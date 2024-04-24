@@ -6,23 +6,17 @@ import { impresiones } from "./Impresiones.js";
 import { memo } from "react";
 
 export default class CustomVisitor extends ArrayInitVisitor{
-
-	// Visit a parse tree produced by ArrayInitParser#prog.
 	visitProg(ctx) {
 		console.log("prog");
 		return this.visit(ctx.content())
-	  }
-  
-  
-	  // Visit a parse tree produced by ArrayInitParser#content.
-	  visitContent(ctx) {
+	}
+	visitContent(ctx) {
 		console.log("content");
 		
 		return this.visitChildren(ctx)
-	  }
+	}
   
-  
-	  /**
+	/**
 	   * La funcion declaracion recibirá un texto a analizar cuya sintaxis es:
 	   * declaration: dataType (ID|NUMBER) simbolos? FIN?
 	   * La función se encargará de guardar en un objeto de objetos (MEMORIA) la variable declarada,
@@ -33,7 +27,7 @@ export default class CustomVisitor extends ArrayInitVisitor{
 	   * @returns La funcion Declaracion retornará el identificador de la variable
 	   * 
 	   */
-	  visitDeclaracion(ctx) {
+	visitDeclaracion(ctx) {
 		console.log("declaracion");
 		try{
 
@@ -86,10 +80,9 @@ export default class CustomVisitor extends ArrayInitVisitor{
 		  throw new Error("Detenido debido a errores de compilación");
 	}
 		
-	  }
-  
-  
-	  /**
+	}
+
+	/**
 	   * La función DeclAndAssig permite declarar una variable y asignarle un valor
 	   * en la misma linea de codigo.
 	   * La sintaxis es : declarationAndAssignament: dataType (ID|NUMBER) EQUALS exp? FIN? #declAndAssig;
@@ -98,7 +91,7 @@ export default class CustomVisitor extends ArrayInitVisitor{
 	   * @param {Object} ctx 
 	   * @returns Variable guardada en memoria
 	   */
-	  visitDeclAndAssig(ctx) {
+	visitDeclAndAssig(ctx) {
 		console.log("Declaracion con asignacion");
 		try{
 			const regExpString = /^"([a-zA-Z0-9\s]+)"$/;
@@ -183,9 +176,9 @@ export default class CustomVisitor extends ArrayInitVisitor{
 			throw new Error("Detenido debido a errores de compilación");
 		}
 
-	  }
+	}
 	  
-	  /**
+	/**
 	   * La función visitAsignacion trabajara con un variables que ya estan en la memoria,
 	   * por lo tanto identificara si el nombre de la variable ya existe para poder reasignarle 
 	   * un valor nuevo, en caso de que no funcione por mal trato de sintaxis o nombre de varible
@@ -193,7 +186,7 @@ export default class CustomVisitor extends ArrayInitVisitor{
 	   * @param {Object} ctx 
 	   * @returns El valor de la variable
 	   */
-	  visitAsignacion(ctx) {
+	visitAsignacion(ctx) {
 		console.log("asignacion");
 		try{
 			const regExpChar = /^'.'$/;
@@ -237,15 +230,21 @@ export default class CustomVisitor extends ArrayInitVisitor{
 		
 		
 		
-	  }
+	}
 
-	  // Visit a parse tree produced by ArrayInitParser#whileSentencia.
+	  //!AQUI SE TRABAJA EL WHILE
 	visitWhileSentencia(ctx) {
 		console.log("CIclo While");
+		let condicion = this.visit(ctx.condition())
+		if(condicion){
+			while (condicion) {
+				this.visit(ctx.content())
+				condicion = this.visit(ctx.condition());
+			}
+		}
 		return ;
-	  }
-	  
-	  visitSentenciaIf(ctx) {
+	}  
+	visitSentenciaIf(ctx) {
 		let dondeParo=0
 		const condicionIf = this.visit(ctx.condition(0))
 		if(condicionIf){
@@ -265,15 +264,8 @@ export default class CustomVisitor extends ArrayInitVisitor{
 				return
 			}
 		}
-
-	
-		}
-
-
-		
-
-		// Visit a parse tree produced by ArrayInitParser#condicion.
-		visitCondicion(ctx) {
+	}
+	visitCondicion(ctx) {
 			console.log("Condicion");
 			console.log(ctx.getText());
 			if(ctx.getText()=== 'true')
@@ -295,9 +287,7 @@ export default class CustomVisitor extends ArrayInitVisitor{
 			
 	
 	}
-  
-	  // Visit a parse tree produced by ArrayInitParser#expresionLogica.
-	  visitExpresionLogica(ctx) {
+	visitExpresionLogica(ctx) {
 		console.log("Expresion logica");
 		const resultRelational1 =this.visit(ctx.relationalExpression(0))
 		console.log(resultRelational1);
@@ -320,11 +310,8 @@ export default class CustomVisitor extends ArrayInitVisitor{
 		else if(resultRelational1){return true}
 		else{return false}
 
-	  }
-  
-  
-	  // Visit a parse tree produced by ArrayInitParser#expresionRelacional.
-	  visitExpresionRelacional(ctx) {
+	}
+	visitExpresionRelacional(ctx) {
 	  	console.log("Expresion relacional");
 		const exp1 = this.visit(ctx.exp(0))
 		if(ctx.exp(1)!==null)
@@ -359,10 +346,8 @@ export default class CustomVisitor extends ArrayInitVisitor{
 		else{
 			return true
 		}
-	  }
-  
-	  // Visit a parse tree produced by ArrayInitParser#trueOrFalse.
-	  visitVerdaderoOFalso(ctx) {
+	}
+	visitVerdaderoOFalso(ctx) {
 		console.log(ctx.TRUE());
 		if(this.visit(ctx.TRUE()))
 		{
@@ -372,10 +357,7 @@ export default class CustomVisitor extends ArrayInitVisitor{
 		else{
 			return false;
 		}
-	  }
-  
-
-  // Visit a parse tree produced by ArrayInitParser#concatenacion.
+	}
 	visitConcatenacion(ctx) {
 		console.log("visitConca");
 		console.log(this.visit(ctx.atom()).join(''));
@@ -383,12 +365,8 @@ export default class CustomVisitor extends ArrayInitVisitor{
 		impresiones.push(concate)
 			
 		return concate;
-	  }
-
-
-	  
-	  // Visit a parse tree produced by ArrayInitParser#impresion.
-	  visitImpresion(ctx) {
+	}
+	visitImpresion(ctx) {
 		console.log("impresion");
 		if(ctx.STRING())
 		{
@@ -425,23 +403,18 @@ export default class CustomVisitor extends ArrayInitVisitor{
 		
 		//console.log(this.visit(ctx.exp(0) ));
 		return this.visitChildren(ctx);
-	  }
-  
-	  
-	  // Visit a parse tree produced by ArrayInitParser#dataType.
-	  visitDataType(ctx) {
+	}
+	visitDataType(ctx) {
 		console.log("Datatype broooo");
 		try{
 			throw new Error("Error, declaracion incompleta")
 			return this.visitChildren(ctx);
-			
 		}
 		catch(error){
 			errores.push(error.message);
 			throw new Error("Detenido debido a errores de compilación");
 		}
-	  }
-	  
+	} 
 	visitParentesis(ctx) {
     	let res = this.visit(ctx.exp(0)) 
         if(ctx.exp(1))
@@ -451,8 +424,6 @@ export default class CustomVisitor extends ArrayInitVisitor{
 		}
         return Number(res)
     }
-
-	// Visit a parse tree produced by CalculadoraParser#parentesisMultiply.
 	visitParentesisMultiply(ctx) {
 		console.log('entre');
 		
@@ -477,9 +448,7 @@ export default class CustomVisitor extends ArrayInitVisitor{
 			}
 			
 			return numero1*numero2  ;
-		  }
-	
-	// Visit a parse tree produced by CalculadoraParser#timesDiv.
+	}
 	visitTimesDiv(ctx) {
 		
 		const numero1 = Number(this.visit(ctx.exp(0)))//encontramos el primer numero usando los indices ([10,undefined,5])
@@ -509,29 +478,18 @@ export default class CustomVisitor extends ArrayInitVisitor{
         else{
 			
           if(numero1Text.match(/[a-z]+/i)){
-          
             console.log("Ya vi que es letra el numero 1");
             if(memoria[numero1Text] != undefined){return memoria[numero1Text].valor/numero2}
             else{return String("error")}
-
-
           }
           else if(numero2Text.match(/[a-z]+/i)){
-
             console.log("Ya vi que es letra el numero 2");
             if(memoria[numero2Text ] != undefined){return numero1 / memoria[numero2Text].valor;}
             else{return String("error")}
-
-          }
-
+		  }
           return Number(numero1/numero2) //resultado de la division de los numeros
-        }
-        
-        //return res  ;
-        
+        }     
 	}
-
-	// Visit a parse tree produced by CalculadoraParser#plusSubtraction.
 	visitPlusSubtraction(ctx) {
         
         const numero1 = Number(this.visit(ctx.exp(0)))//encontramos el primer numero usando los indices ([10,undefined,5])
@@ -582,12 +540,7 @@ export default class CustomVisitor extends ArrayInitVisitor{
         }
     
 	}
-	
-
-
-	
-	  // Visit a parse tree produced by ArrayInitParser#identificador.
-	  visitIdentificador(ctx) {
+	visitIdentificador(ctx) {
 		console.log("VisitandoId");
 		const id = ctx.getText()
 		console.log(id);
@@ -597,34 +550,33 @@ export default class CustomVisitor extends ArrayInitVisitor{
 		else{
 			throw new Error('Variable "' + id + '" no declarada')
 		}
-	  }
-	  
-	  // Visit a parse tree produced by ArrayInitParser#simb.
-	visitSimb(ctx) {
-		errores.push("papaa")
-		return this.visitChildren(ctx);
-	  }
-	
-	  // Visit a parse tree produced by ArrayInitParser#numero.
-	  visitNumero(ctx) {
-		console.log("Visitando Numero");
-		return Number(ctx.getText());
-	  }
-  
-	  // Visit a parse tree produced by ArrayInitParser#string.
-	visitString(ctx) {
-		console.log("vsit string");
-		console.log(ctx.getText().slice(1,-1));
-		return String(ctx.getText().slice(1,-1));
-	  }
+	}
 
-	  // Visit a parse tree produced by ArrayInitParser#char.
-	  visitChar(ctx) {
-		return String(ctx.getText());
-	  }
-  
-  
-  
+	visitIncremento(ctx) {
+		try{
+			const variable = ctx.ID().getText()
+			if(!isNaN(variable)){
+				throw new Error(`Error en la linea ${ctx.start.line}, no se puede incrementar`)
+			}
+			if(memoria[variable] !== undefined){
+				memoria[variable].valor += 1
+				console.log(memoria[variable]);
+				return
+			}
+			else{
+				throw new Error(`Error en la linea ${ctx.start.line}, la variable ${variable}, no ha sido declarada`)
+			}
+		}
+		catch(error){
+
+		}
 		
-
+	  }
+	visitDecremento(ctx) {
+		return this.visitChildren(ctx);
+	}
+	visitSimb(ctx) {return this.visitChildren(ctx);}
+	visitNumero(ctx) {return Number(ctx.getText());}
+	visitString(ctx) {return String(ctx.getText().slice(1,-1));}
+	visitChar(ctx) {return String(ctx.getText());}
 	}

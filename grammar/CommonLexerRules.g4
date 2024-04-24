@@ -34,6 +34,7 @@ PRINT: 'printPlease';
 IF: 'if';
 ELSE: 'else';
 ELSEIF: 'elseif';
+WHILE: 'mien';
 //TIPOS DE DATOS
 NUM: 'num';
 VUL: 'vul';
@@ -50,5 +51,3 @@ SALTO: '\n';
 TRUE: 'true';
 FALSE: 'false';
 
-//WHILE
-WHILE: 'mien';

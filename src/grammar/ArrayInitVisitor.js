@@ -36,6 +36,12 @@ export default class ArrayInitVisitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 
+	// Visit a parse tree produced by ArrayInitParser#whileSentencia.
+	visitWhileSentencia(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
 	// Visit a parse tree produced by ArrayInitParser#sentenciaIf.
 	visitSentenciaIf(ctx) {
 	  return this.visitChildren(ctx);
@@ -66,12 +72,6 @@ export default class ArrayInitVisitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 
-	// Visit a parse tree produced by ArrayInitParser#whileSentencia.
-	visitWhileSentencia(ctx) {
-	  return this.visitChildren(ctx);
-	}
-
-
 	// Visit a parse tree produced by ArrayInitParser#impresion.
 	visitImpresion(ctx) {
 	  return this.visitChildren(ctx);
@@ -92,6 +92,18 @@ export default class ArrayInitVisitor extends antlr4.tree.ParseTreeVisitor {
 
 	// Visit a parse tree produced by ArrayInitParser#expp.
 	visitExpp(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by ArrayInitParser#incremento.
+	visitIncremento(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by ArrayInitParser#decremento.
+	visitDecremento(ctx) {
 	  return this.visitChildren(ctx);
 	}
 
