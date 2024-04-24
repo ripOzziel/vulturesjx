@@ -245,67 +245,32 @@ export default class CustomVisitor extends ArrayInitVisitor{
 		return ;
 	  }
 	  
-	  visitIfStatement(ctx) {
-		  return this.visitChildren(ctx);
-		}
-
-
-		// Visit a parse tree produced by ArrayInitParser#sentenciaIf.
-		visitSentenciaIf(ctx) {
-			console.log("Sentencia if");
-			if(this.visit(ctx.condition()))
-			{
-				console.log("dio true");
-				this.visit(ctx.content())
-				return true
-			}
-			else{
-				console.log("dio false");
-				return false
-				
-			}
-			
-		}
-		
-		// Visit a parse tree produced by ArrayInitParser#ifConElse.
-	visitIfConElse(ctx) {
-		console.log("Visitando if con else");
-		if(this.visit(ctx.ifSentence())=== false){this.visit(ctx.content())}
-	  }
-  
-  
-	  // Visit a parse tree produced by ArrayInitParser#ifConElseIf.
-	  visitIfConElseIf(ctx) {
-		console.log("Visitando if con else if");
-		if(this.visit(ctx.ifSentence())=== false)
-		{
-			const lenOfElseIfs =ctx.elseIfSintax().length
-			for (let i = 0; i < lenOfElseIfs; i++) {
-				console.log(ctx.elseIfSintax(i).condition());
-				if(this.visit(ctx.elseIfSintax(i).condition())=== true)
-				{
-					console.log("Else if num " + i+1);
-					this.visit(ctx.elseIfSintax(i).content())
-					return true
+	  visitSentenciaIf(ctx) {
+		let dondeParo=0
+		const condicionIf = this.visit(ctx.condition(0))
+		if(condicionIf){
+			this.visit(ctx.content(0))
+		} else{
+			if(ctx.ELSEIF()){
+				for (let i = 1; i <= ctx.ELSEIF().length; i++) {
+					if(this.visit(ctx.condition(i))){
+						this.visit(ctx.content(i))
+						dondeParo=i
+						return
+					}
 				}
-				
-				
 			}
-			console.log("No fue ni una");
-			return false
-		}
-		
-	  }
-  
-  
-	  // Visit a parse tree produced by ArrayInitParser#ifConElseIfConElse.
-	  visitIfConElseIfConElse(ctx) {
-		console.log("Visitando if elseif con else");
-		if(this.visit(ctx.ifWithElseIf())===false){
-			this.visit(ctx.content())
+			if(ctx.ELSE()){
+				this.visit(ctx.content(dondeParo+1))
+				return
+			}
 		}
 
-	  }
+	
+		}
+
+
+		
 
 		// Visit a parse tree produced by ArrayInitParser#condicion.
 		visitCondicion(ctx) {
