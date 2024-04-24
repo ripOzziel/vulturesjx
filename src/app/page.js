@@ -81,10 +81,10 @@ const HomePage = () => {
         </section>
         <textarea  onChange={escribir} className='bg-slate-200 w-[60%] h-auto p-10 rounded-lg text-black italic overflow-y-auto'  value={textarea} placeholder='✞✞✞'></textarea>
 
-        <section id='terminal' className='h-full  w-[50%] '>
-          <center>
+        <section id='terminal' className='h-25  w-[50%] '>
+          <center className='h-[80%]'>
             <p>Output</p>
-            <textarea value={output} readOnly className='w-[80%] h-auto rounded-md bg-slate-200 text-black overflow-y-auto'/>
+            <textarea value={output} readOnly className='w-[80%] h-[80%] rounded-md bg-slate-200 text-black overflow-y-auto'/>
           </center>
         </section>
         

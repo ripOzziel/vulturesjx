@@ -23,9 +23,13 @@ assignment: ID EQUALS exp FIN?  #asignacion;
 whileStatement: WHILE LPAREN condition RPAREN LBRACE content* RBRACE #whileSentencia;
 
 //sintaxis del if
-ifStatement: IF LPAREN condition RPAREN LBRACE content* RBRACE 
-(ELSEIF LPAREN condition RPAREN LBRACE content* RBRACE)* 
-(ELSE LBRACE content* RBRACE)? #sentenciaIf;
+ifStatement: IF LPAREN condition RPAREN LBRACE ifContent RBRACE 
+(ELSEIF LPAREN condition RPAREN LBRACE elseifContent RBRACE)* 
+(ELSE LBRACE elseContent RBRACE)? #sentenciaIf;
+ifContent: content*;
+elseifContent: content*;
+elseContent: content*;
+
 condition: (logicalExpression | NOT condition | trueOrFalse) #condicion;
 trueOrFalse:(TRUE |FALSE) #verdaderoOFalso;
 logicalExpression: relationalExpression ( logic=(AND | OR) relationalExpression )* #expresionLogica;

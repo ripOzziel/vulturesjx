@@ -31,14 +31,15 @@ export default class CustomVisitorC extends TranslateVisitor {
 		
 		// Visita el contenido del programa y agrega la traducción
 		const childrenTranslations = this.visitChildren(ctx);
+		console.log(childrenTranslations);
 		const notEmptyChildrenTranslation = childrenTranslations.filter(e => e !== undefined) //eliminamos los nodos vacios que retorna
 		console.log(notEmptyChildrenTranslation);
 		if (notEmptyChildrenTranslation.length > 0) {
-			for (let i = 0; i < notEmptyChildrenTranslation[0].length; i++) {
-				console.log(notEmptyChildrenTranslation[0][i]);
-				if(notEmptyChildrenTranslation[0][i] !== undefined)
+			for (let i = 0; i < notEmptyChildrenTranslation.length; i++) {
+				console.log(notEmptyChildrenTranslation[i]);
+				if(notEmptyChildrenTranslation[i] !== undefined)
 				{
-					this.translation += notEmptyChildrenTranslation[0][i]+'\n';
+					this.translation += notEmptyChildrenTranslation[i]+'\n';
 
 				}
 			}
@@ -55,6 +56,7 @@ export default class CustomVisitorC extends TranslateVisitor {
 
 	// Visit a parse tree produced by TranslateParser#content.
 	visitContent(ctx) {
+		console.log(this.visitChildren(ctx));
 	  return this.visitChildren(ctx);
 	}
 
@@ -85,78 +87,27 @@ export default class CustomVisitorC extends TranslateVisitor {
 
 
 	// Visit a parse tree produced by TranslateParser#ifStatement.
-	visitIfStatement(ctx) {
-		console.log("IF");
-		console.log(this.visitChildren(ctx)[0]);
-		return this.visitChildren(ctx)[0]
-	  }
-  
-  
-	  // Visit a parse tree produced by TranslateParser#sentenciaIf.
-	  visitSentenciaIf(ctx) {
-		console.log("PURO IF");
+	visitSentenciaIf(ctx) {
+		console.log("IF PURO");
+		let dondeParo=0
 		let nuevaIf = ''
-		nuevaIf += 'if('
-		nuevaIf+= this.visit(ctx.condition())
-		nuevaIf += '){\n'
-		for (let i = 0; i < this.visit(ctx.content()).length; i++) {
-			nuevaIf += this.visit(ctx.content())[i]+'\n'
+		const condicionIf = this.visit(ctx.condition(0))
+		nuevaIf += 'if(' + condicionIf + ')\n{\n'
+		console.log(this.visit(ctx.content(0)));
+		nuevaIf += this.visit(ctx.content(0)) +'\n}\n'
+		if(ctx.ELSEIF()){
+			for (let i = 1; i < ctx.ELSEIF().length; i++) {
+				nuevaIf+='elseif(' + this.visit(ctx.condition(i)) +')\n{\n'
+				nuevaIf+= this.visit(ctx.content(i)) +'\n}\n'
+				dondeParo=i
+			}
 		}
-		nuevaIf += '}\n'
+		if(ctx.ELSE()){
+			nuevaIf += 'else \n {\n' + this.visit(ctx.content(dondeParo+1)) + '\n}\n'
+		}
 		console.log(nuevaIf);
 		return nuevaIf
 	  }
-  
-  
-	  // Visit a parse tree produced by TranslateParser#ifConElse.
-	  visitIfConElse(ctx) {
-		let nuevaIfConElse = ''
-		const iF = this.visit(ctx.ifSentence())
-		nuevaIfConElse += iF
-		nuevaIfConElse += 'else{\n'
-		for (let i = 0; i < this.visit(ctx.content()).length; i++) {
-			nuevaIfConElse += this.visit(ctx.content())[i]+'\n'
-		}
-		nuevaIfConElse += '}\n'
-		return nuevaIfConElse
-	  }
-  
-  
-	  // Visit a parse tree produced by TranslateParser#elseIfSintax.
-	  visitElseIfSintax(ctx) {
-		let nuevaElseIf =''
-		nuevaElseIf +='elseif ('+ this.visit(ctx.condition())+'){\n'
-		for (let i = 0; i < this.visit(ctx.content()).length; i++) {
-			nuevaElseIf += this.visit(ctx.content())[i]+'\n'
-		}
-		nuevaElseIf +='}\n'
-		return nuevaElseIf
-	  }
-  
-  
-	  // Visit a parse tree produced by TranslateParser#ifConElseIf.
-	  visitIfConElseIf(ctx) {
-		let nuevo = ''
-		nuevo += this.visit(ctx.ifSentence())
-		nuevo += this.visit(ctx.elseIfSintax())
-		return nuevo
-	  }
-  
-  
-	  // Visit a parse tree produced by TranslateParser#ifConElseIfConElse.
-	  visitIfConElseIfConElse(ctx) {
-		let nuevo = ''
-		nuevo += this.visit(ctx.ifWithElseIf())
-		nuevo += 'else{\n'
-		for (let i = 0; i < this.visit(ctx.content()).length; i++) {
-			nuevo += this.visit(ctx.content())[i]+'\n'
-		}
-		nuevo += '}\n'
-		return nuevo
-	  }
-  
-
-
 	// Visit a parse tree produced by TranslateParser#condicion.
 	visitCondicion(ctx) {
 		console.log("Condicion");

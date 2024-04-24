@@ -3,14 +3,14 @@ import CoomonC;
 
 /** The start rule; begin parsing here. */
 
-prog: INT MAIN LPAREN RPAREN LBRACE content RBRACE ;
+prog: INT MAIN LPAREN RPAREN LBRACE content* RBRACE ;
 
 /**
     Contenido es lo que el cascaron puede soportar dentro de el.
     contenido puede tener declaracion de variables, declaracion con asignacion,
     asignacion de una variable creada
  */
-content: ( declaration | declarationAndAssignament | assignment | ifStatement | printPlease | dataType )+;
+content: declaration | declarationAndAssignament | assignment | ifStatement | whileStatement| printPlease | dataType | incre| decre ;
 
 /**
     Sinntaxis de las declaracion y asignaciones
@@ -19,13 +19,13 @@ declaration: dataType (ID|NUMBER) simbolos? FIN?    #declaracion;
 declarationAndAssignament: dataType (ID|NUMBER) EQUALS exp? FIN? #declAndAssig;
 assignment: ID EQUALS exp FIN?  #asignacion;
 
-//sintaxis del if
-ifStatement: ifWithElse | ifWithElseIf | ifWithElseIfElse | ifSentence;
-ifSentence: IF LPAREN condition RPAREN LBRACE content RBRACE #sentenciaIf;
-ifWithElse: ifSentence ELSE LBRACE content RBRACE #ifConElse;
-elseIfSintax: ELSEIF LPAREN condition RPAREN LBRACE content RBRACE;
-ifWithElseIf: ifSentence (elseIfSintax)+ #ifConElseIf;
-ifWithElseIfElse: ifWithElseIf (ELSE LBRACE content RBRACE)? #ifConElseIfConElse;
+//sintaxis de while
+whileStatement: WHILE LPAREN condition RPAREN LBRACE content* RBRACE #whileSentencia;
+
+//sintaxis de sentencia if
+ifStatement: IF LPAREN condition RPAREN LBRACE content* RBRACE 
+(ELSEIF LPAREN condition RPAREN LBRACE content* RBRACE)* 
+(ELSE LBRACE content* RBRACE)? #sentenciaIf;
 condition: (logicalExpression | NOT condition | trueOrFalse) #condicion;
 trueOrFalse:(TRUE |FALSE) #verdaderoOFalso;
 logicalExpression: relationalExpression ( logic=(AND | OR) relationalExpression )* #expresionLogica;
@@ -39,6 +39,9 @@ atom:STRING #string
     |
     exp #expp;
 
+//incremento y decremento
+incre : ID '++' #incremento;
+decre : ID '--' #decremento;
 //expresion
 exp: 
     '(' exp ')' exp?           #parentesis

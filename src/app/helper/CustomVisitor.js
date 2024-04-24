@@ -245,22 +245,25 @@ export default class CustomVisitor extends ArrayInitVisitor{
 		return ;
 	}  
 	visitSentenciaIf(ctx) {
-		let dondeParo=0
+
 		const condicionIf = this.visit(ctx.condition(0))
 		if(condicionIf){
-			this.visit(ctx.content(0))
+		
+			this.visit(ctx.ifContent())
+			return
 		} else{
+			console.log("else");
 			if(ctx.ELSEIF()){
-				for (let i = 1; i <= ctx.ELSEIF().length; i++) {
-					if(this.visit(ctx.condition(i))){
-						this.visit(ctx.content(i))
-						dondeParo=i
+				for (let i = 0; i <= ctx.ELSEIF().length; i++) {
+					if(this.visit(ctx.condition(i+1))){
+						this.visit(ctx.elseifContent(i))
+
 						return
 					}
 				}
 			}
 			if(ctx.ELSE()){
-				this.visit(ctx.content(dondeParo+1))
+				this.visit(ctx.elseContent());
 				return
 			}
 		}
@@ -296,12 +299,12 @@ export default class CustomVisitor extends ArrayInitVisitor{
 		{
 			const resultRelational2 =this.visit(ctx.relationalExpression(1))
 			console.log(resultRelational2);
-			if(ctx.logic.type === 23){
+			if(ctx.logic.type === 25){
 				console.log("and");
 				if(resultRelational1 && resultRelational2){return true}
 				else{return false}
 			}
-			if(ctx.logic.type === 24){
+			if(ctx.logic.type === 26){
 				if(resultRelational1 || resultRelational2){return true}
 				else{return false}
 			}
@@ -317,28 +320,28 @@ export default class CustomVisitor extends ArrayInitVisitor{
 		if(ctx.exp(1)!==null)
 		{
 			const exp2 = this.visit(ctx.exp(1))
-			if(ctx.relation.type===17){
+			if(ctx.relation.type===19){
 				if(exp1 == exp2){return true}
 				else{return false}
 			}
-			else if(ctx.relation.type ===18)
+			else if(ctx.relation.type ===20)
 			{
 				if(exp1 != exp2){return true}
 				else{return false}
 			}
-			else if(ctx.relation.type === 19){
+			else if(ctx.relation.type === 21){
 				if(exp1>exp2){return true}
 				else{return false}
 			}
-			else if(ctx.relation.type === 20){
+			else if(ctx.relation.type === 22){
 				if(exp1<exp2){return true}
 				else{return false}
 			}
-			else if(ctx.relation.type === 21){
+			else if(ctx.relation.type === 23){
 				if(exp1>=exp2){return true}
 				else{return false}
 			}
-			else if(ctx.relation.type === 22){
+			else if(ctx.relation.type === 24){
 				if(exp1<=exp2){return true}
 				else{return false}
 			}

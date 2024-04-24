@@ -8,6 +8,8 @@ TRUE: 'true';
 FALSE: 'false';
 ELSE: 'else';
 ELSEIF: 'elseif';
+VOID: 'void';
+WHILE: 'while';
 INT: 'int';
 FLOAT: 'float';
 STRING: 'string';
