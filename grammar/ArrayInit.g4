@@ -32,8 +32,16 @@ elseContent: content*;
 
 condition: (logicalExpression | NOT condition | trueOrFalse) #condicion;
 trueOrFalse:(TRUE |FALSE) #verdaderoOFalso;
-logicalExpression: relationalExpression ( logic=(AND | OR) relationalExpression )* #expresionLogica;
+logicalExpression: 
+    logicalExpression (logic=(AND | OR) logicalExpression)+ #logicLogical
+    |
+    LPAREN logicalExpression RPAREN #logicalConParentesis
+    |
+    relationalExpression ( logic=(AND | OR) relationalExpression )* #expresionLogica
+    ;
 relationalExpression: 
+    LPAREN relationalExpression RPAREN #relacionalConParentesis
+    |
     (exp ( relation=(IGUAL | DISTINTO | MAYOR | MENOR | MAYORIGUAL | MENORIGUAL) exp)*) #expresionRelacional;
 
 
@@ -52,6 +60,8 @@ exp:
     '(' exp ')' exp?           #parentesis
     |
     '(' exp ')''(' exp ')'       #parentesisMultiply
+    |
+    exp RESI exp #resiudo
     |
     exp operation=(TIMES|DIV) exp     #timesDiv
     |

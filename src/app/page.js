@@ -10,11 +10,12 @@ const HomePage = () => {
   //aqui se enceuntran los hooks
   const [textarea, setTextarea]=useState('')
   const [output, setOutput]=useState('')
+  const [cCode, setCCode] = useState('')
 
   
   //funcion para llamar a la funcion analizar del generador
   const traducir = () =>{
-    const texto = textarea.replace(/\/\/.*|\/\*[\s\S]*?\*\//g, "").trim();
+    const texto = cCode.replace(/\/\/.*|\/\*[\s\S]*?\*\//g, "").trim();
     setTextarea(analizarC(texto))
   }
   const iniciar=()=>
@@ -50,6 +51,24 @@ const HomePage = () => {
   const escribir =(event)=>{ //funcion que actualiza el text area a lo que escribamos en el teclado
     const textAreaAct = event.target.value;
     setTextarea(textAreaAct)
+
+  }
+  const escribirC =(event)=>{ //funcion que actualiza el text area a lo que escribamos en el teclado
+    const textAreaAct = event.target.value;
+    setCCode(textAreaAct)
+
+  }
+  const soltar = (e)=>{
+    e.preventDefault();
+    
+    const file = e.dataTransfer.files[0];
+  if (file.type === 'text/plain') {
+    const reader = new FileReader();
+    reader.onload = function(event) {
+      setCCode(event.target.result);
+    };
+    reader.readAsText(file);
+  }
   }
   const borrar = () =>{ //funcion para borrar el resultado y el mensaje
     setTextarea("")
@@ -58,8 +77,20 @@ const HomePage = () => {
   }
   
   const obtenerNumerosDeLinea = () => {
-    const lineas = textarea.split('\n');
-    return Array.from({ length: lineas.length }, (_, index) => index + 1);
+    if (textarea) {
+      const lineas = textarea.split('\n');
+      return Array.from({ length: lineas.length }, (_, index) => index + 1);
+    } else {
+      return [];
+    }
+  };
+  const obtenerNumerosDeLineaC = () => {
+    if (cCode) {
+      const lineas = cCode.split('\n');
+      return Array.from({ length: lineas.length }, (_, index) => index + 1);
+    } else {
+      return [];
+    }
   };
   return (
     <main className='bg-black h-full'>
@@ -74,23 +105,40 @@ const HomePage = () => {
       <button onClick={() =>borrar()}>✧°</button>
       </section>
       <section className='flex h-full '>
+        <section className='w-[37%] flex h-full  '>
+
         <section id='numeroDeLinea' className='text-right py-10 px-5' >
         {obtenerNumerosDeLinea().map((numero) => (
           <div key={numero}>{numero}</div>
         ))} 
         </section>
-        <textarea  onChange={escribir} className='bg-slate-200 w-[60%] h-auto p-10 rounded-lg text-black italic overflow-y-auto'  value={textarea} placeholder='✞✞✞'></textarea>
+        <textarea onDrop={soltar} onChange={escribir} className='bg-slate-200 w-[90%] h-auto rounded-lg text-black italic overflow-y-auto m-4'  value={textarea} placeholder='✞✞✞'></textarea>
 
-        <section id='terminal' className='h-25  w-[50%] '>
-          <center className='h-[80%]'>
+        </section>
+        <section id='terminal' className='h-30  w-[25%] flex'>
+          <center className='h-[80%] w-[100%]'>
             <p>Output</p>
-            <textarea value={output} readOnly className='w-[80%] h-[80%] rounded-md bg-slate-200 text-black overflow-y-auto'/>
+            <textarea value={output} readOnly className='w-[100%] h-30 rounded-md bg-slate-200 text-black overflow-y-auto'/>
           </center>
         </section>
         
+      <section className='w-[37%] flex h-full'>
+
+       <section id='numeroDeLinea' className='text-right py-10 px-5' >
+        {obtenerNumerosDeLineaC().map((numero) => (
+          <div key={numero}>{numero}</div>
+        ))} 
+        </section>
+      <textarea
+          className='bg-slate-200 w-[90%] h-auto rounded-lg text-black italic overflow-y-auto m-4'
+          placeholder='C Code'
+          value={cCode}
+          onChange={escribirC}
+          
+          ></textarea>
       </section>
       
-      
+          </section>
       </main>
   )
 }

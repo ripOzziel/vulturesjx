@@ -40,7 +40,7 @@ NUM: 'num';
 VUL: 'vul';
 V: 'v';
 ID: [^a-zA-Z][a-zA-Z0-9]*;
-NUMBER: [0-9]+;
+NUMBER: '-'? DIGIT+ ('.' DIGIT+)?;
 STRING: '"' .*? '"';
 CHAR: '\'' . '\'';
 WS: [ \t\r\n]+ -> skip;
@@ -50,4 +50,6 @@ SALTO: '\n';
 //verdadero o falso
 TRUE: 'true';
 FALSE: 'false';
+DIGIT: [0-9];
+RESI: '%';
 

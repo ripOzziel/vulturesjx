@@ -85,7 +85,31 @@ export default class CustomVisitorC extends TranslateVisitor {
 	  return this.tratoDeDataType(ctx)
 	}
 
+	visitWhileSentencia(ctx) {
+		console.log("Ciclo while");
+		console.log("bajo");
+		console.log(this.visit(ctx.content()));
+		let nuevoWhile =''
+		nuevoWhile += 'mien(' + this.visit(ctx.condition(0))+')\n{\n'
+		for (let i = 0; i < ctx.content().length; i++) {
+			nuevoWhile += this.visit(ctx.content(i)) + '\n'
+		}
+		nuevoWhile += '}'
+		return nuevoWhile
+	  }
 
+	  visitIncremento(ctx) {
+		console.log("incremento");
+		console.log(ctx.getText());
+		return ctx.getText();
+	  }
+  
+  
+	  // Visit a parse tree produced by TranslateParser#decremento.
+	  visitDecremento(ctx) {
+		return ctx.getText()
+	  }
+  
 	// Visit a parse tree produced by TranslateParser#ifStatement.
 	visitSentenciaIf(ctx) {
 		console.log("IF PURO");
@@ -93,17 +117,19 @@ export default class CustomVisitorC extends TranslateVisitor {
 		let nuevaIf = ''
 		const condicionIf = this.visit(ctx.condition(0))
 		nuevaIf += 'if(' + condicionIf + ')\n{\n'
-		console.log(this.visit(ctx.content(0)));
-		nuevaIf += this.visit(ctx.content(0)) +'\n}\n'
-		if(ctx.ELSEIF()){
-			for (let i = 1; i < ctx.ELSEIF().length; i++) {
-				nuevaIf+='elseif(' + this.visit(ctx.condition(i)) +')\n{\n'
-				nuevaIf+= this.visit(ctx.content(i)) +'\n}\n'
+		console.log(this.visit(ctx.ifContent()));
+		nuevaIf += this.visit(ctx.ifContent()) +'\n}\n'
+
+		const numElseIf = ctx.ELSEIF() ? ctx.ELSEIF().length : 0;
+		if(numElseIf >0){
+			for (let i = 0; i < numElseIf; i++) {
+				nuevaIf+='elseif(' + this.visit(ctx.condition(i+1)) +')\n{\n'
+				nuevaIf+= this.visit(ctx.elseifContent(i)) +'\n}\n'
 				dondeParo=i
 			}
 		}
 		if(ctx.ELSE()){
-			nuevaIf += 'else \n {\n' + this.visit(ctx.content(dondeParo+1)) + '\n}\n'
+			nuevaIf += 'else \n {\n' + this.visit(ctx.elseContent()) + '\n}\n'
 		}
 		console.log(nuevaIf);
 		return nuevaIf
@@ -115,7 +141,7 @@ export default class CustomVisitorC extends TranslateVisitor {
 		return ctx.getText()
 	}
 
-
+	
 
 	// Visit a parse tree produced by TranslateParser#expresionLogica.
 	visitExpresionLogica(ctx) {

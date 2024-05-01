@@ -84,6 +84,24 @@ export default class ArrayInitVisitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 
+	// Visit a parse tree produced by ArrayInitParser#logicLogical.
+	visitLogicLogical(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by ArrayInitParser#logicalConParentesis.
+	visitLogicalConParentesis(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by ArrayInitParser#relacionalConParentesis.
+	visitRelacionalConParentesis(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
 	// Visit a parse tree produced by ArrayInitParser#expresionRelacional.
 	visitExpresionRelacional(ctx) {
 	  return this.visitChildren(ctx);
@@ -140,6 +158,12 @@ export default class ArrayInitVisitor extends antlr4.tree.ParseTreeVisitor {
 
 	// Visit a parse tree produced by ArrayInitParser#parentesisMultiply.
 	visitParentesisMultiply(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by ArrayInitParser#resiudo.
+	visitResiudo(ctx) {
 	  return this.visitChildren(ctx);
 	}
 

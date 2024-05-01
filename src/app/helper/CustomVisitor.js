@@ -71,7 +71,7 @@ export default class CustomVisitor extends ArrayInitVisitor{
 			}
 			console.log("Memoria");
 			console.log(memoria);
-			console.log(String(memoria[id].identificador));
+			console.log(String(memoria[id].valor));
 			return String(memoria[id].identificador);
 		}
 	}catch(error){
@@ -79,7 +79,7 @@ export default class CustomVisitor extends ArrayInitVisitor{
 		  errores.push(error.message);
 		  throw new Error("Detenido debido a errores de compilación");
 	}
-		
+		clg
 	}
 
 	/**
@@ -127,17 +127,16 @@ export default class CustomVisitor extends ArrayInitVisitor{
 				else{
 					const nuevoValor = this.visit(ctx.exp(0));
 					console.log("nuevo valor: " + this.visit(ctx.exp(0) ));
-				
 					if(tipoDato==='num'){
-						if(!isNaN(nuevoValor))
-						{
+						//if(!isNaN(nuevoValor))
+						//{
 							console.log("si lo es");
 							memoria[id]={identificador:id, valor:Number(nuevoValor), tipoDeDato: tipoDato}
-						}
-						else{
-							throw new Error("Solo puedes asignar numeros al tipo de dato int")
-							return String("No es un numero")
-						}
+						//}
+						//else{
+						//	throw new Error("Solo puedes asignar numeros al tipo de dato int")
+						//	return String("No es un numero")
+						//}
 						
 						//memoria[id]={identificador:id, valor:Number(nuevoValor), tipoDeDato: tipoDato}
 		
@@ -192,9 +191,12 @@ export default class CustomVisitor extends ArrayInitVisitor{
 			const regExpChar = /^'.'$/;
 			const expresionRegular = /^"([a-zA-Z0-9\s]+)"$/;
 			const id = ctx.ID().getText();
-			
+			console.log("este es el id: "+ id);
+			console.log(memoria);
 			if(memoria[id] != undefined){
-				const nuevoValor = ctx.exp().getText();
+				console.log("el id a tratar: ");
+				console.log(memoria[id].identificador);
+				const nuevoValor = this.visit(ctx.exp(0));
 				console.log("Nuevo valor: " + nuevoValor);
 				if(memoria[id].tipoDeDato === 'num'){
 					/*if(!isNaN(nuevoValor)){memoria[id].valor=Number(nuevoValor)}
@@ -218,7 +220,7 @@ export default class CustomVisitor extends ArrayInitVisitor{
 				console.log("Valor del id Nuevo: " + nuevoValor);
 				return nuevoValor;
 			}
-			else{
+			else{ 
 				console.log("La variable no ha sido declarada");
 				throw new Error("Variable '" + id + "' no ha sido declarada")
 				return String("No declarada")
@@ -234,38 +236,49 @@ export default class CustomVisitor extends ArrayInitVisitor{
 
 	  //!AQUI SE TRABAJA EL WHILE
 	visitWhileSentencia(ctx) {
-		console.log("CIclo While");
-		let condicion = this.visit(ctx.condition())
-		if(condicion){
-			while (condicion) {
-				this.visit(ctx.content())
-				condicion = this.visit(ctx.condition());
+		try{
+
+			console.log("CIclo While");
+			//console.log(ctx.content().getText());
+			let condicion = this.visit(ctx.condition())
+			if(condicion){
+				while (condicion) {
+					this.visit(ctx.content())
+					condicion = this.visit(ctx.condition());
+				}
 			}
+			return ;
 		}
-		return ;
+		catch(error){
+			errores.push(error.message);
+			throw new Error("Detenido debido a errores de compilación");
+		}
 	}  
 	visitSentenciaIf(ctx) {
-
 		const condicionIf = this.visit(ctx.condition(0))
 		if(condicionIf){
 		
 			this.visit(ctx.ifContent())
 			return
-		} else{
+		} 
+		
+		else{
 			console.log("else");
-			if(ctx.ELSEIF()){
-				for (let i = 0; i <= ctx.ELSEIF().length; i++) {
-					if(this.visit(ctx.condition(i+1))){
-						this.visit(ctx.elseifContent(i))
-
-						return
+			const numElseIf = ctx.ELSEIF() ? ctx.ELSEIF().length : 0;
+			if (numElseIf > 0) {
+				for (let i = 0; i < numElseIf; i++) {
+					if (this.visit(ctx.condition(i + 1))) {
+						this.visit(ctx.elseifContent(i));
+						return;
 					}
 				}
 			}
-			if(ctx.ELSE()){
+			if (ctx.ELSE()) {
 				this.visit(ctx.elseContent());
-				return
+				return;
 			}
+			console.log("No paso nada");
+			return;
 		}
 	}
 	visitCondicion(ctx) {
@@ -281,15 +294,47 @@ export default class CustomVisitor extends ArrayInitVisitor{
 				return false
 			}
 			else{
-
+				console.log(ctx.logicalExpression().getText());
 				const resultLogical1 =this.visit(ctx.logicalExpression(0))	  
-				console.log(resultLogical1);
+				console.log(this.visit(ctx.logicalExpression()));
 				if(ctx.NOT() !== null){return !resultLogical1}
 				else{return resultLogical1}
 			}
 			
 	
 	}
+	visitLogicLogical(ctx) {
+		console.log("Logic Logical");
+		console.log(this.visit(ctx.logicalExpression()));
+		const result1 = this.visit(ctx.logicalExpression(0))
+		
+		if(ctx.logicalExpression(1) !== null)
+		{
+			const result2 =this.visit(ctx.logicalExpression(1))
+			console.log(result2);
+			if(ctx.logic.type === 25){
+				console.log("and");
+				if(result1 && result2){return true}
+				else{return false}
+			}
+			if(ctx.logic.type === 26){
+				if(result1 || result2){return true}
+				else{return false}
+			}
+			
+		}
+		else if(result1){return true}
+		else{return false}
+		
+	
+	
+		return this.visitChildren(ctx);
+	  }
+	visitLogicalConParentesis(ctx) {
+		console.log("Expresion logica con parentesis");
+    	const expresion = this.visit(ctx.logicalExpression());
+		return expresion
+	  }
 	visitExpresionLogica(ctx) {
 		console.log("Expresion logica");
 		const resultRelational1 =this.visit(ctx.relationalExpression(0))
@@ -314,6 +359,12 @@ export default class CustomVisitor extends ArrayInitVisitor{
 		else{return false}
 
 	}
+	// Visit a parse tree produced by ArrayInitParser#relacionalConParentesis.
+	visitRelacionalConParentesis(ctx) {
+		console.log("Expresion relacional con parentesis");
+		const expresion = this.visit(ctx.relationalExpression())
+		return expresion
+	  }
 	visitExpresionRelacional(ctx) {
 	  	console.log("Expresion relacional");
 		const exp1 = this.visit(ctx.exp(0))
@@ -460,7 +511,7 @@ export default class CustomVisitor extends ArrayInitVisitor{
 		const numero2Text = String(this.visit(ctx.exp(1)))
 		
         //usamos el cero y el dos porque arregloNums es un arreglo de arreglos, y hagarramos hasta el indice dos porque el 1 es el signo mas
-        if(ctx.operation.type === 6){
+        if(ctx.operation.type === 7){
           if(numero1Text.match(/[a-z]+/i)){
           
             console.log("Ya vi que es letra el numero 1");
@@ -501,27 +552,27 @@ export default class CustomVisitor extends ArrayInitVisitor{
 		const numero2Text = String(this.visit(ctx.exp(1)))
 		console.log(numero1Text);
         console.log("En suma");
-        if(ctx.operation.type === 4){
+        if(ctx.operation.type === 5){
 			if(numero1Text.match(/[a-z]+/i)){
 				
 				console.log("Ya vi que es letra el numero 1");
 				console.log("Valor de memoria: " + memoria[numero1]);
-            if(memoria[numero1Text] != undefined){return memoria[numero1Text].valor+numero2}
-            else{
-				console.log("Error en algo");
-				return String("error")}
+				if(memoria[numero1Text] != undefined){return memoria[numero1Text].valor+numero2}
+				else{
+					console.log("Error en algo");
+					return String("error")}
 
 
-          }
-          else if(numero2Text.match(/[a-z]+/i)){
+         	 }
+          	else if(numero2Text.match(/[a-z]+/i)){
 
-            console.log("Ya vi que es letra el numero 2");
-            if(memoria[numero2Text ] != undefined){return numero1 + memoria[numero2Text].valor;}
-            else{return String("error")}
+				console.log("Ya vi que es letra el numero 2");
+				if(memoria[numero2Text ] != undefined){return numero1 + memoria[numero2Text].valor;}
+				else{return String("error")}
 
-          }
-		  console.log((numero1+numero2));
-          return Number(numero1+numero2) //resultado de la suma de los numeros
+         	 }
+			console.log((numero1+numero2));
+			return Number(numero1+numero2) //resultado de la suma de los numeros
         }
         else{
           if(numero1Text.match(/[a-z]+/i)){
@@ -543,6 +594,33 @@ export default class CustomVisitor extends ArrayInitVisitor{
         }
     
 	}
+	visitResiudo(ctx) {
+		const numero1 = Number(this.visit(ctx.exp(0)))//encontramos el primer numero usando los indices ([10,undefined,5])
+        const numero2 = Number(this.visit(ctx.exp(1))) // de igual manera encontramos el segundo numero        
+		const numero1Text = String(this.visit(ctx.exp(0)))
+		const numero2Text = String(this.visit(ctx.exp(1)))
+		if(numero1Text.match(/[a-z]+/i)){
+				
+			console.log("Ya vi que es letra el numero 1");
+			console.log("Valor de memoria: " + memoria[numero1]);
+			if(memoria[numero1Text] != undefined){return memoria[numero1Text].valor%numero2}
+			else{
+				console.log("Error en algo");
+				return String("error")}
+
+
+		  }
+		  else if(numero2Text.match(/[a-z]+/i)){
+
+			console.log("Ya vi que es letra el numero 2");
+			if(memoria[numero2Text ] != undefined){return numero1 % memoria[numero2Text].valor;}
+			else{return String("error")}
+
+		  }
+		console.log((numero1%numero2));
+		return Number(numero1%numero2)
+		
+	  }
 	visitIdentificador(ctx) {
 		console.log("VisitandoId");
 		const id = ctx.getText()
@@ -599,7 +677,16 @@ export default class CustomVisitor extends ArrayInitVisitor{
 		}
 	}
 	visitSimb(ctx) {return this.visitChildren(ctx);}
-	visitNumero(ctx) {return Number(ctx.getText());}
+	visitNumero(ctx) {
+		// Verifica si el número tiene un signo negativo
+        if (ctx.getText().startsWith('-')) {
+            // Si es negativo, convierte el texto del contexto a un número negativo
+            return -parseFloat(ctx.getText().substring(1));
+        } else {
+            // Si no es negativo, convierte el texto del contexto a un número normal
+            return parseFloat(ctx.getText());
+        }
+	}
 	visitString(ctx) {return String(ctx.getText().slice(1,-1));}
 	visitChar(ctx) {return String(ctx.getText());}
 	}

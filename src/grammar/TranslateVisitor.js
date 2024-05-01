@@ -48,6 +48,24 @@ export default class TranslateVisitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 
+	// Visit a parse tree produced by TranslateParser#ifContent.
+	visitIfContent(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by TranslateParser#elseifContent.
+	visitElseifContent(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by TranslateParser#elseContent.
+	visitElseContent(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
 	// Visit a parse tree produced by TranslateParser#condicion.
 	visitCondicion(ctx) {
 	  return this.visitChildren(ctx);
@@ -62,6 +80,24 @@ export default class TranslateVisitor extends antlr4.tree.ParseTreeVisitor {
 
 	// Visit a parse tree produced by TranslateParser#expresionLogica.
 	visitExpresionLogica(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by TranslateParser#logicLogical.
+	visitLogicLogical(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by TranslateParser#logicalConParentesis.
+	visitLogicalConParentesis(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by TranslateParser#relacionalConParentesis.
+	visitRelacionalConParentesis(ctx) {
 	  return this.visitChildren(ctx);
 	}
 
@@ -122,6 +158,12 @@ export default class TranslateVisitor extends antlr4.tree.ParseTreeVisitor {
 
 	// Visit a parse tree produced by TranslateParser#parentesisMultiply.
 	visitParentesisMultiply(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by TranslateParser#resiudo.
+	visitResiudo(ctx) {
 	  return this.visitChildren(ctx);
 	}
 

@@ -3,7 +3,7 @@ import CoomonC;
 
 /** The start rule; begin parsing here. */
 
-prog: INT MAIN LPAREN RPAREN LBRACE content* RBRACE ;
+prog: VOID MAIN LPAREN RPAREN LBRACE content* RBRACE ;
 
 /**
     Contenido es lo que el cascaron puede soportar dentro de el.
@@ -23,30 +23,44 @@ assignment: ID EQUALS exp FIN?  #asignacion;
 whileStatement: WHILE LPAREN condition RPAREN LBRACE content* RBRACE #whileSentencia;
 
 //sintaxis de sentencia if
-ifStatement: IF LPAREN condition RPAREN LBRACE content* RBRACE 
-(ELSEIF LPAREN condition RPAREN LBRACE content* RBRACE)* 
-(ELSE LBRACE content* RBRACE)? #sentenciaIf;
+ifStatement: IF LPAREN condition RPAREN LBRACE ifContent RBRACE 
+(ELSEIF LPAREN condition RPAREN LBRACE elseifContent RBRACE)* 
+(ELSE LBRACE elseContent RBRACE)? #sentenciaIf;
+ifContent: content*;
+elseifContent: content*;
+elseContent: content*;
 condition: (logicalExpression | NOT condition | trueOrFalse) #condicion;
 trueOrFalse:(TRUE |FALSE) #verdaderoOFalso;
-logicalExpression: relationalExpression ( logic=(AND | OR) relationalExpression )* #expresionLogica;
+
+logicalExpression: 
+    logicalExpression (logic=(AND | OR) logicalExpression)+ #logicLogical
+    |
+    LPAREN logicalExpression RPAREN #logicalConParentesis
+    |
+    relationalExpression ( logic=(AND | OR) relationalExpression )* #expresionLogica
+    ;
 relationalExpression: 
+    LPAREN relationalExpression RPAREN #relacionalConParentesis
+    |
     (exp ( relation=(IGUAL | DISTINTO | MAYOR | MENOR | MAYORIGUAL | MENORIGUAL) exp)*) #expresionRelacional;
 
 //sintaxis de impresion
-printPlease: PRINT LPAREN (STRINGL|exp|concat) RPAREN FIN?  #impresion;
+printPlease: PRINT LPAREN (STRINGL|exp|concat) RPAREN FIN  #impresion;
 concat:  (atom) (PLUS atom)+ #concatenacion;
 atom:STRING #string
     |
     exp #expp;
 
 //incremento y decremento
-incre : ID '++' #incremento;
-decre : ID '--' #decremento;
+incre : ID '++' FIN #incremento;
+decre : ID '--' FIN #decremento;
 //expresion
 exp: 
     '(' exp ')' exp?           #parentesis
     |
     '(' exp ')''(' exp ')'       #parentesisMultiply
+    |
+    exp RESI exp #resiudo
     |
     exp operation=(TIMES|DIV) exp     #timesDiv
     |

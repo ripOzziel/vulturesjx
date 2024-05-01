@@ -7,7 +7,7 @@ PRINT: 'printf';
 TRUE: 'true';
 FALSE: 'false';
 ELSE: 'else';
-ELSEIF: 'elseif';
+ELSEIF: 'else if';
 VOID: 'void';
 WHILE: 'while';
 INT: 'int';
@@ -25,7 +25,7 @@ TIMES   :   '*';
 DIV     :   '/';
 EQUALS   : '=';
 ID: [^a-zA-Z][a-zA-Z0-9]*;
-NUMBER: [0-9]+;
+NUMBER: '-'? DIGIT+ ('.' DIGIT+)?;
 STRINGL: '"' .*? '"';
 CHARL: '\'' . '\'';
 
@@ -42,6 +42,6 @@ AND: '&&';
 OR: '||';
 NOT: '!';
 
-
-
+DIGIT: [0-9];
+RESI: '%';
 WS: [ \t\r\n]+ -> skip;

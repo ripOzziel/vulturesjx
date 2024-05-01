@@ -26,6 +26,7 @@ export const analizar = (input) => {
   const parser = new ArrayInitParser(tokens);
   parser.buildParseTrees = true;
 
+  /*
   parser.removeErrorListeners(); // Elimina los listeners de errores predeterminados
   lexer.removeErrorListeners();
   
@@ -37,7 +38,7 @@ export const analizar = (input) => {
     new ErrorLexico()
   )
 
-
+*/
   
   try{
    
