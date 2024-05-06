@@ -118,7 +118,7 @@ export default class CustomVisitorC extends TranslateVisitor {
 		const condicionIf = this.visit(ctx.condition(0))
 		nuevaIf += 'if(' + condicionIf + ')\n{\n'
 		console.log(this.visit(ctx.ifContent()));
-		nuevaIf += this.visit(ctx.ifContent()) +'\n}\n'
+		nuevaIf += this.visit(ctx.ifContent()).join('\n') +'\n}\n'
 
 		const numElseIf = ctx.ELSEIF() ? ctx.ELSEIF().length : 0;
 		if(numElseIf >0){

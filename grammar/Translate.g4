@@ -46,8 +46,8 @@ relationalExpression:
 
 //sintaxis de impresion
 printPlease: PRINT LPAREN (STRINGL|exp|concat) RPAREN FIN  #impresion;
-concat:  (atom) (PLUS atom)+ #concatenacion;
-atom:STRING #string
+concat:  (atom) ((PLUS|',') atom)+ #concatenacion;
+atom:STRINGL #string
     |
     exp #expp;
 

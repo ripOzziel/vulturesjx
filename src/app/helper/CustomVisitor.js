@@ -8,6 +8,8 @@ import { memo } from "react";
 export default class CustomVisitor extends ArrayInitVisitor{
 	visitProg(ctx) {
 		console.log("prog");
+		console.log("cantidad de contents");
+		console.log(ctx.content().length);
 		return this.visit(ctx.content())
 	}
 	visitContent(ctx) {
@@ -257,7 +259,7 @@ export default class CustomVisitor extends ArrayInitVisitor{
 	visitSentenciaIf(ctx) {
 		const condicionIf = this.visit(ctx.condition(0))
 		if(condicionIf){
-		
+			console.log(ctx.ifContent().length);
 			this.visit(ctx.ifContent())
 			return
 		} 
