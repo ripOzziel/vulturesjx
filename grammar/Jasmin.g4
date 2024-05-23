@@ -1,9 +1,9 @@
-grammar Translate;
-import CoomonC;
+    grammar Jasmin;
+    import CommonLexerRules;
 
-/** The start rule; begin parsing here. */
-
-prog: VOID MAIN LPAREN RPAREN LBRACE content* RBRACE ;
+//!GRAMATICA DEL LENGUAJE DE PROGRAMACIÓN VULTRES
+/** prog es el cascaron que se utiliza para poder compilar el codigo */
+prog: 'hiram' '{' content* '}' ;
 
 /**
     Contenido es lo que el cascaron puede soportar dentro de el.
@@ -22,16 +22,16 @@ assignment: ID EQUALS exp FIN?  #asignacion;
 //sintaxis de while
 whileStatement: WHILE LPAREN condition RPAREN LBRACE content* RBRACE #whileSentencia;
 
-//sintaxis de sentencia if
+//sintaxis del if
 ifStatement: IF LPAREN condition RPAREN LBRACE ifContent RBRACE 
 (ELSEIF LPAREN condition RPAREN LBRACE elseifContent RBRACE)* 
 (ELSE LBRACE elseContent RBRACE)? #sentenciaIf;
 ifContent: content*;
 elseifContent: content*;
 elseContent: content*;
+
 condition: (logicalExpression | NOT condition | trueOrFalse) #condicion;
 trueOrFalse:(TRUE |FALSE) #verdaderoOFalso;
-
 logicalExpression: 
     logicalExpression (logic=(AND | OR) logicalExpression)+ #logicLogical
     |
@@ -44,16 +44,17 @@ relationalExpression:
     |
     (exp ( relation=(IGUAL | DISTINTO | MAYOR | MENOR | MAYORIGUAL | MENORIGUAL) exp)*) #expresionRelacional;
 
+
 //sintaxis de impresion
-printPlease: PRINT LPAREN (STRINGL|exp|concat) RPAREN FIN  #impresion;
+printPlease: PRINT LPAREN (STRING|exp|concat) RPAREN FIN?  #impresion;
 concat:  (atom) ((PLUS|',') atom)+ #concatenacion;
-atom:STRINGL #string
+atom:STRING #string
     |
     exp #expp;
 
 //incremento y decremento
-incre : ID '++' FIN #incremento;
-decre : ID '--' FIN #decremento;
+incre : ID '++' #incremento;
+decre : ID '--' #decremento;
 //expresion
 exp: 
     '(' exp ')' exp?           #parentesis
@@ -71,8 +72,8 @@ exp:
     CHAR    #char
     |
     ID      #identificador
-    ;   
-                                       //Traduccion de los tipos de datos de Vulture
-dataType: INT | STRING | CHAR; // (int, int), (flot, float), (vul, String), (v, char)
-simbolos: PLUS | MINUS | TIMES | DIV;
 
+    ;   
+                                        //Traduccion de los tipos de datos de Vulture
+dataType: NUM | VUL | V; // (int, int), (flot, float), (vul, String), (v, char)
+simbolos: PLUS | MINUS | TIMES | DIV;

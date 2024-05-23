@@ -47,20 +47,17 @@ export default class CustomVisitor extends ArrayInitVisitor{
 		
 		if(corroborar === null){
 			throw new Error("Ingresaste algo diferente a un id, corrobora por favor.")
-			return String("No es un id");
 		}
 		const id = ctx.ID().getText();
 		const regExp = /[*+-/]+/
 		if(regExp.test(id)){
 			throw new Error("Los Id's no pueden tener operadores matematicos")
-			return String("Los Id's no pueden tener operadores matematicos");
 		}
 		console.log("Este es el id");
 		console.log(id);
 		if(memoria[id] != undefined){
 			console.log("Ya existe, no se puede declarar");
 			throw new Error("El id '" + id + "' ya existe, no se puede declarar")
-			return String("Ya declarada")
 		}
 		else
 		{
@@ -69,7 +66,6 @@ export default class CustomVisitor extends ArrayInitVisitor{
 			else if(tipoDato==='v'){memoria[id]={identificador:id, valor:"", tipoDeDato: tipoDato}}
 			else{
 				throw new Error("Ingresaste mal el tipo de dato")
-				return String("Algo esta mal");
 			}
 			console.log("Memoria");
 			console.log(memoria);
@@ -81,7 +77,7 @@ export default class CustomVisitor extends ArrayInitVisitor{
 		  errores.push(error.message);
 		  throw new Error("Detenido debido a errores de compilación");
 	}
-		clg
+
 	}
 
 	/**
@@ -104,44 +100,32 @@ export default class CustomVisitor extends ArrayInitVisitor{
 			console.log("Para corroborar: " + corroborar);
 			if(corroborar === null){
 				throw new Error("Ingresaste algo diferente a un id, corrobora por favor.")
-				return String("No es un id");
 			}
 			const id = ctx.ID().getText();
 			const regExp = /[*+-/]+/
 			if(regExp.test(id)){
 				throw new Error("Los Id's no pueden tener operadores matematicos")
-				return String("Los Id's no pueden tener operadores matematicos");
 			}
 			console.log("Este es el id");
 			console.log(id);
 			if(memoria[id] != undefined){
 				console.log("Ya existe, no se puede declarar");
 				throw new Error("El id '" + id + "' ya existe, no se puede declarar")
-				return String("Ya declarada")
 			}
 			else{
 	
 				if(ctx.exp()===null)
 				{
 					throw new Error("No pusiste ningun valor para la variable")
-					return String("Error")
 				}
 				else{
 					const nuevoValor = this.visit(ctx.exp(0));
 					console.log("nuevo valor: " + this.visit(ctx.exp(0) ));
 					if(tipoDato==='num'){
-						//if(!isNaN(nuevoValor))
-						//{
+
 							console.log("si lo es");
 							memoria[id]={identificador:id, valor:Number(nuevoValor), tipoDeDato: tipoDato}
-						//}
-						//else{
-						//	throw new Error("Solo puedes asignar numeros al tipo de dato int")
-						//	return String("No es un numero")
-						//}
-						
-						//memoria[id]={identificador:id, valor:Number(nuevoValor), tipoDeDato: tipoDato}
-		
+					
 					}
 					else if(tipoDato==='vul'){
 						if(regExpString.test(nuevoValor))
@@ -150,7 +134,6 @@ export default class CustomVisitor extends ArrayInitVisitor{
 						}
 						else{
 							throw new Error("vul solo acepta cadenas de texto")
-							return String("vul solo acepta cadenas de texto")
 						}
 					}
 					else if(tipoDato==='v'){
@@ -159,7 +142,6 @@ export default class CustomVisitor extends ArrayInitVisitor{
 						}
 						else{
 							throw new Error("v solo acepta caracteres")
-							return String("v solo acepta caracteres")
 						}
 					}
 					
@@ -201,9 +183,6 @@ export default class CustomVisitor extends ArrayInitVisitor{
 				const nuevoValor = this.visit(ctx.exp(0));
 				console.log("Nuevo valor: " + nuevoValor);
 				if(memoria[id].tipoDeDato === 'num'){
-					/*if(!isNaN(nuevoValor)){memoria[id].valor=Number(nuevoValor)}
-					else{errores.push("int solo acepta numeros");}
-					*/
 					memoria[id].valor=Number(nuevoValor)
 				}
 				if(memoria[id].tipoDeDato==='vul')
@@ -225,7 +204,6 @@ export default class CustomVisitor extends ArrayInitVisitor{
 			else{ 
 				console.log("La variable no ha sido declarada");
 				throw new Error("Variable '" + id + "' no ha sido declarada")
-				return String("No declarada")
 			}
 		}catch(error){
 			errores.push(error.message);

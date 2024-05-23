@@ -3,27 +3,32 @@
  * se debe remplazar en las importaciones
  */
 import antlr4, { ErrorListener } from "antlr4";
-import TranslateLexer from "../../grammar/TranslateLexer.js";
-import TranslateParser from "../../grammar/TranslateParser.js";
-import CustomVisitorC from "../helper/CustomVisitorC.js";
+import JasminLexer from "../../grammar/JasminLexer.js";
+import JasminParser from "../../grammar/JasminParser.js";
+import CustomVisitorJ from "../helper/CustomVisitorJ.js";
 
 import { errores } from "../helper/Errores.js";
+import { memoria } from "../helper/Memoria.js";
+import { impresiones } from "../helper/Impresiones.js";
 import { ErrorSintaxis, ErrorLexico } from "../helper/List.js";
 
 
-export const analizarC = (input) => {
-  
+export const analizarJ = (input) => {
+ 
+  //borrando los helpers
+  Object.keys(memoria).forEach(key => delete memoria[key]);
   errores.splice(0, errores.length)
+  impresiones.splice(0, impresiones.length) 
 
   const chars = new antlr4.InputStream(input);
-  const lexer = new TranslateLexer(chars);
+  const lexer = new JasminLexer(chars);
   const tokens = new antlr4.CommonTokenStream(lexer);
-  const parser = new TranslateParser(tokens);
+  const parser = new JasminParser(tokens);
   parser.buildParseTrees = true;
-
+/*
   parser.removeErrorListeners(); // Elimina los listeners de errores predeterminados
   lexer.removeErrorListeners();
-  
+  */
   parser.addErrorListener(
   new ErrorSintaxis()
   )
@@ -39,7 +44,7 @@ export const analizarC = (input) => {
     console.log("Antes de analizar...");
     const tree = parser.prog();
     console.log(tree.toStringTree(parser.ruleNames));
-    const customVisitor = new CustomVisitorC();
+    const customVisitor = new CustomVisitorJ();
     
     console.log("Antes de visitar...");
     return customVisitor.visitProg(tree);
