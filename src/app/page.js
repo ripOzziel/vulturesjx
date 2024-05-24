@@ -14,10 +14,12 @@ const HomePage = () => {
   const [showOutput, setShowOutput] = useState(false); // State to control the visibility of the output section
   const handleCompile = async () => {
     try {
-      if(!prueba)
+
+      if(!cCode)
       {
         throw new Error("No Jasmin code to compile");
       }
+      setShowOutput(true)
       const response = await fetch('http://localhost:3001/compile', {
           method: 'POST',
           headers: {

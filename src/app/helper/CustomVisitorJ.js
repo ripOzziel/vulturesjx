@@ -222,7 +222,6 @@ export default class CustomVisitorJ extends JasminVisitor {
 		this.isWhile = true
 		console.log("Ciclo while");
 		let jasminCode =''
-		const content = this.visit(ctx.content());
 		const startLabel = this.getNextLabel();
 		const endLabel = this.getNextLabel();
 		
@@ -230,10 +229,10 @@ export default class CustomVisitorJ extends JasminVisitor {
 		jasminCode += `${startLabel}: \n`;
 		jasminCode += condition;
 		jasminCode += `${endLabel}\n`
-		jasminCode += content.join('\n') +'\n'
+		this.isWhile = false
+		jasminCode += this.visit(ctx.content()).join('\n') +'\n'
 		jasminCode += `goto ${startLabel}\n`
 		jasminCode += `${endLabel}:\n`
-		this.isWhile = false
 		return jasminCode
 		
 		
@@ -260,6 +259,7 @@ export default class CustomVisitorJ extends JasminVisitor {
 	}
 
 	  visitSentenciaIf(ctx) {
+		//this.isWhile =false
         let jasminCode = '';
         const ifLabel = this.getNextLabel();
         const endLabel = this.getNextLabel();
@@ -368,6 +368,7 @@ export default class CustomVisitorJ extends JasminVisitor {
             jasminCode += exp1;
             jasminCode += exp2;
 			const insideWhile = this.isWhile
+			console.log(insideWhile);
             switch (ctx.relation.type) {
 				case 19: // IGUAL
 					jasminCode += insideWhile ? 'if_icmpne ' : 'if_icmpeq ';
@@ -450,12 +451,22 @@ export default class CustomVisitorJ extends JasminVisitor {
 		console.log("visitConca");
 		let nuevaConcatenacion = ''
 		const atom = this.visit(ctx.atom())
+		console.log(ctx.atom(0).getText().slice(1,-1));
 		nuevaConcatenacion += 'getstatic java/lang/System/out Ljava/io/PrintStream;\n'
 		for (let i = 0; i < atom.length; i++) {
 			
-			if(isNaN(atom[i]))
-			{
-				nuevaConcatenacion += `ldc "${atom[i]}"\n`
+			if(isNaN(ctx.atom(i).getText()))
+			{	
+				const texto = ctx.atom(i).getText()
+				if(memoria[texto])
+				{
+					nuevaConcatenacion += `iload_${memoria[texto].contador}\n`
+					nuevaConcatenacion += 'invokestatic java/lang/String/valueOf(I)Ljava/lang/String;\n'
+				}
+				else{
+					
+					nuevaConcatenacion += `ldc "${atom[i]}"\n`
+				}
 			}
 			else{
 				nuevaConcatenacion += `bipush ${atom[i]}\n`
