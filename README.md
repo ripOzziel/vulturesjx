@@ -21,10 +21,10 @@ In vulture you can also make declaration and declaration with assignment, with a
 "DATA-TYPE ID = EXPRESSION" .
 The declarations, if a defined value is not used, depending on the data-type, a default value will be assigned.
 
-vulture puede tener 3 tipos de variables:
-* num: can contain integer and float numeric values.
-* vul:  may contain text strings.
-* v: can contain single characters such as 'a'.
+Vulture can have 3 types of variables:
+* num: can contain integer and float numeric values(default value: 0).
+* vul:  may contain text strings (default value: " ").
+* v: can contain single characters such as 'a' (default value: ' ').
 
 So, for example, to make a program that just generates one variable with a specific value you could use the following code:
 ```
@@ -32,14 +32,114 @@ hiram{
     num a = 10
 }
 ```
+You can also assign a value to variables after being declared, using the id of the declared variable and assigning a value to it, as follows:
+```
+hiram{
+    num a 
+	a = 10
+}
+```
+### **Prints**
+In order to make a console print, the command `printPlease` will be used followed by `(`, an expression (string, variables, basic operations, and concatenations) ending with `)`.
 
+The following example shows an example of an operation (`sum`) but using a variable (`a`) extracting the value of the variable to do the operation and printing the result (`60`) in the console.
+```
+hiram{
+	num  a
+	a = 30
+	printPlease(a+30)
+}
+```
+### **Conditional sentences**
+#### If Statement
+The `if` conditional works to compile code with a condition, which is reduced to a boolean value, if the result of the condition is `true` the code is compiled within the braces, if it is `false` it jumps to the end of the braces.
+
+In the following example you can see the condition if `a < 10` will compile the code inside the braces, if not, it jumps to the end. In this case it will enter and print `"si se pudo"`.
+
+```
+hiram{
+	num a = 8
+	if(a<10)
+	{
+		printPlease("si se pudo")
+	}
+}
+```
+#### Else If Statement
+You can chain multiple condition evaluations using else if, so if the first condition its not a truthy value you can still evaluate other conditions before taking and ultimate decision.
+
+In the following example, since the first if condition is not met, it will go to the next option which is elseif, where in this case the if condition is `true` and the code runs inside the braces.
+
+```
+hiram{
+num a = 10
+if(a<9)
+{
+	printPlease("IF")
+}
+elseif(a==10)
+{
+	printPlease("ELSEIF")
+}
+}
+```
+#### Else Statement
+If theres no truthy condition on the conditional chain, the code flow will end on the else code block like at the following example.
+```
+hiram{
+	num a = 11
+	if(a<9)
+	{
+		printPlease("IF")
+	}
+	elseif(a==10)
+	{
+		printPlease("ELSEIF")
+	}
+else{
+	printPlease("ELSE")
+}
+}
+```
+#### Condition operators
+Currently, Vulture has the following condition operators available:
+- '>':
+- '<'
+- '>='
+- '<='
+- '||'
+- '&&'
+- '=='
+- '!='
+- 'true'
+- 'false'
+
+### **Loops**
+#### Mien loop
+The `Mien` loop repeatedly executes a block of code as long as a specified condition is `true`. Before each iteration, the condition is evaluated, and if it is `false`, the loop ends. This allows operations to be performed continuously until a termination criterion is met.
+
+Example:
+  ```
+  hiram{
+  	num a =0
+	mien(a<10)
+	{
+		printPlease(a)
+		a++ //incremento
+	}
+  }
+```
+  #### Increase and Decrease
+
+Increment works by adding a 1 to the variable before the `++` and assigning that value to the variable
+In decrement it works the same only with subtraction (`--`).
 # INTERNAL DEVELOPMENT ONLY
 
 ANTL4 Setup
 ===========
-Run `antlr -Dlanguage=JavaScript -o ./src/ -visitor -no-listener ./grammar/Language.g4` every time the grammar is changed on the project
+Run `antlr -Dlanguage=JavaScript -o ./src/ -visitor -no-listener ./grammar/ArrayInit.g4` every time the grammar is changed on the project
 
-NEXT.js Project setup
+Next.js Project setup
 =====================
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
