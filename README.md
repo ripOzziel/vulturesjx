@@ -134,7 +134,7 @@ Example:
 Increment works by adding a 1 to the variable before the `++` and assigning that value to the variable
 In decrement it works the same only with subtraction (`--`).
 
-###How UI works
+### How UI works
 ![alt text](public/img/UI.png)
 We can see the top bar, where we can see the name of the language accompanied by 5 buttons.
 Clicking on the name of the language will take you to a good place.
