@@ -138,11 +138,13 @@ In decrement it works the same only with subtraction (`--`).
 ![alt text](public/img/UI.png)
 We can see the top bar, where we can see the name of the language accompanied by 5 buttons.
 Clicking on the name of the language will take you to a good place.
-The `Run` button works to compile vulture code written in textarea 1.
-The `✧°` button clears the content of the two textareas and the terminal.
-The `C Translator` button translates the text written in C in textarea 2 and the translation is written on textarea 1.
-The `J Translator` button translates the vulture code written on textarea 1 and putting the jasmin code on textarea 2.
-The `Magic` button is responsible for compiling the jasmin code written on textarea 2 and if there are printouts, it shows them in the terminal.
+
+* The `Run` button works to compile vulture code written in textarea 1.
+* The `✧°` button clears the content of the two textareas and the terminal.
+* The `C Translator` button translates the text written in C in textarea 2 and the translation is written on textarea 1.
+* The `J Translator` button translates the vulture code written on textarea 1 and putting the jasmin code on textarea 2.
+* The `Magic` button is responsible for compiling the jasmin code written on textarea 2 and if there are printouts, it shows them in the terminal.
+
 # INTERNAL DEVELOPMENT ONLY
 
 ANTL4 Setup
