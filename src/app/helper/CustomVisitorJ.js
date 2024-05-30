@@ -16,6 +16,8 @@ export default class CustomVisitorJ extends JasminVisitor {
 			this.labelCounter = 0;
 			this.elseIfs =[]
 			this.isWhile = false
+			this.conditionalsIf = []
+			this.conditionalsElseIf = []
 		}
 		getNextLabel() {
 			return `L${this.labelCounter++}`;
@@ -255,32 +257,172 @@ export default class CustomVisitorJ extends JasminVisitor {
 	}
 	// Visit a parse tree produced by TranslateParser#decremento.
 	visitDecremento(ctx) {
-	return ctx.getText()
+		let jasminCode = '';
+		const varName = ctx.ID().getText();
+	
+		if (memoria[varName]) {
+			
+			// Incrementar el valor
+			jasminCode += `idec ${memoria[varName].contador} 1\n`;
+		} else {
+			throw new Error('La variable "' + varName + '" no ha sido declarada');
+		}
+	
+		return jasminCode;
 	}
+	visitMasigual(ctx) {
+		try{
+			let jasminCode = ''
 
+			const varName = ctx.ID().getText();
+			
+			if(!isNaN(varName)){
+				throw new Error(`Error en la linea ${ctx.start.line}, no se puede incrementar`)
+
+			}
+			if (memoria[varName]) {
+				jasminCode += `iload_${memoria[varName].contador}\n`
+				if(isNaN(ctx.atom(0).getText())){
+					console.log("no es nuemero");
+					console.log(ctx.atom().getText());
+					if(memoria[ctx.atom(0).getText()]){
+						jasminCode += `iload_${memoria[ctx.atom().getText()].contador}\n`
+					}
+				}
+				else{
+					jasminCode += `bipush ${this.visit(ctx.atom(0))}\n`
+
+				}
+				jasminCode += `iadd\n`
+				jasminCode += `istore_${memoria[varName].contador}\n`
+
+			} else {
+				throw new Error('La variable "' + varName + '" no ha sido declarada');
+			}
+		
+			return jasminCode;
+			}
+			catch(error){
+				// Manejar el error y detener la compilación
+				errores.push(error.message);
+				throw new Error("Detenido debido a errores de compilación");
+			}
+	  }
+	  visitMenosigual(ctx) {
+		try{
+			let jasminCode = ''
+
+			const varName = ctx.ID().getText();
+			
+			if(!isNaN(varName)){
+				throw new Error(`Error en la linea ${ctx.start.line}, no se puede incrementar`)
+
+			}
+			if (memoria[varName]) {
+				jasminCode += `iload_${memoria[varName].contador}\n`
+				if(isNaN(ctx.atom(0).getText())){
+					console.log("no es nuemero");
+					console.log(ctx.atom().getText());
+					if(memoria[ctx.atom(0).getText()]){
+						jasminCode += `iload_${memoria[ctx.atom().getText()].contador}\n`
+					}
+				}
+				else{
+					jasminCode += `bipush ${this.visit(ctx.atom(0))}\n`
+
+				}
+				jasminCode += `isub\n`
+				jasminCode += `istore_${memoria[varName].contador}\n`
+
+			} else {
+				throw new Error('La variable "' + varName + '" no ha sido declarada');
+			}
+		
+			return jasminCode;
+			}
+			catch(error){
+				// Manejar el error y detener la compilación
+				errores.push(error.message);
+				throw new Error("Detenido debido a errores de compilación");
+			}
+	  }
 	  visitSentenciaIf(ctx) {
-		//this.isWhile =false
-        let jasminCode = '';
-        const ifLabel = this.getNextLabel();
-        const endLabel = this.getNextLabel();
+		  //this.isWhile =false
+		  this.elseIfs =[]
+		  let jasminCode = '';
+		  const ifLabel = this.getNextLabel();
+		  const endLabel = this.getNextLabel();
+		  const andLabel = this.getNextLabel()
+		  const elseifLabel = this.getNextLabel();	
+		  const startConditionElseIf = this.getNextLabel()
+		  const elseLabel = this.getNextLabel()
         const numElseIf = ctx.ELSEIF() ? ctx.ELSEIF().length : 0;
-        // Generar la condición del if
-        const conditionIf = this.visit(ctx.condition(0))
-		console.log(conditionIf);
-        jasminCode += conditionIf;
-		jasminCode += `${ifLabel}\n`
+		console.log(this.visit(ctx.condition(0)));
+		this.conditionalsIf.push(this.visit(ctx.condition(0)))
+        const firstCondition = ctx.condition(0);
+		const logicalExpression = firstCondition.logicalExpression();
+		const logic = logicalExpression ? logicalExpression.logic : null;
+		if(logic){
+			if(ctx.condition(0).logicalExpression().logic.type==27){
+   
+			   console.log("AND");
+			   console.log(this.conditionalsIf);
+			   const conditionIf = this.visit(ctx.condition(0)).map((string, index) => index==0? string += `${andLabel}\n goto ${ctx.ELSEIF()? startConditionElseIf: endLabel}\n` : string += `${ifLabel}\n`
+		   ).join(`${andLabel}:\n` )
+		   jasminCode += conditionIf
+	   		}
+			else if(ctx.condition(0).logicalExpression().logic.type==28){
+				console.log("OR");
+				const conditionIf = this.visit(ctx.condition(0)).map(string => string += `${ifLabel}\n`).join('')
+				jasminCode += conditionIf
+			}
+
+		}
+		else{
+			console.log("Normal");
+			const conditionIf = this.visit(ctx.condition(0)).join('\n')
+			jasminCode += conditionIf;
+			jasminCode += `${ifLabel}\n`
+		}
 		if(numElseIf >0)
 		{
+			
+			const andLableElseIf = this.getNextLabel()
+			console.log(andLableElseIf);
 			for (let i = 0; i < numElseIf; i++) {
-				const elseifLabel = this.getNextLabel();			
+				const secondCondition = ctx.condition(i+1);
+				const logicalExpression2 = secondCondition.logicalExpression();
+				const logic2 = logicalExpression ? logicalExpression2.logic : null;
 				const conditionElseIf = this.visit(ctx.condition(i + 1));
-				jasminCode += conditionElseIf;
-				jasminCode += `${elseifLabel}\n`
-				this.elseIfs.push(`${elseifLabel}: \n${this.visit(ctx.elseifContent(i)).join('\n') +'\n'}`)
+				console.log(conditionElseIf);
+				if(logic2){
+					if(ctx.condition(i+1).logicalExpression().logic.type==27){
+   
+						console.log("AND");
+						jasminCode += startConditionElseIf+':\n'
+						jasminCode += conditionElseIf.map((string, index) => index==0? string += `${andLableElseIf}\ngoto ${ctx.ELSE()? elseLabel:endLabel}\n` : string += `${elseifLabel}\n`
+						).join(`${andLableElseIf}:\n` )
+						this.elseIfs.push(`${elseifLabel}: \n${this.visit(ctx.elseifContent(i)).join('\n') +'\n'}`)
+
+					}
+					 else if(ctx.condition(i+1).logicalExpression().logic.type==28){
+						 console.log("OR");
+						 jasminCode += conditionElseIf.map(string => string += `${ifLabel}\n`).join('')
+						 this.elseIfs.push(`${elseifLabel}: \n${this.visit(ctx.elseifContent(i)).join('\n') +'\n'}`)
+
+					 }
+		 
+				}
+				else{
+					jasminCode += conditionElseIf;
+					jasminCode += `${elseifLabel}\n`
+					this.elseIfs.push(`${elseifLabel}: \n${this.visit(ctx.elseifContent(i)).join('\n') +'\n'}`)
+				}
 			}
 		}
 
 		if (ctx.ELSE()) {
+			jasminCode += elseLabel +':\n'
 			jasminCode += this.visit(ctx.elseContent()).join('\n') +'\n';
 			jasminCode += `goto ${endLabel}\n`;
 			jasminCode += `${ifLabel}:\n`;
@@ -297,7 +439,7 @@ export default class CustomVisitorJ extends JasminVisitor {
 		}
    
 		
-		
+		console.log(ifLabel);
         // Generar el bloque else si existe	
 		jasminCode+= `${endLabel}:\n`
         return jasminCode;
@@ -310,24 +452,27 @@ export default class CustomVisitorJ extends JasminVisitor {
         } else if (ctx.getText() === 'false') {
             jasminCode += 'ldc 0\n';
         } else if (ctx.logicalExpression()) {
-            jasminCode += this.visit(ctx.logicalExpression());
+           // jasminCode += this.visit(ctx.logicalExpression());
         }
-        return jasminCode;
+		console.log(jasminCode);
+        return this.visit(ctx.logicalExpression());
     }
 
     visitLogicalConParentesis(ctx) {
         return this.visit(ctx.logicalExpression());
     }
-
+	
     visitExpresionLogica(ctx) {
 		
-        let jasminCode = '';
-        jasminCode += this.visit(ctx.relationalExpression(0));
-
+        let jasminCode = []
+        jasminCode.push(this.visit(ctx.relationalExpression(0)));
+		console.log(jasminCode);
         if (ctx.relationalExpression(1)) {
-            jasminCode += this.visit(ctx.relationalExpression(1));
-			return [this.visit(ctx.relationalExpression(0)),this.visit(ctx.relationalExpression(1)) ]
+            jasminCode.push(this.visit(ctx.relationalExpression(1)))
+			console.log(jasminCode);
+			return jasminCode
         }
+		console.log(jasminCode);
         return jasminCode;
     }
 
@@ -336,14 +481,20 @@ export default class CustomVisitorJ extends JasminVisitor {
     }
 
     visitExpresionRelacional(ctx) {
+		console.log("expresion relacional");
         let jasminCode = '';
 		const num1 = ctx.exp(0).getText()
 		const num2 = ctx.exp(1).getText()
+		console.log(num1);
 		let exp1=''
 		let exp2=''
 		if(isNaN(num1)){
 			if(memoria[num1]){
 				exp1 =`iload_${memoria[num1].contador}\n`
+			}
+			else if(num1.includes('%')){
+			console.log("si incluye");
+				exp1 = `ldc ${this.visit(ctx.exp(0))}\n`
 			}
 			else{
 				throw new Error('La variable "' + num1 + '" no ha sido declarada')
@@ -370,22 +521,22 @@ export default class CustomVisitorJ extends JasminVisitor {
 			const insideWhile = this.isWhile
 			console.log(insideWhile);
             switch (ctx.relation.type) {
-				case 19: // IGUAL
+				case 21: // IGUAL
 					jasminCode += insideWhile ? 'if_icmpne ' : 'if_icmpeq ';
 					break;
-				case 20: // DISTINTO
+				case 22: // DISTINTO
 					jasminCode += insideWhile ? 'if_icmpeq ' : 'if_icmpne ';
 					break;
-				case 21: // MAYOR
+				case 23: // MAYOR
 					jasminCode += insideWhile ? 'if_icmple ' : 'if_icmpgt ';
 					break;
-				case 22: // MENOR
+				case 24: // MENOR
 					jasminCode += insideWhile ? 'if_icmpge ' : 'if_icmplt ';
 					break;
-				case 23: // MAYORIGUAL
+				case 25: // MAYORIGUAL
 					jasminCode += insideWhile ? 'if_icmplt ' : 'if_icmpge ';
 					break;
-				case 24: // MENORIGUAL
+				case 26: // MENORIGUAL
 					jasminCode += insideWhile ? 'if_icmpgt ' : 'if_icmple ';
 					break;
                 default:
@@ -394,6 +545,7 @@ export default class CustomVisitorJ extends JasminVisitor {
         } else {
             jasminCode += exp1;
         }
+		console.log(jasminCode);
         return jasminCode;
     }
 
@@ -492,6 +644,37 @@ export default class CustomVisitorJ extends JasminVisitor {
 	   return newDataType
 	}
 
+	visitResiudo(ctx) {
+		const numero1 = Number(this.visit(ctx.exp(0)))//encontramos el primer numero usando los indices ([10,undefined,5])
+        const numero2 = Number(this.visit(ctx.exp(1))) // de igual manera encontramos el segundo numero        
+		const numero1Text = String(this.visit(ctx.exp(0)))
+		const numero2Text = String(this.visit(ctx.exp(1)))
+		if(numero1Text.match(/[a-z]+/i)){
+				
+			console.log("Ya vi que es letra el numero 1");
+			console.log("Valor de memoria: " + memoria[numero1]);
+			if(memoria[numero1Text] != undefined){
+				return memoria[numero1Text].valor%numero2
+			}
+			else{
+				console.log("Error en algo");
+				return String("error")}
+
+
+		  }
+		  else if(numero2Text.match(/[a-z]+/i)){
+
+			console.log("Ya vi que es letra el numero 2");
+			if(memoria[numero2Text ] != undefined){
+				return numero1 % memoria[numero2Text].valor;
+			}
+			else{return String("error")}
+
+		  }
+		console.log((numero1%numero2));
+		return Number(numero1%numero2)
+		
+	  }
 
 	//!VISITAS EXTRAS
 	visitNumero(ctx) {
@@ -559,7 +742,7 @@ export default class CustomVisitorJ extends JasminVisitor {
 		const numero2Text = String(this.visit(ctx.exp(1)))
 		
         //usamos el cero y el dos porque arregloNums es un arreglo de arreglos, y hagarramos hasta el indice dos porque el 1 es el signo mas
-        if(ctx.operation.type === 7){
+        if(ctx.operation.type === 9){
           if(numero1Text.match(/[a-z]+/i)){
           
             console.log("Ya vi que es letra el numero 1");
@@ -600,7 +783,7 @@ export default class CustomVisitorJ extends JasminVisitor {
 		const numero2Text = String(this.visit(ctx.exp(1)))
 		console.log(numero1Text);
         console.log("En suma");
-        if(ctx.operation.type === 5){
+        if(ctx.operation.type === 7){
 			if(numero1Text.match(/[a-z]+/i)){
 				
 				console.log("Ya vi que es letra el numero 1");

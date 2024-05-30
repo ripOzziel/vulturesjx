@@ -10,7 +10,7 @@ prog: 'hiram' '{' content* '}' ;
     contenido puede tener declaracion de variables, declaracion con asignacion,
     asignacion de una variable creada
  */
-content: declaration | declarationAndAssignament | assignment | ifStatement | whileStatement| printPlease | dataType | incre| decre ;
+content: declaration | declarationAndAssignament | assignment | ifStatement | whileStatement| printPlease | dataType | incre| decre | masi | menosi;
 
 /**
     Sinntaxis de las declaracion y asignaciones
@@ -53,8 +53,10 @@ atom:STRING #string
     exp #expp;
 
 //incremento y decremento
-incre : ID '++' #incremento;
-decre : ID '--' #decremento;
+incre : ID '++' FIN?#incremento;
+decre : ID '--' FIN? #decremento;
+masi: ID '+=' atom FIN? #masigual;
+menosi: ID '-=' atom FIN? #menosigual;
 //expresion
 exp: 
     '(' exp ')' exp?           #parentesis

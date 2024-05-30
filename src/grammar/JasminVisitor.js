@@ -144,6 +144,18 @@ export default class JasminVisitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 
+	// Visit a parse tree produced by JasminParser#masigual.
+	visitMasigual(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by JasminParser#menosigual.
+	visitMenosigual(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
 	// Visit a parse tree produced by JasminParser#parentesis.
 	visitParentesis(ctx) {
 	  return this.visitChildren(ctx);

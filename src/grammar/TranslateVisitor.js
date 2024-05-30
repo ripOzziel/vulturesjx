@@ -144,6 +144,18 @@ export default class TranslateVisitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 
+	// Visit a parse tree produced by TranslateParser#masigual.
+	visitMasigual(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by TranslateParser#menosigual.
+	visitMenosigual(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
 	// Visit a parse tree produced by TranslateParser#parentesis.
 	visitParentesis(ctx) {
 	  return this.visitChildren(ctx);

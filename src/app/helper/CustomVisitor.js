@@ -263,7 +263,7 @@ export default class CustomVisitor extends ArrayInitVisitor{
 	}
 	visitCondicion(ctx) {
 			console.log("Condicion");
-			console.log(ctx.getText());
+			
 			if(ctx.getText()=== 'true')
 			{
 				console.log("Hola");
@@ -292,12 +292,12 @@ export default class CustomVisitor extends ArrayInitVisitor{
 		{
 			const result2 =this.visit(ctx.logicalExpression(1))
 			console.log(result2);
-			if(ctx.logic.type === 25){
+			if(ctx.logic.type === 27){
 				console.log("and");
 				if(result1 && result2){return true}
 				else{return false}
 			}
-			if(ctx.logic.type === 26){
+			if(ctx.logic.type === 28){
 				if(result1 || result2){return true}
 				else{return false}
 			}
@@ -313,23 +313,25 @@ export default class CustomVisitor extends ArrayInitVisitor{
 	visitLogicalConParentesis(ctx) {
 		console.log("Expresion logica con parentesis");
     	const expresion = this.visit(ctx.logicalExpression());
+		console.log(ctx.logicalExpression().getText());
 		return expresion
 	  }
 	visitExpresionLogica(ctx) {
 		console.log("Expresion logica");
 		const resultRelational1 =this.visit(ctx.relationalExpression(0))
 		console.log(resultRelational1);
-		
+		console.log(ctx.relationalExpression(0).getText());
 		if(ctx.relationalExpression(1) !== null)
 		{
+			console.log(ctx.relationalExpression(1).getText());
 			const resultRelational2 =this.visit(ctx.relationalExpression(1))
 			console.log(resultRelational2);
-			if(ctx.logic.type === 25){
+			if(ctx.logic.type === 27){
 				console.log("and");
 				if(resultRelational1 && resultRelational2){return true}
 				else{return false}
 			}
-			if(ctx.logic.type === 26){
+			if(ctx.logic.type === 28){
 				if(resultRelational1 || resultRelational2){return true}
 				else{return false}
 			}
@@ -351,28 +353,28 @@ export default class CustomVisitor extends ArrayInitVisitor{
 		if(ctx.exp(1)!==null)
 		{
 			const exp2 = this.visit(ctx.exp(1))
-			if(ctx.relation.type===19){
+			if(ctx.relation.type===21){
 				if(exp1 == exp2){return true}
 				else{return false}
 			}
-			else if(ctx.relation.type ===20)
+			else if(ctx.relation.type ===22)
 			{
 				if(exp1 != exp2){return true}
 				else{return false}
 			}
-			else if(ctx.relation.type === 21){
+			else if(ctx.relation.type === 23){
 				if(exp1>exp2){return true}
 				else{return false}
 			}
-			else if(ctx.relation.type === 22){
+			else if(ctx.relation.type === 24){
 				if(exp1<exp2){return true}
 				else{return false}
 			}
-			else if(ctx.relation.type === 23){
+			else if(ctx.relation.type === 25){
 				if(exp1>=exp2){return true}
 				else{return false}
 			}
-			else if(ctx.relation.type === 24){
+			else if(ctx.relation.type === 26){
 				if(exp1<=exp2){return true}
 				else{return false}
 			}
@@ -439,15 +441,7 @@ export default class CustomVisitor extends ArrayInitVisitor{
 		return this.visitChildren(ctx);
 	}
 	visitDataType(ctx) {
-		console.log("Datatype broooo");
-		try{
-			throw new Error("Error, declaracion incompleta")
-			return this.visitChildren(ctx);
-		}
-		catch(error){
-			errores.push(error.message);
-			throw new Error("Detenido debido a errores de compilación");
-		}
+		
 	} 
 	visitParentesis(ctx) {
     	let res = this.visit(ctx.exp(0)) 
@@ -491,7 +485,7 @@ export default class CustomVisitor extends ArrayInitVisitor{
 		const numero2Text = String(this.visit(ctx.exp(1)))
 		
         //usamos el cero y el dos porque arregloNums es un arreglo de arreglos, y hagarramos hasta el indice dos porque el 1 es el signo mas
-        if(ctx.operation.type === 7){
+        if(ctx.operation.type === 8){
           if(numero1Text.match(/[a-z]+/i)){
           
             console.log("Ya vi que es letra el numero 1");
@@ -532,7 +526,7 @@ export default class CustomVisitor extends ArrayInitVisitor{
 		const numero2Text = String(this.visit(ctx.exp(1)))
 		console.log(numero1Text);
         console.log("En suma");
-        if(ctx.operation.type === 5){
+        if(ctx.operation.type === 6){
 			if(numero1Text.match(/[a-z]+/i)){
 				
 				console.log("Ya vi que es letra el numero 1");
@@ -656,6 +650,52 @@ export default class CustomVisitor extends ArrayInitVisitor{
 			throw new Error("Detenido debido a errores de compilación");
 		}
 	}
+	visitMasigual(ctx) {
+		try{
+			console.log("Mas igual");
+			
+			const variable = ctx.ID().getText()
+			if(!isNaN(variable)){
+				throw new Error(`Error en la linea ${ctx.start.line}, no se puede incrementar`)
+			}
+			if(memoria[variable] !== undefined){
+				memoria[variable].valor += Number(this.visit(ctx.atom(0)))
+				console.log(memoria[variable]);
+				return
+			}
+			else{
+				throw new Error(`Error en la linea ${ctx.start.line}, la variable ${variable}, no ha sido declarada`)
+			}
+		}
+		catch(error){
+			// Manejar el error y detener la compilación
+			errores.push(error.message);
+			throw new Error("Detenido debido a errores de compilación");
+		}
+	  }
+	  visitMenosigual(ctx) {
+		try{
+			console.log("menos igual");
+			
+			const variable = ctx.ID().getText()
+			if(!isNaN(variable)){
+				throw new Error(`Error en la linea ${ctx.start.line}, no se puede decrementar`)
+			}
+			if(memoria[variable] !== undefined){
+				memoria[variable].valor -= Number(this.visit(ctx.atom(0)))
+				console.log(memoria[variable]);
+				return
+			}
+			else{
+				throw new Error(`Error en la linea ${ctx.start.line}, la variable ${variable}, no ha sido declarada`)
+			}
+		}
+		catch(error){
+			// Manejar el error y detener la compilación
+			errores.push(error.message);
+			throw new Error("Detenido debido a errores de compilación");
+		}
+	  }
 	visitSimb(ctx) {return this.visitChildren(ctx);}
 	visitNumero(ctx) {
 		// Verifica si el número tiene un signo negativo

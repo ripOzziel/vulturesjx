@@ -109,6 +109,14 @@ export default class CustomVisitorC extends TranslateVisitor {
 	  visitDecremento(ctx) {
 		return ctx.getText()
 	  }
+
+	  visitMasigual(ctx) {
+		return ctx.getText()
+
+	  }
+	  visitMenosigual(ctx) {
+		return ctx.getText()
+	  }
   
 	// Visit a parse tree produced by TranslateParser#ifStatement.
 	visitSentenciaIf(ctx) {
@@ -124,12 +132,12 @@ export default class CustomVisitorC extends TranslateVisitor {
 		if(numElseIf >0){
 			for (let i = 0; i < numElseIf; i++) {
 				nuevaIf+='elseif(' + this.visit(ctx.condition(i+1)) +')\n{\n'
-				nuevaIf+= this.visit(ctx.elseifContent(i)) +'\n}\n'
+				nuevaIf+= this.visit(ctx.elseifContent(i)).join('\n') +'\n}\n'
 				dondeParo=i
 			}
 		}
 		if(ctx.ELSE()){
-			nuevaIf += 'else \n {\n' + this.visit(ctx.elseContent()) + '\n}\n'
+			nuevaIf += 'else \n {\n' + this.visit(ctx.elseContent()).join('\n') + '\n}\n'
 		}
 		console.log(nuevaIf);
 		return nuevaIf

@@ -3,89 +3,97 @@
 import antlr4 from 'antlr4';
 import JasminVisitor from './JasminVisitor.js';
 
-const serializedATN = [4,1,45,261,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,
+const serializedATN = [4,1,47,282,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,
 4,2,5,7,5,2,6,7,6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,
 2,13,7,13,2,14,7,14,2,15,7,15,2,16,7,16,2,17,7,17,2,18,7,18,2,19,7,19,2,
-20,7,20,2,21,7,21,1,0,1,0,1,0,5,0,48,8,0,10,0,12,0,51,9,0,1,0,1,0,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,3,1,64,8,1,1,2,1,2,1,2,3,2,69,8,2,1,2,3,2,
-72,8,2,1,3,1,3,1,3,1,3,3,3,78,8,3,1,3,3,3,81,8,3,1,4,1,4,1,4,1,4,3,4,87,
-8,4,1,5,1,5,1,5,1,5,1,5,1,5,5,5,95,8,5,10,5,12,5,98,9,5,1,5,1,5,1,6,1,6,
-1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,5,6,117,8,6,10,6,12,
-6,120,9,6,1,6,1,6,1,6,1,6,1,6,3,6,127,8,6,1,7,5,7,130,8,7,10,7,12,7,133,
-9,7,1,8,5,8,136,8,8,10,8,12,8,139,9,8,1,9,5,9,142,8,9,10,9,12,9,145,9,9,
-1,10,1,10,1,10,1,10,3,10,151,8,10,1,11,1,11,1,12,1,12,1,12,1,12,1,12,1,12,
-1,12,1,12,5,12,163,8,12,10,12,12,12,166,9,12,3,12,168,8,12,1,12,1,12,1,12,
-4,12,173,8,12,11,12,12,12,174,5,12,177,8,12,10,12,12,12,180,9,12,1,13,1,
-13,1,13,1,13,1,13,1,13,1,13,5,13,189,8,13,10,13,12,13,192,9,13,3,13,194,
-8,13,1,14,1,14,1,14,1,14,1,14,3,14,201,8,14,1,14,1,14,3,14,205,8,14,1,15,
-1,15,1,15,4,15,210,8,15,11,15,12,15,211,1,16,1,16,3,16,216,8,16,1,17,1,17,
-1,17,1,18,1,18,1,18,1,19,1,19,1,19,1,19,1,19,3,19,229,8,19,1,19,1,19,1,19,
-1,19,1,19,1,19,1,19,1,19,1,19,1,19,3,19,241,8,19,1,19,1,19,1,19,1,19,1,19,
-1,19,1,19,1,19,1,19,5,19,252,8,19,10,19,12,19,255,9,19,1,20,1,20,1,21,1,
-21,1,21,0,2,24,38,22,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,
-38,40,42,0,9,1,0,36,37,1,0,42,43,1,0,25,26,1,0,19,24,2,0,5,5,14,14,1,0,7,
-8,1,0,5,6,1,0,33,35,1,0,5,8,279,0,44,1,0,0,0,2,63,1,0,0,0,4,65,1,0,0,0,6,
-73,1,0,0,0,8,82,1,0,0,0,10,88,1,0,0,0,12,101,1,0,0,0,14,131,1,0,0,0,16,137,
-1,0,0,0,18,143,1,0,0,0,20,150,1,0,0,0,22,152,1,0,0,0,24,167,1,0,0,0,26,193,
-1,0,0,0,28,195,1,0,0,0,30,206,1,0,0,0,32,215,1,0,0,0,34,217,1,0,0,0,36,220,
-1,0,0,0,38,240,1,0,0,0,40,256,1,0,0,0,42,258,1,0,0,0,44,45,5,1,0,0,45,49,
-5,17,0,0,46,48,3,2,1,0,47,46,1,0,0,0,48,51,1,0,0,0,49,47,1,0,0,0,49,50,1,
-0,0,0,50,52,1,0,0,0,51,49,1,0,0,0,52,53,5,18,0,0,53,1,1,0,0,0,54,64,3,4,
-2,0,55,64,3,6,3,0,56,64,3,8,4,0,57,64,3,12,6,0,58,64,3,10,5,0,59,64,3,28,
-14,0,60,64,3,40,20,0,61,64,3,34,17,0,62,64,3,36,18,0,63,54,1,0,0,0,63,55,
-1,0,0,0,63,56,1,0,0,0,63,57,1,0,0,0,63,58,1,0,0,0,63,59,1,0,0,0,63,60,1,
-0,0,0,63,61,1,0,0,0,63,62,1,0,0,0,64,3,1,0,0,0,65,66,3,40,20,0,66,68,7,0,
-0,0,67,69,3,42,21,0,68,67,1,0,0,0,68,69,1,0,0,0,69,71,1,0,0,0,70,72,5,4,
-0,0,71,70,1,0,0,0,71,72,1,0,0,0,72,5,1,0,0,0,73,74,3,40,20,0,74,75,7,0,0,
-0,75,77,5,9,0,0,76,78,3,38,19,0,77,76,1,0,0,0,77,78,1,0,0,0,78,80,1,0,0,
-0,79,81,5,4,0,0,80,79,1,0,0,0,80,81,1,0,0,0,81,7,1,0,0,0,82,83,5,36,0,0,
-83,84,5,9,0,0,84,86,3,38,19,0,85,87,5,4,0,0,86,85,1,0,0,0,86,87,1,0,0,0,
-87,9,1,0,0,0,88,89,5,32,0,0,89,90,5,15,0,0,90,91,3,20,10,0,91,92,5,16,0,
-0,92,96,5,17,0,0,93,95,3,2,1,0,94,93,1,0,0,0,95,98,1,0,0,0,96,94,1,0,0,0,
-96,97,1,0,0,0,97,99,1,0,0,0,98,96,1,0,0,0,99,100,5,18,0,0,100,11,1,0,0,0,
-101,102,5,29,0,0,102,103,5,15,0,0,103,104,3,20,10,0,104,105,5,16,0,0,105,
-106,5,17,0,0,106,107,3,14,7,0,107,118,5,18,0,0,108,109,5,31,0,0,109,110,
-5,15,0,0,110,111,3,20,10,0,111,112,5,16,0,0,112,113,5,17,0,0,113,114,3,16,
-8,0,114,115,5,18,0,0,115,117,1,0,0,0,116,108,1,0,0,0,117,120,1,0,0,0,118,
-116,1,0,0,0,118,119,1,0,0,0,119,126,1,0,0,0,120,118,1,0,0,0,121,122,5,30,
-0,0,122,123,5,17,0,0,123,124,3,18,9,0,124,125,5,18,0,0,125,127,1,0,0,0,126,
-121,1,0,0,0,126,127,1,0,0,0,127,13,1,0,0,0,128,130,3,2,1,0,129,128,1,0,0,
-0,130,133,1,0,0,0,131,129,1,0,0,0,131,132,1,0,0,0,132,15,1,0,0,0,133,131,
-1,0,0,0,134,136,3,2,1,0,135,134,1,0,0,0,136,139,1,0,0,0,137,135,1,0,0,0,
-137,138,1,0,0,0,138,17,1,0,0,0,139,137,1,0,0,0,140,142,3,2,1,0,141,140,1,
-0,0,0,142,145,1,0,0,0,143,141,1,0,0,0,143,144,1,0,0,0,144,19,1,0,0,0,145,
-143,1,0,0,0,146,151,3,24,12,0,147,148,5,27,0,0,148,151,3,20,10,0,149,151,
-3,22,11,0,150,146,1,0,0,0,150,147,1,0,0,0,150,149,1,0,0,0,151,21,1,0,0,0,
-152,153,7,1,0,0,153,23,1,0,0,0,154,155,6,12,-1,0,155,156,5,15,0,0,156,157,
-3,24,12,0,157,158,5,16,0,0,158,168,1,0,0,0,159,164,3,26,13,0,160,161,7,2,
-0,0,161,163,3,26,13,0,162,160,1,0,0,0,163,166,1,0,0,0,164,162,1,0,0,0,164,
-165,1,0,0,0,165,168,1,0,0,0,166,164,1,0,0,0,167,154,1,0,0,0,167,159,1,0,
-0,0,168,178,1,0,0,0,169,172,10,3,0,0,170,171,7,2,0,0,171,173,3,24,12,0,172,
-170,1,0,0,0,173,174,1,0,0,0,174,172,1,0,0,0,174,175,1,0,0,0,175,177,1,0,
-0,0,176,169,1,0,0,0,177,180,1,0,0,0,178,176,1,0,0,0,178,179,1,0,0,0,179,
-25,1,0,0,0,180,178,1,0,0,0,181,182,5,15,0,0,182,183,3,26,13,0,183,184,5,
-16,0,0,184,194,1,0,0,0,185,190,3,38,19,0,186,187,7,3,0,0,187,189,3,38,19,
-0,188,186,1,0,0,0,189,192,1,0,0,0,190,188,1,0,0,0,190,191,1,0,0,0,191,194,
-1,0,0,0,192,190,1,0,0,0,193,181,1,0,0,0,193,185,1,0,0,0,194,27,1,0,0,0,195,
-196,5,28,0,0,196,200,5,15,0,0,197,201,5,38,0,0,198,201,3,38,19,0,199,201,
-3,30,15,0,200,197,1,0,0,0,200,198,1,0,0,0,200,199,1,0,0,0,201,202,1,0,0,
-0,202,204,5,16,0,0,203,205,5,4,0,0,204,203,1,0,0,0,204,205,1,0,0,0,205,29,
-1,0,0,0,206,209,3,32,16,0,207,208,7,4,0,0,208,210,3,32,16,0,209,207,1,0,
-0,0,210,211,1,0,0,0,211,209,1,0,0,0,211,212,1,0,0,0,212,31,1,0,0,0,213,216,
-5,38,0,0,214,216,3,38,19,0,215,213,1,0,0,0,215,214,1,0,0,0,216,33,1,0,0,
-0,217,218,5,36,0,0,218,219,5,2,0,0,219,35,1,0,0,0,220,221,5,36,0,0,221,222,
-5,3,0,0,222,37,1,0,0,0,223,224,6,19,-1,0,224,225,5,15,0,0,225,226,3,38,19,
-0,226,228,5,16,0,0,227,229,3,38,19,0,228,227,1,0,0,0,228,229,1,0,0,0,229,
-241,1,0,0,0,230,231,5,15,0,0,231,232,3,38,19,0,232,233,5,16,0,0,233,234,
-5,15,0,0,234,235,3,38,19,0,235,236,5,16,0,0,236,241,1,0,0,0,237,241,5,37,
-0,0,238,241,5,39,0,0,239,241,5,36,0,0,240,223,1,0,0,0,240,230,1,0,0,0,240,
-237,1,0,0,0,240,238,1,0,0,0,240,239,1,0,0,0,241,253,1,0,0,0,242,243,10,6,
-0,0,243,244,5,45,0,0,244,252,3,38,19,7,245,246,10,5,0,0,246,247,7,5,0,0,
-247,252,3,38,19,6,248,249,10,4,0,0,249,250,7,6,0,0,250,252,3,38,19,5,251,
-242,1,0,0,0,251,245,1,0,0,0,251,248,1,0,0,0,252,255,1,0,0,0,253,251,1,0,
-0,0,253,254,1,0,0,0,254,39,1,0,0,0,255,253,1,0,0,0,256,257,7,7,0,0,257,41,
-1,0,0,0,258,259,7,8,0,0,259,43,1,0,0,0,28,49,63,68,71,77,80,86,96,118,126,
-131,137,143,150,164,167,174,178,190,193,200,204,211,215,228,240,251,253];
+20,7,20,2,21,7,21,2,22,7,22,2,23,7,23,1,0,1,0,1,0,5,0,52,8,0,10,0,12,0,55,
+9,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,3,1,70,8,1,1,2,1,
+2,1,2,3,2,75,8,2,1,2,3,2,78,8,2,1,3,1,3,1,3,1,3,3,3,84,8,3,1,3,3,3,87,8,
+3,1,4,1,4,1,4,1,4,3,4,93,8,4,1,5,1,5,1,5,1,5,1,5,1,5,5,5,101,8,5,10,5,12,
+5,104,9,5,1,5,1,5,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,
+6,1,6,5,6,123,8,6,10,6,12,6,126,9,6,1,6,1,6,1,6,1,6,1,6,3,6,133,8,6,1,7,
+5,7,136,8,7,10,7,12,7,139,9,7,1,8,5,8,142,8,8,10,8,12,8,145,9,8,1,9,5,9,
+148,8,9,10,9,12,9,151,9,9,1,10,1,10,1,10,1,10,3,10,157,8,10,1,11,1,11,1,
+12,1,12,1,12,1,12,1,12,1,12,1,12,1,12,5,12,169,8,12,10,12,12,12,172,9,12,
+3,12,174,8,12,1,12,1,12,1,12,4,12,179,8,12,11,12,12,12,180,5,12,183,8,12,
+10,12,12,12,186,9,12,1,13,1,13,1,13,1,13,1,13,1,13,1,13,5,13,195,8,13,10,
+13,12,13,198,9,13,3,13,200,8,13,1,14,1,14,1,14,1,14,1,14,3,14,207,8,14,1,
+14,1,14,3,14,211,8,14,1,15,1,15,1,15,4,15,216,8,15,11,15,12,15,217,1,16,
+1,16,3,16,222,8,16,1,17,1,17,1,17,3,17,227,8,17,1,18,1,18,1,18,3,18,232,
+8,18,1,19,1,19,1,19,1,19,3,19,238,8,19,1,20,1,20,1,20,1,20,1,20,1,21,1,21,
+1,21,1,21,1,21,3,21,250,8,21,1,21,1,21,1,21,1,21,1,21,1,21,1,21,1,21,1,21,
+1,21,3,21,262,8,21,1,21,1,21,1,21,1,21,1,21,1,21,1,21,1,21,1,21,5,21,273,
+8,21,10,21,12,21,276,9,21,1,22,1,22,1,23,1,23,1,23,0,2,24,42,24,0,2,4,6,
+8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,0,9,1,0,38,39,
+1,0,44,45,1,0,27,28,1,0,21,26,2,0,7,7,16,16,1,0,9,10,1,0,7,8,1,0,35,37,1,
+0,7,10,303,0,48,1,0,0,0,2,69,1,0,0,0,4,71,1,0,0,0,6,79,1,0,0,0,8,88,1,0,
+0,0,10,94,1,0,0,0,12,107,1,0,0,0,14,137,1,0,0,0,16,143,1,0,0,0,18,149,1,
+0,0,0,20,156,1,0,0,0,22,158,1,0,0,0,24,173,1,0,0,0,26,199,1,0,0,0,28,201,
+1,0,0,0,30,212,1,0,0,0,32,221,1,0,0,0,34,223,1,0,0,0,36,228,1,0,0,0,38,233,
+1,0,0,0,40,239,1,0,0,0,42,261,1,0,0,0,44,277,1,0,0,0,46,279,1,0,0,0,48,49,
+5,1,0,0,49,53,5,19,0,0,50,52,3,2,1,0,51,50,1,0,0,0,52,55,1,0,0,0,53,51,1,
+0,0,0,53,54,1,0,0,0,54,56,1,0,0,0,55,53,1,0,0,0,56,57,5,20,0,0,57,1,1,0,
+0,0,58,70,3,4,2,0,59,70,3,6,3,0,60,70,3,8,4,0,61,70,3,12,6,0,62,70,3,10,
+5,0,63,70,3,28,14,0,64,70,3,44,22,0,65,70,3,34,17,0,66,70,3,36,18,0,67,70,
+3,38,19,0,68,70,3,40,20,0,69,58,1,0,0,0,69,59,1,0,0,0,69,60,1,0,0,0,69,61,
+1,0,0,0,69,62,1,0,0,0,69,63,1,0,0,0,69,64,1,0,0,0,69,65,1,0,0,0,69,66,1,
+0,0,0,69,67,1,0,0,0,69,68,1,0,0,0,70,3,1,0,0,0,71,72,3,44,22,0,72,74,7,0,
+0,0,73,75,3,46,23,0,74,73,1,0,0,0,74,75,1,0,0,0,75,77,1,0,0,0,76,78,5,6,
+0,0,77,76,1,0,0,0,77,78,1,0,0,0,78,5,1,0,0,0,79,80,3,44,22,0,80,81,7,0,0,
+0,81,83,5,11,0,0,82,84,3,42,21,0,83,82,1,0,0,0,83,84,1,0,0,0,84,86,1,0,0,
+0,85,87,5,6,0,0,86,85,1,0,0,0,86,87,1,0,0,0,87,7,1,0,0,0,88,89,5,38,0,0,
+89,90,5,11,0,0,90,92,3,42,21,0,91,93,5,6,0,0,92,91,1,0,0,0,92,93,1,0,0,0,
+93,9,1,0,0,0,94,95,5,34,0,0,95,96,5,17,0,0,96,97,3,20,10,0,97,98,5,18,0,
+0,98,102,5,19,0,0,99,101,3,2,1,0,100,99,1,0,0,0,101,104,1,0,0,0,102,100,
+1,0,0,0,102,103,1,0,0,0,103,105,1,0,0,0,104,102,1,0,0,0,105,106,5,20,0,0,
+106,11,1,0,0,0,107,108,5,31,0,0,108,109,5,17,0,0,109,110,3,20,10,0,110,111,
+5,18,0,0,111,112,5,19,0,0,112,113,3,14,7,0,113,124,5,20,0,0,114,115,5,33,
+0,0,115,116,5,17,0,0,116,117,3,20,10,0,117,118,5,18,0,0,118,119,5,19,0,0,
+119,120,3,16,8,0,120,121,5,20,0,0,121,123,1,0,0,0,122,114,1,0,0,0,123,126,
+1,0,0,0,124,122,1,0,0,0,124,125,1,0,0,0,125,132,1,0,0,0,126,124,1,0,0,0,
+127,128,5,32,0,0,128,129,5,19,0,0,129,130,3,18,9,0,130,131,5,20,0,0,131,
+133,1,0,0,0,132,127,1,0,0,0,132,133,1,0,0,0,133,13,1,0,0,0,134,136,3,2,1,
+0,135,134,1,0,0,0,136,139,1,0,0,0,137,135,1,0,0,0,137,138,1,0,0,0,138,15,
+1,0,0,0,139,137,1,0,0,0,140,142,3,2,1,0,141,140,1,0,0,0,142,145,1,0,0,0,
+143,141,1,0,0,0,143,144,1,0,0,0,144,17,1,0,0,0,145,143,1,0,0,0,146,148,3,
+2,1,0,147,146,1,0,0,0,148,151,1,0,0,0,149,147,1,0,0,0,149,150,1,0,0,0,150,
+19,1,0,0,0,151,149,1,0,0,0,152,157,3,24,12,0,153,154,5,29,0,0,154,157,3,
+20,10,0,155,157,3,22,11,0,156,152,1,0,0,0,156,153,1,0,0,0,156,155,1,0,0,
+0,157,21,1,0,0,0,158,159,7,1,0,0,159,23,1,0,0,0,160,161,6,12,-1,0,161,162,
+5,17,0,0,162,163,3,24,12,0,163,164,5,18,0,0,164,174,1,0,0,0,165,170,3,26,
+13,0,166,167,7,2,0,0,167,169,3,26,13,0,168,166,1,0,0,0,169,172,1,0,0,0,170,
+168,1,0,0,0,170,171,1,0,0,0,171,174,1,0,0,0,172,170,1,0,0,0,173,160,1,0,
+0,0,173,165,1,0,0,0,174,184,1,0,0,0,175,178,10,3,0,0,176,177,7,2,0,0,177,
+179,3,24,12,0,178,176,1,0,0,0,179,180,1,0,0,0,180,178,1,0,0,0,180,181,1,
+0,0,0,181,183,1,0,0,0,182,175,1,0,0,0,183,186,1,0,0,0,184,182,1,0,0,0,184,
+185,1,0,0,0,185,25,1,0,0,0,186,184,1,0,0,0,187,188,5,17,0,0,188,189,3,26,
+13,0,189,190,5,18,0,0,190,200,1,0,0,0,191,196,3,42,21,0,192,193,7,3,0,0,
+193,195,3,42,21,0,194,192,1,0,0,0,195,198,1,0,0,0,196,194,1,0,0,0,196,197,
+1,0,0,0,197,200,1,0,0,0,198,196,1,0,0,0,199,187,1,0,0,0,199,191,1,0,0,0,
+200,27,1,0,0,0,201,202,5,30,0,0,202,206,5,17,0,0,203,207,5,40,0,0,204,207,
+3,42,21,0,205,207,3,30,15,0,206,203,1,0,0,0,206,204,1,0,0,0,206,205,1,0,
+0,0,207,208,1,0,0,0,208,210,5,18,0,0,209,211,5,6,0,0,210,209,1,0,0,0,210,
+211,1,0,0,0,211,29,1,0,0,0,212,215,3,32,16,0,213,214,7,4,0,0,214,216,3,32,
+16,0,215,213,1,0,0,0,216,217,1,0,0,0,217,215,1,0,0,0,217,218,1,0,0,0,218,
+31,1,0,0,0,219,222,5,40,0,0,220,222,3,42,21,0,221,219,1,0,0,0,221,220,1,
+0,0,0,222,33,1,0,0,0,223,224,5,38,0,0,224,226,5,2,0,0,225,227,5,6,0,0,226,
+225,1,0,0,0,226,227,1,0,0,0,227,35,1,0,0,0,228,229,5,38,0,0,229,231,5,3,
+0,0,230,232,5,6,0,0,231,230,1,0,0,0,231,232,1,0,0,0,232,37,1,0,0,0,233,234,
+5,38,0,0,234,235,5,4,0,0,235,237,3,32,16,0,236,238,5,6,0,0,237,236,1,0,0,
+0,237,238,1,0,0,0,238,39,1,0,0,0,239,240,5,38,0,0,240,241,5,5,0,0,241,242,
+3,32,16,0,242,243,5,6,0,0,243,41,1,0,0,0,244,245,6,21,-1,0,245,246,5,17,
+0,0,246,247,3,42,21,0,247,249,5,18,0,0,248,250,3,42,21,0,249,248,1,0,0,0,
+249,250,1,0,0,0,250,262,1,0,0,0,251,252,5,17,0,0,252,253,3,42,21,0,253,254,
+5,18,0,0,254,255,5,17,0,0,255,256,3,42,21,0,256,257,5,18,0,0,257,262,1,0,
+0,0,258,262,5,39,0,0,259,262,5,41,0,0,260,262,5,38,0,0,261,244,1,0,0,0,261,
+251,1,0,0,0,261,258,1,0,0,0,261,259,1,0,0,0,261,260,1,0,0,0,262,274,1,0,
+0,0,263,264,10,6,0,0,264,265,5,47,0,0,265,273,3,42,21,7,266,267,10,5,0,0,
+267,268,7,5,0,0,268,273,3,42,21,6,269,270,10,4,0,0,270,271,7,6,0,0,271,273,
+3,42,21,5,272,263,1,0,0,0,272,266,1,0,0,0,272,269,1,0,0,0,273,276,1,0,0,
+0,274,272,1,0,0,0,274,275,1,0,0,0,275,43,1,0,0,0,276,274,1,0,0,0,277,278,
+7,7,0,0,278,45,1,0,0,0,279,280,7,8,0,0,280,47,1,0,0,0,31,53,69,74,77,83,
+86,92,102,124,132,137,143,149,156,170,173,180,184,196,199,206,210,217,221,
+226,231,237,249,261,272,274];
 
 
 const atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
@@ -97,29 +105,29 @@ const sharedContextCache = new antlr4.atn.PredictionContextCache();
 export default class JasminParser extends antlr4.Parser {
 
     static grammarFileName = "Jasmin.g4";
-    static literalNames = [ null, "'hiram'", "'++'", "'--'", "';'", "'+'", 
-                            "'-'", "'*'", "'/'", "'='", "'#'", "'$'", "':'", 
-                            "'&'", "','", "'('", "')'", "'{'", "'}'", "'=='", 
-                            "'!='", "'>'", "'<'", "'>='", "'<='", "'&&'", 
-                            "'||'", "'!'", "'printPlease'", "'if'", "'else'", 
-                            "'elseif'", "'mien'", "'num'", "'vul'", "'v'", 
-                            null, null, null, null, null, "'\\n'", "'true'", 
-                            "'false'", null, "'%'" ];
-    static symbolicNames = [ null, null, null, null, "FIN", "PLUS", "MINUS", 
-                             "TIMES", "DIV", "EQUALS", "GATO", "DOLLAR", 
-                             "DOBLEPUNTO", "ANDPERSON", "COMMA", "LPAREN", 
-                             "RPAREN", "LBRACE", "RBRACE", "IGUAL", "DISTINTO", 
-                             "MAYOR", "MENOR", "MAYORIGUAL", "MENORIGUAL", 
-                             "AND", "OR", "NOT", "PRINT", "IF", "ELSE", 
-                             "ELSEIF", "WHILE", "NUM", "VUL", "V", "ID", 
-                             "NUMBER", "STRING", "CHAR", "WS", "SALTO", 
-                             "TRUE", "FALSE", "DIGIT", "RESI" ];
+    static literalNames = [ null, "'hiram'", "'++'", "'--'", "'+='", "'-='", 
+                            "';'", "'+'", "'-'", "'*'", "'/'", "'='", "'#'", 
+                            "'$'", "':'", "'&'", "','", "'('", "')'", "'{'", 
+                            "'}'", "'=='", "'!='", "'>'", "'<'", "'>='", 
+                            "'<='", "'&&'", "'||'", "'!'", "'printPlease'", 
+                            "'if'", "'else'", "'elseif'", "'mien'", "'num'", 
+                            "'vul'", "'v'", null, null, null, null, null, 
+                            "'\\n'", "'true'", "'false'", null, "'%'" ];
+    static symbolicNames = [ null, null, null, null, null, null, "FIN", 
+                             "PLUS", "MINUS", "TIMES", "DIV", "EQUALS", 
+                             "GATO", "DOLLAR", "DOBLEPUNTO", "ANDPERSON", 
+                             "COMMA", "LPAREN", "RPAREN", "LBRACE", "RBRACE", 
+                             "IGUAL", "DISTINTO", "MAYOR", "MENOR", "MAYORIGUAL", 
+                             "MENORIGUAL", "AND", "OR", "NOT", "PRINT", 
+                             "IF", "ELSE", "ELSEIF", "WHILE", "NUM", "VUL", 
+                             "V", "ID", "NUMBER", "STRING", "CHAR", "WS", 
+                             "SALTO", "TRUE", "FALSE", "DIGIT", "RESI" ];
     static ruleNames = [ "prog", "content", "declaration", "declarationAndAssignament", 
                          "assignment", "whileStatement", "ifStatement", 
                          "ifContent", "elseifContent", "elseContent", "condition", 
                          "trueOrFalse", "logicalExpression", "relationalExpression", 
                          "printPlease", "concat", "atom", "incre", "decre", 
-                         "exp", "dataType", "simbolos" ];
+                         "masi", "menosi", "exp", "dataType", "simbolos" ];
 
     constructor(input) {
         super(input);
@@ -133,7 +141,7 @@ export default class JasminParser extends antlr4.Parser {
     	switch(ruleIndex) {
     	case 12:
     	    		return this.logicalExpression_sempred(localctx, predIndex);
-    	case 19:
+    	case 21:
     	    		return this.exp_sempred(localctx, predIndex);
         default:
             throw "No predicate with index:" + ruleIndex;
@@ -171,21 +179,21 @@ export default class JasminParser extends antlr4.Parser {
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 44;
+	        this.state = 48;
 	        this.match(JasminParser.T__0);
-	        this.state = 45;
-	        this.match(JasminParser.LBRACE);
 	        this.state = 49;
+	        this.match(JasminParser.LBRACE);
+	        this.state = 53;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        while(((((_la - 28)) & ~0x1f) === 0 && ((1 << (_la - 28)) & 499) !== 0)) {
-	            this.state = 46;
+	        while(((((_la - 30)) & ~0x1f) === 0 && ((1 << (_la - 30)) & 499) !== 0)) {
+	            this.state = 50;
 	            this.content();
-	            this.state = 51;
+	            this.state = 55;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
 	        }
-	        this.state = 52;
+	        this.state = 56;
 	        this.match(JasminParser.RBRACE);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -207,62 +215,74 @@ export default class JasminParser extends antlr4.Parser {
 	    let localctx = new ContentContext(this, this._ctx, this.state);
 	    this.enterRule(localctx, 2, JasminParser.RULE_content);
 	    try {
-	        this.state = 63;
+	        this.state = 69;
 	        this._errHandler.sync(this);
 	        var la_ = this._interp.adaptivePredict(this._input,1,this._ctx);
 	        switch(la_) {
 	        case 1:
 	            this.enterOuterAlt(localctx, 1);
-	            this.state = 54;
+	            this.state = 58;
 	            this.declaration();
 	            break;
 
 	        case 2:
 	            this.enterOuterAlt(localctx, 2);
-	            this.state = 55;
+	            this.state = 59;
 	            this.declarationAndAssignament();
 	            break;
 
 	        case 3:
 	            this.enterOuterAlt(localctx, 3);
-	            this.state = 56;
+	            this.state = 60;
 	            this.assignment();
 	            break;
 
 	        case 4:
 	            this.enterOuterAlt(localctx, 4);
-	            this.state = 57;
+	            this.state = 61;
 	            this.ifStatement();
 	            break;
 
 	        case 5:
 	            this.enterOuterAlt(localctx, 5);
-	            this.state = 58;
+	            this.state = 62;
 	            this.whileStatement();
 	            break;
 
 	        case 6:
 	            this.enterOuterAlt(localctx, 6);
-	            this.state = 59;
+	            this.state = 63;
 	            this.printPlease();
 	            break;
 
 	        case 7:
 	            this.enterOuterAlt(localctx, 7);
-	            this.state = 60;
+	            this.state = 64;
 	            this.dataType();
 	            break;
 
 	        case 8:
 	            this.enterOuterAlt(localctx, 8);
-	            this.state = 61;
+	            this.state = 65;
 	            this.incre();
 	            break;
 
 	        case 9:
 	            this.enterOuterAlt(localctx, 9);
-	            this.state = 62;
+	            this.state = 66;
 	            this.decre();
+	            break;
+
+	        case 10:
+	            this.enterOuterAlt(localctx, 10);
+	            this.state = 67;
+	            this.masi();
+	            break;
+
+	        case 11:
+	            this.enterOuterAlt(localctx, 11);
+	            this.state = 68;
+	            this.menosi();
 	            break;
 
 	        }
@@ -289,30 +309,30 @@ export default class JasminParser extends antlr4.Parser {
 	    try {
 	        localctx = new DeclaracionContext(this, localctx);
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 65;
+	        this.state = 71;
 	        this.dataType();
-	        this.state = 66;
+	        this.state = 72;
 	        _la = this._input.LA(1);
-	        if(!(_la===36 || _la===37)) {
+	        if(!(_la===38 || _la===39)) {
 	        this._errHandler.recoverInline(this);
 	        }
 	        else {
 	        	this._errHandler.reportMatch(this);
 	            this.consume();
 	        }
-	        this.state = 68;
+	        this.state = 74;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        if((((_la) & ~0x1f) === 0 && ((1 << _la) & 480) !== 0)) {
-	            this.state = 67;
+	        if((((_la) & ~0x1f) === 0 && ((1 << _la) & 1920) !== 0)) {
+	            this.state = 73;
 	            this.simbolos();
 	        }
 
-	        this.state = 71;
+	        this.state = 77;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        if(_la===4) {
-	            this.state = 70;
+	        if(_la===6) {
+	            this.state = 76;
 	            this.match(JasminParser.FIN);
 	        }
 
@@ -339,32 +359,32 @@ export default class JasminParser extends antlr4.Parser {
 	    try {
 	        localctx = new DeclAndAssigContext(this, localctx);
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 73;
+	        this.state = 79;
 	        this.dataType();
-	        this.state = 74;
+	        this.state = 80;
 	        _la = this._input.LA(1);
-	        if(!(_la===36 || _la===37)) {
+	        if(!(_la===38 || _la===39)) {
 	        this._errHandler.recoverInline(this);
 	        }
 	        else {
 	        	this._errHandler.reportMatch(this);
 	            this.consume();
 	        }
-	        this.state = 75;
+	        this.state = 81;
 	        this.match(JasminParser.EQUALS);
-	        this.state = 77;
+	        this.state = 83;
 	        this._errHandler.sync(this);
 	        var la_ = this._interp.adaptivePredict(this._input,4,this._ctx);
 	        if(la_===1) {
-	            this.state = 76;
+	            this.state = 82;
 	            this.exp(0);
 
 	        }
-	        this.state = 80;
+	        this.state = 86;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        if(_la===4) {
-	            this.state = 79;
+	        if(_la===6) {
+	            this.state = 85;
 	            this.match(JasminParser.FIN);
 	        }
 
@@ -391,17 +411,17 @@ export default class JasminParser extends antlr4.Parser {
 	    try {
 	        localctx = new AsignacionContext(this, localctx);
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 82;
+	        this.state = 88;
 	        this.match(JasminParser.ID);
-	        this.state = 83;
+	        this.state = 89;
 	        this.match(JasminParser.EQUALS);
-	        this.state = 84;
+	        this.state = 90;
 	        this.exp(0);
-	        this.state = 86;
+	        this.state = 92;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        if(_la===4) {
-	            this.state = 85;
+	        if(_la===6) {
+	            this.state = 91;
 	            this.match(JasminParser.FIN);
 	        }
 
@@ -428,27 +448,27 @@ export default class JasminParser extends antlr4.Parser {
 	    try {
 	        localctx = new WhileSentenciaContext(this, localctx);
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 88;
+	        this.state = 94;
 	        this.match(JasminParser.WHILE);
-	        this.state = 89;
+	        this.state = 95;
 	        this.match(JasminParser.LPAREN);
-	        this.state = 90;
-	        this.condition();
-	        this.state = 91;
-	        this.match(JasminParser.RPAREN);
-	        this.state = 92;
-	        this.match(JasminParser.LBRACE);
 	        this.state = 96;
+	        this.condition();
+	        this.state = 97;
+	        this.match(JasminParser.RPAREN);
+	        this.state = 98;
+	        this.match(JasminParser.LBRACE);
+	        this.state = 102;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        while(((((_la - 28)) & ~0x1f) === 0 && ((1 << (_la - 28)) & 499) !== 0)) {
-	            this.state = 93;
+	        while(((((_la - 30)) & ~0x1f) === 0 && ((1 << (_la - 30)) & 499) !== 0)) {
+	            this.state = 99;
 	            this.content();
-	            this.state = 98;
+	            this.state = 104;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
 	        }
-	        this.state = 99;
+	        this.state = 105;
 	        this.match(JasminParser.RBRACE);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -473,53 +493,53 @@ export default class JasminParser extends antlr4.Parser {
 	    try {
 	        localctx = new SentenciaIfContext(this, localctx);
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 101;
-	        this.match(JasminParser.IF);
-	        this.state = 102;
-	        this.match(JasminParser.LPAREN);
-	        this.state = 103;
-	        this.condition();
-	        this.state = 104;
-	        this.match(JasminParser.RPAREN);
-	        this.state = 105;
-	        this.match(JasminParser.LBRACE);
-	        this.state = 106;
-	        this.ifContent();
 	        this.state = 107;
+	        this.match(JasminParser.IF);
+	        this.state = 108;
+	        this.match(JasminParser.LPAREN);
+	        this.state = 109;
+	        this.condition();
+	        this.state = 110;
+	        this.match(JasminParser.RPAREN);
+	        this.state = 111;
+	        this.match(JasminParser.LBRACE);
+	        this.state = 112;
+	        this.ifContent();
+	        this.state = 113;
 	        this.match(JasminParser.RBRACE);
-	        this.state = 118;
+	        this.state = 124;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        while(_la===31) {
-	            this.state = 108;
-	            this.match(JasminParser.ELSEIF);
-	            this.state = 109;
-	            this.match(JasminParser.LPAREN);
-	            this.state = 110;
-	            this.condition();
-	            this.state = 111;
-	            this.match(JasminParser.RPAREN);
-	            this.state = 112;
-	            this.match(JasminParser.LBRACE);
-	            this.state = 113;
-	            this.elseifContent();
+	        while(_la===33) {
 	            this.state = 114;
-	            this.match(JasminParser.RBRACE);
+	            this.match(JasminParser.ELSEIF);
+	            this.state = 115;
+	            this.match(JasminParser.LPAREN);
+	            this.state = 116;
+	            this.condition();
+	            this.state = 117;
+	            this.match(JasminParser.RPAREN);
+	            this.state = 118;
+	            this.match(JasminParser.LBRACE);
+	            this.state = 119;
+	            this.elseifContent();
 	            this.state = 120;
+	            this.match(JasminParser.RBRACE);
+	            this.state = 126;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
 	        }
-	        this.state = 126;
+	        this.state = 132;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        if(_la===30) {
-	            this.state = 121;
+	        if(_la===32) {
+	            this.state = 127;
 	            this.match(JasminParser.ELSE);
-	            this.state = 122;
+	            this.state = 128;
 	            this.match(JasminParser.LBRACE);
-	            this.state = 123;
+	            this.state = 129;
 	            this.elseContent();
-	            this.state = 124;
+	            this.state = 130;
 	            this.match(JasminParser.RBRACE);
 	        }
 
@@ -545,13 +565,13 @@ export default class JasminParser extends antlr4.Parser {
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 131;
+	        this.state = 137;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        while(((((_la - 28)) & ~0x1f) === 0 && ((1 << (_la - 28)) & 499) !== 0)) {
-	            this.state = 128;
+	        while(((((_la - 30)) & ~0x1f) === 0 && ((1 << (_la - 30)) & 499) !== 0)) {
+	            this.state = 134;
 	            this.content();
-	            this.state = 133;
+	            this.state = 139;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
 	        }
@@ -577,13 +597,13 @@ export default class JasminParser extends antlr4.Parser {
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 137;
+	        this.state = 143;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        while(((((_la - 28)) & ~0x1f) === 0 && ((1 << (_la - 28)) & 499) !== 0)) {
-	            this.state = 134;
+	        while(((((_la - 30)) & ~0x1f) === 0 && ((1 << (_la - 30)) & 499) !== 0)) {
+	            this.state = 140;
 	            this.content();
-	            this.state = 139;
+	            this.state = 145;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
 	        }
@@ -609,13 +629,13 @@ export default class JasminParser extends antlr4.Parser {
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 143;
+	        this.state = 149;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        while(((((_la - 28)) & ~0x1f) === 0 && ((1 << (_la - 28)) & 499) !== 0)) {
-	            this.state = 140;
+	        while(((((_la - 30)) & ~0x1f) === 0 && ((1 << (_la - 30)) & 499) !== 0)) {
+	            this.state = 146;
 	            this.content();
-	            this.state = 145;
+	            this.state = 151;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
 	        }
@@ -641,25 +661,25 @@ export default class JasminParser extends antlr4.Parser {
 	    try {
 	        localctx = new CondicionContext(this, localctx);
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 150;
+	        this.state = 156;
 	        this._errHandler.sync(this);
 	        switch(this._input.LA(1)) {
-	        case 15:
-	        case 36:
-	        case 37:
+	        case 17:
+	        case 38:
 	        case 39:
-	            this.state = 146;
+	        case 41:
+	            this.state = 152;
 	            this.logicalExpression(0);
 	            break;
-	        case 27:
-	            this.state = 147;
+	        case 29:
+	            this.state = 153;
 	            this.match(JasminParser.NOT);
-	            this.state = 148;
+	            this.state = 154;
 	            this.condition();
 	            break;
-	        case 42:
-	        case 43:
-	            this.state = 149;
+	        case 44:
+	        case 45:
+	            this.state = 155;
 	            this.trueOrFalse();
 	            break;
 	        default:
@@ -688,9 +708,9 @@ export default class JasminParser extends antlr4.Parser {
 	    try {
 	        localctx = new VerdaderoOFalsoContext(this, localctx);
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 152;
+	        this.state = 158;
 	        _la = this._input.LA(1);
-	        if(!(_la===42 || _la===43)) {
+	        if(!(_la===44 || _la===45)) {
 	        this._errHandler.recoverInline(this);
 	        }
 	        else {
@@ -725,7 +745,7 @@ export default class JasminParser extends antlr4.Parser {
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 167;
+	        this.state = 173;
 	        this._errHandler.sync(this);
 	        var la_ = this._interp.adaptivePredict(this._input,15,this._ctx);
 	        switch(la_) {
@@ -734,11 +754,11 @@ export default class JasminParser extends antlr4.Parser {
 	            this._ctx = localctx;
 	            _prevctx = localctx;
 
-	            this.state = 155;
+	            this.state = 161;
 	            this.match(JasminParser.LPAREN);
-	            this.state = 156;
+	            this.state = 162;
 	            this.logicalExpression(0);
-	            this.state = 157;
+	            this.state = 163;
 	            this.match(JasminParser.RPAREN);
 	            break;
 
@@ -746,27 +766,27 @@ export default class JasminParser extends antlr4.Parser {
 	            localctx = new ExpresionLogicaContext(this, localctx);
 	            this._ctx = localctx;
 	            _prevctx = localctx;
-	            this.state = 159;
+	            this.state = 165;
 	            this.relationalExpression();
-	            this.state = 164;
+	            this.state = 170;
 	            this._errHandler.sync(this);
 	            var _alt = this._interp.adaptivePredict(this._input,14,this._ctx)
 	            while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	                if(_alt===1) {
-	                    this.state = 160;
+	                    this.state = 166;
 	                    localctx.logic = this._input.LT(1);
 	                    _la = this._input.LA(1);
-	                    if(!(_la===25 || _la===26)) {
+	                    if(!(_la===27 || _la===28)) {
 	                        localctx.logic = this._errHandler.recoverInline(this);
 	                    }
 	                    else {
 	                    	this._errHandler.reportMatch(this);
 	                        this.consume();
 	                    }
-	                    this.state = 161;
+	                    this.state = 167;
 	                    this.relationalExpression(); 
 	                }
-	                this.state = 166;
+	                this.state = 172;
 	                this._errHandler.sync(this);
 	                _alt = this._interp.adaptivePredict(this._input,14,this._ctx);
 	            }
@@ -775,7 +795,7 @@ export default class JasminParser extends antlr4.Parser {
 
 	        }
 	        this._ctx.stop = this._input.LT(-1);
-	        this.state = 178;
+	        this.state = 184;
 	        this._errHandler.sync(this);
 	        var _alt = this._interp.adaptivePredict(this._input,17,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
@@ -786,38 +806,38 @@ export default class JasminParser extends antlr4.Parser {
 	                _prevctx = localctx;
 	                localctx = new LogicLogicalContext(this, new LogicalExpressionContext(this, _parentctx, _parentState));
 	                this.pushNewRecursionContext(localctx, _startState, JasminParser.RULE_logicalExpression);
-	                this.state = 169;
+	                this.state = 175;
 	                if (!( this.precpred(this._ctx, 3))) {
 	                    throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 3)");
 	                }
-	                this.state = 172; 
+	                this.state = 178; 
 	                this._errHandler.sync(this);
 	                var _alt = 1;
 	                do {
 	                	switch (_alt) {
 	                	case 1:
-	                		this.state = 170;
+	                		this.state = 176;
 	                		localctx.logic = this._input.LT(1);
 	                		_la = this._input.LA(1);
-	                		if(!(_la===25 || _la===26)) {
+	                		if(!(_la===27 || _la===28)) {
 	                		    localctx.logic = this._errHandler.recoverInline(this);
 	                		}
 	                		else {
 	                			this._errHandler.reportMatch(this);
 	                		    this.consume();
 	                		}
-	                		this.state = 171;
+	                		this.state = 177;
 	                		this.logicalExpression(0);
 	                		break;
 	                	default:
 	                		throw new antlr4.error.NoViableAltException(this);
 	                	}
-	                	this.state = 174; 
+	                	this.state = 180; 
 	                	this._errHandler.sync(this);
 	                	_alt = this._interp.adaptivePredict(this._input,16, this._ctx);
 	                } while ( _alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER ); 
 	            }
-	            this.state = 180;
+	            this.state = 186;
 	            this._errHandler.sync(this);
 	            _alt = this._interp.adaptivePredict(this._input,17,this._ctx);
 	        }
@@ -843,45 +863,45 @@ export default class JasminParser extends antlr4.Parser {
 	    this.enterRule(localctx, 26, JasminParser.RULE_relationalExpression);
 	    var _la = 0;
 	    try {
-	        this.state = 193;
+	        this.state = 199;
 	        this._errHandler.sync(this);
 	        var la_ = this._interp.adaptivePredict(this._input,19,this._ctx);
 	        switch(la_) {
 	        case 1:
 	            localctx = new RelacionalConParentesisContext(this, localctx);
 	            this.enterOuterAlt(localctx, 1);
-	            this.state = 181;
+	            this.state = 187;
 	            this.match(JasminParser.LPAREN);
-	            this.state = 182;
+	            this.state = 188;
 	            this.relationalExpression();
-	            this.state = 183;
+	            this.state = 189;
 	            this.match(JasminParser.RPAREN);
 	            break;
 
 	        case 2:
 	            localctx = new ExpresionRelacionalContext(this, localctx);
 	            this.enterOuterAlt(localctx, 2);
-	            this.state = 185;
+	            this.state = 191;
 	            this.exp(0);
-	            this.state = 190;
+	            this.state = 196;
 	            this._errHandler.sync(this);
 	            var _alt = this._interp.adaptivePredict(this._input,18,this._ctx)
 	            while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	                if(_alt===1) {
-	                    this.state = 186;
+	                    this.state = 192;
 	                    localctx.relation = this._input.LT(1);
 	                    _la = this._input.LA(1);
-	                    if(!((((_la) & ~0x1f) === 0 && ((1 << _la) & 33030144) !== 0))) {
+	                    if(!((((_la) & ~0x1f) === 0 && ((1 << _la) & 132120576) !== 0))) {
 	                        localctx.relation = this._errHandler.recoverInline(this);
 	                    }
 	                    else {
 	                    	this._errHandler.reportMatch(this);
 	                        this.consume();
 	                    }
-	                    this.state = 187;
+	                    this.state = 193;
 	                    this.exp(0); 
 	                }
-	                this.state = 192;
+	                this.state = 198;
 	                this._errHandler.sync(this);
 	                _alt = this._interp.adaptivePredict(this._input,18,this._ctx);
 	            }
@@ -912,37 +932,37 @@ export default class JasminParser extends antlr4.Parser {
 	    try {
 	        localctx = new ImpresionContext(this, localctx);
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 195;
+	        this.state = 201;
 	        this.match(JasminParser.PRINT);
-	        this.state = 196;
+	        this.state = 202;
 	        this.match(JasminParser.LPAREN);
-	        this.state = 200;
+	        this.state = 206;
 	        this._errHandler.sync(this);
 	        var la_ = this._interp.adaptivePredict(this._input,20,this._ctx);
 	        switch(la_) {
 	        case 1:
-	            this.state = 197;
+	            this.state = 203;
 	            this.match(JasminParser.STRING);
 	            break;
 
 	        case 2:
-	            this.state = 198;
+	            this.state = 204;
 	            this.exp(0);
 	            break;
 
 	        case 3:
-	            this.state = 199;
+	            this.state = 205;
 	            this.concat();
 	            break;
 
 	        }
-	        this.state = 202;
+	        this.state = 208;
 	        this.match(JasminParser.RPAREN);
-	        this.state = 204;
+	        this.state = 210;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        if(_la===4) {
-	            this.state = 203;
+	        if(_la===6) {
+	            this.state = 209;
 	            this.match(JasminParser.FIN);
 	        }
 
@@ -969,27 +989,27 @@ export default class JasminParser extends antlr4.Parser {
 	    try {
 	        localctx = new ConcatenacionContext(this, localctx);
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 206;
+	        this.state = 212;
 	        this.atom();
-	        this.state = 209; 
+	        this.state = 215; 
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
 	        do {
-	            this.state = 207;
+	            this.state = 213;
 	            _la = this._input.LA(1);
-	            if(!(_la===5 || _la===14)) {
+	            if(!(_la===7 || _la===16)) {
 	            this._errHandler.recoverInline(this);
 	            }
 	            else {
 	            	this._errHandler.reportMatch(this);
 	                this.consume();
 	            }
-	            this.state = 208;
+	            this.state = 214;
 	            this.atom();
-	            this.state = 211; 
+	            this.state = 217; 
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
-	        } while(_la===5 || _la===14);
+	        } while(_la===7 || _la===16);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
 		        localctx.exception = re;
@@ -1010,22 +1030,22 @@ export default class JasminParser extends antlr4.Parser {
 	    let localctx = new AtomContext(this, this._ctx, this.state);
 	    this.enterRule(localctx, 32, JasminParser.RULE_atom);
 	    try {
-	        this.state = 215;
+	        this.state = 221;
 	        this._errHandler.sync(this);
 	        switch(this._input.LA(1)) {
-	        case 38:
+	        case 40:
 	            localctx = new StringContext(this, localctx);
 	            this.enterOuterAlt(localctx, 1);
-	            this.state = 213;
+	            this.state = 219;
 	            this.match(JasminParser.STRING);
 	            break;
-	        case 15:
-	        case 36:
-	        case 37:
+	        case 17:
+	        case 38:
 	        case 39:
+	        case 41:
 	            localctx = new ExppContext(this, localctx);
 	            this.enterOuterAlt(localctx, 2);
-	            this.state = 214;
+	            this.state = 220;
 	            this.exp(0);
 	            break;
 	        default:
@@ -1050,13 +1070,22 @@ export default class JasminParser extends antlr4.Parser {
 	incre() {
 	    let localctx = new IncreContext(this, this._ctx, this.state);
 	    this.enterRule(localctx, 34, JasminParser.RULE_incre);
+	    var _la = 0;
 	    try {
 	        localctx = new IncrementoContext(this, localctx);
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 217;
+	        this.state = 223;
 	        this.match(JasminParser.ID);
-	        this.state = 218;
+	        this.state = 224;
 	        this.match(JasminParser.T__1);
+	        this.state = 226;
+	        this._errHandler.sync(this);
+	        _la = this._input.LA(1);
+	        if(_la===6) {
+	            this.state = 225;
+	            this.match(JasminParser.FIN);
+	        }
+
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
 		        localctx.exception = re;
@@ -1076,13 +1105,89 @@ export default class JasminParser extends antlr4.Parser {
 	decre() {
 	    let localctx = new DecreContext(this, this._ctx, this.state);
 	    this.enterRule(localctx, 36, JasminParser.RULE_decre);
+	    var _la = 0;
 	    try {
 	        localctx = new DecrementoContext(this, localctx);
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 220;
+	        this.state = 228;
 	        this.match(JasminParser.ID);
-	        this.state = 221;
+	        this.state = 229;
 	        this.match(JasminParser.T__2);
+	        this.state = 231;
+	        this._errHandler.sync(this);
+	        _la = this._input.LA(1);
+	        if(_la===6) {
+	            this.state = 230;
+	            this.match(JasminParser.FIN);
+	        }
+
+	    } catch (re) {
+	    	if(re instanceof antlr4.error.RecognitionException) {
+		        localctx.exception = re;
+		        this._errHandler.reportError(this, re);
+		        this._errHandler.recover(this, re);
+		    } else {
+		    	throw re;
+		    }
+	    } finally {
+	        this.exitRule();
+	    }
+	    return localctx;
+	}
+
+
+
+	masi() {
+	    let localctx = new MasiContext(this, this._ctx, this.state);
+	    this.enterRule(localctx, 38, JasminParser.RULE_masi);
+	    var _la = 0;
+	    try {
+	        localctx = new MasigualContext(this, localctx);
+	        this.enterOuterAlt(localctx, 1);
+	        this.state = 233;
+	        this.match(JasminParser.ID);
+	        this.state = 234;
+	        this.match(JasminParser.T__3);
+	        this.state = 235;
+	        this.atom();
+	        this.state = 237;
+	        this._errHandler.sync(this);
+	        _la = this._input.LA(1);
+	        if(_la===6) {
+	            this.state = 236;
+	            this.match(JasminParser.FIN);
+	        }
+
+	    } catch (re) {
+	    	if(re instanceof antlr4.error.RecognitionException) {
+		        localctx.exception = re;
+		        this._errHandler.reportError(this, re);
+		        this._errHandler.recover(this, re);
+		    } else {
+		    	throw re;
+		    }
+	    } finally {
+	        this.exitRule();
+	    }
+	    return localctx;
+	}
+
+
+
+	menosi() {
+	    let localctx = new MenosiContext(this, this._ctx, this.state);
+	    this.enterRule(localctx, 40, JasminParser.RULE_menosi);
+	    try {
+	        localctx = new MenosigualContext(this, localctx);
+	        this.enterOuterAlt(localctx, 1);
+	        this.state = 239;
+	        this.match(JasminParser.ID);
+	        this.state = 240;
+	        this.match(JasminParser.T__4);
+	        this.state = 241;
+	        this.atom();
+	        this.state = 242;
+	        this.match(JasminParser.FIN);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
 		        localctx.exception = re;
@@ -1106,31 +1211,31 @@ export default class JasminParser extends antlr4.Parser {
 	    const _parentState = this.state;
 	    let localctx = new ExpContext(this, this._ctx, _parentState);
 	    let _prevctx = localctx;
-	    const _startState = 38;
-	    this.enterRecursionRule(localctx, 38, JasminParser.RULE_exp, _p);
+	    const _startState = 42;
+	    this.enterRecursionRule(localctx, 42, JasminParser.RULE_exp, _p);
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 240;
+	        this.state = 261;
 	        this._errHandler.sync(this);
-	        var la_ = this._interp.adaptivePredict(this._input,25,this._ctx);
+	        var la_ = this._interp.adaptivePredict(this._input,28,this._ctx);
 	        switch(la_) {
 	        case 1:
 	            localctx = new ParentesisContext(this, localctx);
 	            this._ctx = localctx;
 	            _prevctx = localctx;
 
-	            this.state = 224;
+	            this.state = 245;
 	            this.match(JasminParser.LPAREN);
-	            this.state = 225;
+	            this.state = 246;
 	            this.exp(0);
-	            this.state = 226;
+	            this.state = 247;
 	            this.match(JasminParser.RPAREN);
-	            this.state = 228;
+	            this.state = 249;
 	            this._errHandler.sync(this);
-	            var la_ = this._interp.adaptivePredict(this._input,24,this._ctx);
+	            var la_ = this._interp.adaptivePredict(this._input,27,this._ctx);
 	            if(la_===1) {
-	                this.state = 227;
+	                this.state = 248;
 	                this.exp(0);
 
 	            }
@@ -1140,17 +1245,17 @@ export default class JasminParser extends antlr4.Parser {
 	            localctx = new ParentesisMultiplyContext(this, localctx);
 	            this._ctx = localctx;
 	            _prevctx = localctx;
-	            this.state = 230;
+	            this.state = 251;
 	            this.match(JasminParser.LPAREN);
-	            this.state = 231;
+	            this.state = 252;
 	            this.exp(0);
-	            this.state = 232;
+	            this.state = 253;
 	            this.match(JasminParser.RPAREN);
-	            this.state = 233;
+	            this.state = 254;
 	            this.match(JasminParser.LPAREN);
-	            this.state = 234;
+	            this.state = 255;
 	            this.exp(0);
-	            this.state = 235;
+	            this.state = 256;
 	            this.match(JasminParser.RPAREN);
 	            break;
 
@@ -1158,7 +1263,7 @@ export default class JasminParser extends antlr4.Parser {
 	            localctx = new NumeroContext(this, localctx);
 	            this._ctx = localctx;
 	            _prevctx = localctx;
-	            this.state = 237;
+	            this.state = 258;
 	            this.match(JasminParser.NUMBER);
 	            break;
 
@@ -1166,7 +1271,7 @@ export default class JasminParser extends antlr4.Parser {
 	            localctx = new CharContext(this, localctx);
 	            this._ctx = localctx;
 	            _prevctx = localctx;
-	            this.state = 238;
+	            this.state = 259;
 	            this.match(JasminParser.CHAR);
 	            break;
 
@@ -1174,46 +1279,67 @@ export default class JasminParser extends antlr4.Parser {
 	            localctx = new IdentificadorContext(this, localctx);
 	            this._ctx = localctx;
 	            _prevctx = localctx;
-	            this.state = 239;
+	            this.state = 260;
 	            this.match(JasminParser.ID);
 	            break;
 
 	        }
 	        this._ctx.stop = this._input.LT(-1);
-	        this.state = 253;
+	        this.state = 274;
 	        this._errHandler.sync(this);
-	        var _alt = this._interp.adaptivePredict(this._input,27,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,30,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                if(this._parseListeners!==null) {
 	                    this.triggerExitRuleEvent();
 	                }
 	                _prevctx = localctx;
-	                this.state = 251;
+	                this.state = 272;
 	                this._errHandler.sync(this);
-	                var la_ = this._interp.adaptivePredict(this._input,26,this._ctx);
+	                var la_ = this._interp.adaptivePredict(this._input,29,this._ctx);
 	                switch(la_) {
 	                case 1:
 	                    localctx = new ResiudoContext(this, new ExpContext(this, _parentctx, _parentState));
 	                    this.pushNewRecursionContext(localctx, _startState, JasminParser.RULE_exp);
-	                    this.state = 242;
+	                    this.state = 263;
 	                    if (!( this.precpred(this._ctx, 6))) {
 	                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 6)");
 	                    }
-	                    this.state = 243;
+	                    this.state = 264;
 	                    this.match(JasminParser.RESI);
-	                    this.state = 244;
+	                    this.state = 265;
 	                    this.exp(7);
 	                    break;
 
 	                case 2:
 	                    localctx = new TimesDivContext(this, new ExpContext(this, _parentctx, _parentState));
 	                    this.pushNewRecursionContext(localctx, _startState, JasminParser.RULE_exp);
-	                    this.state = 245;
+	                    this.state = 266;
 	                    if (!( this.precpred(this._ctx, 5))) {
 	                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 5)");
 	                    }
-	                    this.state = 246;
+	                    this.state = 267;
+	                    localctx.operation = this._input.LT(1);
+	                    _la = this._input.LA(1);
+	                    if(!(_la===9 || _la===10)) {
+	                        localctx.operation = this._errHandler.recoverInline(this);
+	                    }
+	                    else {
+	                    	this._errHandler.reportMatch(this);
+	                        this.consume();
+	                    }
+	                    this.state = 268;
+	                    this.exp(6);
+	                    break;
+
+	                case 3:
+	                    localctx = new PlusSubtractionContext(this, new ExpContext(this, _parentctx, _parentState));
+	                    this.pushNewRecursionContext(localctx, _startState, JasminParser.RULE_exp);
+	                    this.state = 269;
+	                    if (!( this.precpred(this._ctx, 4))) {
+	                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 4)");
+	                    }
+	                    this.state = 270;
 	                    localctx.operation = this._input.LT(1);
 	                    _la = this._input.LA(1);
 	                    if(!(_la===7 || _la===8)) {
@@ -1223,36 +1349,15 @@ export default class JasminParser extends antlr4.Parser {
 	                    	this._errHandler.reportMatch(this);
 	                        this.consume();
 	                    }
-	                    this.state = 247;
-	                    this.exp(6);
-	                    break;
-
-	                case 3:
-	                    localctx = new PlusSubtractionContext(this, new ExpContext(this, _parentctx, _parentState));
-	                    this.pushNewRecursionContext(localctx, _startState, JasminParser.RULE_exp);
-	                    this.state = 248;
-	                    if (!( this.precpred(this._ctx, 4))) {
-	                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 4)");
-	                    }
-	                    this.state = 249;
-	                    localctx.operation = this._input.LT(1);
-	                    _la = this._input.LA(1);
-	                    if(!(_la===5 || _la===6)) {
-	                        localctx.operation = this._errHandler.recoverInline(this);
-	                    }
-	                    else {
-	                    	this._errHandler.reportMatch(this);
-	                        this.consume();
-	                    }
-	                    this.state = 250;
+	                    this.state = 271;
 	                    this.exp(5);
 	                    break;
 
 	                } 
 	            }
-	            this.state = 255;
+	            this.state = 276;
 	            this._errHandler.sync(this);
-	            _alt = this._interp.adaptivePredict(this._input,27,this._ctx);
+	            _alt = this._interp.adaptivePredict(this._input,30,this._ctx);
 	        }
 
 	    } catch( error) {
@@ -1273,13 +1378,13 @@ export default class JasminParser extends antlr4.Parser {
 
 	dataType() {
 	    let localctx = new DataTypeContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 40, JasminParser.RULE_dataType);
+	    this.enterRule(localctx, 44, JasminParser.RULE_dataType);
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 256;
+	        this.state = 277;
 	        _la = this._input.LA(1);
-	        if(!(((((_la - 33)) & ~0x1f) === 0 && ((1 << (_la - 33)) & 7) !== 0))) {
+	        if(!(((((_la - 35)) & ~0x1f) === 0 && ((1 << (_la - 35)) & 7) !== 0))) {
 	        this._errHandler.recoverInline(this);
 	        }
 	        else {
@@ -1304,13 +1409,13 @@ export default class JasminParser extends antlr4.Parser {
 
 	simbolos() {
 	    let localctx = new SimbolosContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 42, JasminParser.RULE_simbolos);
+	    this.enterRule(localctx, 46, JasminParser.RULE_simbolos);
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 258;
+	        this.state = 279;
 	        _la = this._input.LA(1);
-	        if(!((((_la) & ~0x1f) === 0 && ((1 << _la) & 480) !== 0))) {
+	        if(!((((_la) & ~0x1f) === 0 && ((1 << _la) & 1920) !== 0))) {
 	        this._errHandler.recoverInline(this);
 	        }
 	        else {
@@ -1338,48 +1443,50 @@ JasminParser.EOF = antlr4.Token.EOF;
 JasminParser.T__0 = 1;
 JasminParser.T__1 = 2;
 JasminParser.T__2 = 3;
-JasminParser.FIN = 4;
-JasminParser.PLUS = 5;
-JasminParser.MINUS = 6;
-JasminParser.TIMES = 7;
-JasminParser.DIV = 8;
-JasminParser.EQUALS = 9;
-JasminParser.GATO = 10;
-JasminParser.DOLLAR = 11;
-JasminParser.DOBLEPUNTO = 12;
-JasminParser.ANDPERSON = 13;
-JasminParser.COMMA = 14;
-JasminParser.LPAREN = 15;
-JasminParser.RPAREN = 16;
-JasminParser.LBRACE = 17;
-JasminParser.RBRACE = 18;
-JasminParser.IGUAL = 19;
-JasminParser.DISTINTO = 20;
-JasminParser.MAYOR = 21;
-JasminParser.MENOR = 22;
-JasminParser.MAYORIGUAL = 23;
-JasminParser.MENORIGUAL = 24;
-JasminParser.AND = 25;
-JasminParser.OR = 26;
-JasminParser.NOT = 27;
-JasminParser.PRINT = 28;
-JasminParser.IF = 29;
-JasminParser.ELSE = 30;
-JasminParser.ELSEIF = 31;
-JasminParser.WHILE = 32;
-JasminParser.NUM = 33;
-JasminParser.VUL = 34;
-JasminParser.V = 35;
-JasminParser.ID = 36;
-JasminParser.NUMBER = 37;
-JasminParser.STRING = 38;
-JasminParser.CHAR = 39;
-JasminParser.WS = 40;
-JasminParser.SALTO = 41;
-JasminParser.TRUE = 42;
-JasminParser.FALSE = 43;
-JasminParser.DIGIT = 44;
-JasminParser.RESI = 45;
+JasminParser.T__3 = 4;
+JasminParser.T__4 = 5;
+JasminParser.FIN = 6;
+JasminParser.PLUS = 7;
+JasminParser.MINUS = 8;
+JasminParser.TIMES = 9;
+JasminParser.DIV = 10;
+JasminParser.EQUALS = 11;
+JasminParser.GATO = 12;
+JasminParser.DOLLAR = 13;
+JasminParser.DOBLEPUNTO = 14;
+JasminParser.ANDPERSON = 15;
+JasminParser.COMMA = 16;
+JasminParser.LPAREN = 17;
+JasminParser.RPAREN = 18;
+JasminParser.LBRACE = 19;
+JasminParser.RBRACE = 20;
+JasminParser.IGUAL = 21;
+JasminParser.DISTINTO = 22;
+JasminParser.MAYOR = 23;
+JasminParser.MENOR = 24;
+JasminParser.MAYORIGUAL = 25;
+JasminParser.MENORIGUAL = 26;
+JasminParser.AND = 27;
+JasminParser.OR = 28;
+JasminParser.NOT = 29;
+JasminParser.PRINT = 30;
+JasminParser.IF = 31;
+JasminParser.ELSE = 32;
+JasminParser.ELSEIF = 33;
+JasminParser.WHILE = 34;
+JasminParser.NUM = 35;
+JasminParser.VUL = 36;
+JasminParser.V = 37;
+JasminParser.ID = 38;
+JasminParser.NUMBER = 39;
+JasminParser.STRING = 40;
+JasminParser.CHAR = 41;
+JasminParser.WS = 42;
+JasminParser.SALTO = 43;
+JasminParser.TRUE = 44;
+JasminParser.FALSE = 45;
+JasminParser.DIGIT = 46;
+JasminParser.RESI = 47;
 
 JasminParser.RULE_prog = 0;
 JasminParser.RULE_content = 1;
@@ -1400,9 +1507,11 @@ JasminParser.RULE_concat = 15;
 JasminParser.RULE_atom = 16;
 JasminParser.RULE_incre = 17;
 JasminParser.RULE_decre = 18;
-JasminParser.RULE_exp = 19;
-JasminParser.RULE_dataType = 20;
-JasminParser.RULE_simbolos = 21;
+JasminParser.RULE_masi = 19;
+JasminParser.RULE_menosi = 20;
+JasminParser.RULE_exp = 21;
+JasminParser.RULE_dataType = 22;
+JasminParser.RULE_simbolos = 23;
 
 class ProgContext extends antlr4.ParserRuleContext {
 
@@ -1498,6 +1607,14 @@ class ContentContext extends antlr4.ParserRuleContext {
 
 	decre() {
 	    return this.getTypedRuleContext(DecreContext,0);
+	};
+
+	masi() {
+	    return this.getTypedRuleContext(MasiContext,0);
+	};
+
+	menosi() {
+	    return this.getTypedRuleContext(MenosiContext,0);
 	};
 
 	accept(visitor) {
@@ -2725,6 +2842,10 @@ class IncrementoContext extends IncreContext {
 	    return this.getToken(JasminParser.ID, 0);
 	};
 
+	FIN() {
+	    return this.getToken(JasminParser.FIN, 0);
+	};
+
 	accept(visitor) {
 	    if ( visitor instanceof JasminVisitor ) {
 	        return visitor.visitIncremento(this);
@@ -2772,6 +2893,10 @@ class DecrementoContext extends DecreContext {
 	    return this.getToken(JasminParser.ID, 0);
 	};
 
+	FIN() {
+	    return this.getToken(JasminParser.FIN, 0);
+	};
+
 	accept(visitor) {
 	    if ( visitor instanceof JasminVisitor ) {
 	        return visitor.visitDecremento(this);
@@ -2784,6 +2909,116 @@ class DecrementoContext extends DecreContext {
 }
 
 JasminParser.DecrementoContext = DecrementoContext;
+
+class MasiContext extends antlr4.ParserRuleContext {
+
+    constructor(parser, parent, invokingState) {
+        if(parent===undefined) {
+            parent = null;
+        }
+        if(invokingState===undefined || invokingState===null) {
+            invokingState = -1;
+        }
+        super(parent, invokingState);
+        this.parser = parser;
+        this.ruleIndex = JasminParser.RULE_masi;
+    }
+
+
+	 
+		copyFrom(ctx) {
+			super.copyFrom(ctx);
+		}
+
+}
+
+
+class MasigualContext extends MasiContext {
+
+    constructor(parser, ctx) {
+        super(parser);
+        super.copyFrom(ctx);
+    }
+
+	ID() {
+	    return this.getToken(JasminParser.ID, 0);
+	};
+
+	atom() {
+	    return this.getTypedRuleContext(AtomContext,0);
+	};
+
+	FIN() {
+	    return this.getToken(JasminParser.FIN, 0);
+	};
+
+	accept(visitor) {
+	    if ( visitor instanceof JasminVisitor ) {
+	        return visitor.visitMasigual(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
+
+}
+
+JasminParser.MasigualContext = MasigualContext;
+
+class MenosiContext extends antlr4.ParserRuleContext {
+
+    constructor(parser, parent, invokingState) {
+        if(parent===undefined) {
+            parent = null;
+        }
+        if(invokingState===undefined || invokingState===null) {
+            invokingState = -1;
+        }
+        super(parent, invokingState);
+        this.parser = parser;
+        this.ruleIndex = JasminParser.RULE_menosi;
+    }
+
+
+	 
+		copyFrom(ctx) {
+			super.copyFrom(ctx);
+		}
+
+}
+
+
+class MenosigualContext extends MenosiContext {
+
+    constructor(parser, ctx) {
+        super(parser);
+        super.copyFrom(ctx);
+    }
+
+	ID() {
+	    return this.getToken(JasminParser.ID, 0);
+	};
+
+	atom() {
+	    return this.getTypedRuleContext(AtomContext,0);
+	};
+
+	FIN() {
+	    return this.getToken(JasminParser.FIN, 0);
+	};
+
+	accept(visitor) {
+	    if ( visitor instanceof JasminVisitor ) {
+	        return visitor.visitMenosigual(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
+
+}
+
+JasminParser.MenosigualContext = MenosigualContext;
 
 class ExpContext extends antlr4.ParserRuleContext {
 
@@ -3191,6 +3426,8 @@ JasminParser.ConcatContext = ConcatContext;
 JasminParser.AtomContext = AtomContext; 
 JasminParser.IncreContext = IncreContext; 
 JasminParser.DecreContext = DecreContext; 
+JasminParser.MasiContext = MasiContext; 
+JasminParser.MenosiContext = MenosiContext; 
 JasminParser.ExpContext = ExpContext; 
 JasminParser.DataTypeContext = DataTypeContext; 
 JasminParser.SimbolosContext = SimbolosContext; 

@@ -133,11 +133,11 @@ const HomePage = () => {
         <Link href="https://www.youtube.com/watch?v=cUcMegPmYIo&list=OLAK5uy_mTTV6CybTZyXnTJ4ZQXms1dhFXqjadRhA&index=2" target="_blank" rel="noopener noreferrer">
           <div className="cursor-pointer hover:text-blue-500">Vulture ✞</div>
         </Link>
-        <button className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded" onClick={traducirJ}>Jasmin Translator</button>
+        <button className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded" onClick={traducirJ}>J Translator</button>
+        <button className="bg-purple-400 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={handleCompile}>Magic</button>
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={traducirC}>C Translator</button>
         <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" onClick={iniciar}>Run ➸</button>
         <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={borrar}>✧°</button>
-        <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={handleCompile}>com</button>
 
       </section>
 

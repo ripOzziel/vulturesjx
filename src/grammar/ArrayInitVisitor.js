@@ -144,6 +144,18 @@ export default class ArrayInitVisitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 
+	// Visit a parse tree produced by ArrayInitParser#masigual.
+	visitMasigual(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by ArrayInitParser#menosigual.
+	visitMenosigual(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
 	// Visit a parse tree produced by ArrayInitParser#parentesis.
 	visitParentesis(ctx) {
 	  return this.visitChildren(ctx);
