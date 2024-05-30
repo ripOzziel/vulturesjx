@@ -133,12 +133,38 @@ Example:
 
 Increment works by adding a 1 to the variable before the `++` and assigning that value to the variable
 In decrement it works the same only with subtraction (`--`).
+
+###How UI works
+![alt text](public/img/UI.png)
+We can see the top bar, where we can see the name of the language accompanied by 5 buttons.
+Clicking on the name of the language will take you to a good place.
+The `Run` button works to compile vulture code written in textarea 1.
+The `✧°` button clears the content of the two textareas and the terminal.
+The `C Translator` button translates the text written in C in textarea 2 and the translation is written on textarea 1.
+The `J Translator` button translates the vulture code written on textarea 1 and putting the jasmin code on textarea 2.
+The `Magic` button is responsible for compiling the jasmin code written on textarea 2 and if there are printouts, it shows them in the terminal.
 # INTERNAL DEVELOPMENT ONLY
 
 ANTL4 Setup
 ===========
 Run `antlr -Dlanguage=JavaScript -o ./src/ -visitor -no-listener ./grammar/ArrayInit.g4` every time the grammar is changed on the project
 
+Running backend
+=====================
+In order to compile JASMIN code it is necessary to have an API that can compile the code on a different port than where the frontend is running, for it to work we must open a terminal in the root where our `server.js` file is located, where we will use the command:
+`node server.js`
+With this our JASMIN code can be compiled and display the output in the terminal.
+
+C Translator
+====================
+The C translator works by obtaining the code from vulture and going through the `generatorC.js` to in turn go through the grammar visitor to generate part by part the translation of the code from C to vulture.
+The compiler has the ability to drag a `.c` or `.txt` file into the textarea where the C code is written and will read the text and then translate it.
+After clicking the `C Translator` button, the translated code will be placed in textarea 1, where vulture language is written.
+
+Jasmin Translator
+======================
+The Jasmin translator works the same as the C translator, it translates from the vulture language to Jasmin, placing the Jasmin code in textarea 2, where C code is written.
+To compile it you must click the `Magic` button.
 Next.js Project setup
 =====================
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
